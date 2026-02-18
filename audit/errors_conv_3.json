@@ -1,0 +1,417 @@
+[
+  {
+    "question_id": "locomo_3_qa4",
+    "question": "What pets wouldn't cause any discomfort to Joanna?",
+    "golden_answer": "Hairless cats or pigs,since they don't have fur, which is one of the main causes of Joanna's allergy.",
+    "category": 3,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D2:23"
+    ],
+    "correct_evidence": [
+      "D2:23",
+      "D5:11"
+    ],
+    "reasoning": "D2:23: 'I'm allergic to most reptiles and animals with fur. It can be a bit of a drag, but I find other ways to be happy.' D5:11: 'I wish I wasn't allergic! I would get two turtles today if I could! I found out recently I'm allergic to cockroaches as well, so who knows if I'll ever get a pet.' The golden answer fabricates specific pet recommendations ('hairless cats or pigs') that appear nowhere in the transcript. Neither 'hairless', 'cats', nor 'pigs' is mentioned anywhere in the conversation. The transcript only establishes Joanna's allergies (reptiles, furry animals, cockroaches) without suggesting any specific safe pets.",
+    "correct_answer": "The transcript does not suggest specific pets. Joanna is allergic to reptiles, animals with fur, and cockroaches (D2:23, D5:11). No specific safe pet types are proposed in the conversation."
+  },
+  {
+    "question_id": "locomo_3_qa5",
+    "question": "What are Joanna's hobbies?",
+    "golden_answer": "Writing, watchingmovies, exploringnature, hanging withfriends.",
+    "category": 1,
+    "error_type": "INCOMPLETE",
+    "cited_evidence": [
+      "D1:10",
+      "D2:25"
+    ],
+    "correct_evidence": [
+      "D1:10",
+      "D2:25"
+    ],
+    "reasoning": "The golden answer lists writing, watching movies, exploring nature, and hanging with friends. This is incomplete. D1:10 (cited evidence) explicitly says \"Besides writing, I also enjoy reading, watching movies, and exploring nature\" but reading is omitted from the golden answer. Additional hobbies mentioned elsewhere in the transcript include hiking (D8:4, D11:3), cooking and baking (D10:9, D10:13), acting (D9:7), and DIY/crafts (D22:19, D22:21). The golden answer is not fabricated but substantially incomplete.",
+    "correct_answer": "Writing, reading, watching movies, exploring nature, hiking, cooking and baking, hanging with friends, acting (past passion), DIY/crafts"
+  },
+  {
+    "question_id": "locomo_3_qa24",
+    "question": "When is Nate hosting a gaming party?",
+    "golden_answer": "The weekend after 3June, 2022.",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D14:20"
+    ],
+    "correct_evidence": [
+      "D14:20"
+    ],
+    "reasoning": "D14:20 (session: 5:44 pm on 3 June, 2022) states: 'I'm organizing a gaming party two weekends later'. 'Two weekends later' from June 3 means approximately June 17-18, 2022 (two weeks after). The golden answer says 'The weekend after 3 June, 2022' which would be June 4-5 (one weekend after), not two weekends later.",
+    "correct_answer": "Two weekends after 3 June, 2022 (approximately June 17-18, 2022)."
+  },
+  {
+    "question_id": "locomo_3_qa34",
+    "question": "What book recommendations has Joanna given to Nate?",
+    "golden_answer": "\"Little Women\",'A Court of Thorns andRoses'.",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D3:17",
+      "D19:14",
+      "D19:16"
+    ],
+    "correct_evidence": [
+      "D1:16",
+      "D3:17",
+      "D9:14",
+      "D19:14"
+    ],
+    "reasoning": "The golden answer claims Joanna recommended 'A Court of Thorns and Roses' to Nate, but this title never appears in the transcript text. In D19:14-16, Joanna generically recommends 'finding a fantasy book series', then NATE shows a photo of a specific series (D19:15, whose image query reveals it as 'A Court of Thorns and Roses'), and Joanna approves with 'That's a great one!' This is Nate selecting a book and Joanna validating his choice, not Joanna recommending it. Also, 'Little Women' in D3:17 is a movie recommendation ('I just watched'), not a book recommendation as the golden answer implies.",
+    "correct_answer": "'Eternal Sunshine of the Spotless Mind' movie (D1:16), 'Little Women' movie (D3:17). Joanna also generically recommended finding a fantasy book series (D19:14), but never named a specific title."
+  },
+  {
+    "question_id": "locomo_3_qa43",
+    "question": "How long did it take for Joanna to finish writing her book?",
+    "golden_answer": "four months",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D17:14",
+      "D22:9"
+    ],
+    "correct_evidence": [
+      "D17:14",
+      "D22:9"
+    ],
+    "reasoning": "D17:14 (session: 2:34 pm on 10 July, 2022) shows Joanna saying 'I actually started on a book recently'. D22:9 (session: 11:15 am on 6 October, 2022) says 'I finished up my writing for my book last week' (approximately late September 2022). From mid-July to late September is approximately 2.5-3 months, not four months. The golden answer of 'four months' overcounts the duration.",
+    "correct_answer": "Approximately three months (mid-July to late September 2022)."
+  },
+  {
+    "question_id": "locomo_3_qa50",
+    "question": "What is something Nate gave to Joanna that brings her a lot of joy?",
+    "golden_answer": "stuffed toy pup",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D13:9",
+      "D24:2"
+    ],
+    "correct_evidence": [
+      "D13:9",
+      "D24:4",
+      "D24:8"
+    ],
+    "reasoning": "The cited evidence D24:2 reads: 'Hey Nate! I have been revising and perfecting the recipe I made for my family and it turned out really tasty. What's been happening with you?' This is about recipe revision and has nothing to do with the stuffed toy pup. The correct evidence for the stuffed pup bringing joy should include D24:4 ('I still have that stuffed animal dog you gave me! I named her Tilly, and she's always with me while I write') and D24:8 ('Tilly helps me stay focused and brings me so much joy').",
+    "correct_answer": "stuffed toy pup (Tilly)"
+  },
+  {
+    "question_id": "locomo_3_qa51",
+    "question": "When did Nate get Tilly for Joanna?",
+    "golden_answer": "25 May, 2022",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D13:9",
+      "D24:2"
+    ],
+    "correct_evidence": [
+      "D13:9",
+      "D24:4"
+    ],
+    "reasoning": "The cited evidence D24:2 reads: 'Hey Nate! I have been revising and perfecting the recipe I made for my family and it turned out really tasty.' This has nothing to do with when Nate got the stuffed pup. The name 'Tilly' is first revealed in D24:4: 'I still have that stuffed animal dog you gave me! I named her Tilly'. D13:9 correctly shows Nate giving the stuffed animal on May 25, 2022.",
+    "correct_answer": "25 May, 2022"
+  },
+  {
+    "question_id": "locomo_3_qa52",
+    "question": "How many of Joanna's writing have made it to the big screen?",
+    "golden_answer": "two",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D15:1",
+      "D25:2"
+    ],
+    "correct_evidence": [
+      "D15:1",
+      "D25:2",
+      "D25:4"
+    ],
+    "reasoning": "The golden answer claims 'two' of Joanna's writings made it to the big screen, citing D15:1 and D25:2. However, D25:4 (Joanna, session: 8:16 pm on 25 October, 2022) explicitly states: 'I know this is the third time it's happened, but its just so awesome!' This clearly indicates THREE instances of her writing appearing on the big screen, not two. The third instance is mentioned but its evidence was not cited separately; Joanna herself counts it as the third time.",
+    "correct_answer": "Three (as stated by Joanna in D25:4: 'I know this is the third time it's happened')."
+  },
+  {
+    "question_id": "locomo_3_qa54",
+    "question": "When was Joanna's second movie script shown on the big screens?",
+    "golden_answer": "The Sunday before 25October, 2022.",
+    "category": 2,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D25:1"
+    ],
+    "correct_evidence": [
+      "D25:2"
+    ],
+    "reasoning": "The cited evidence D25:1 reads: 'Hey Joanna, what's been up since we last chatted? How's it going?' This is Nate's greeting and contains no information about when the movie was shown. The actual evidence is D25:2 (Joanna): 'Another movie script that I contributed to was shown on the big screen last Sunday for the first time!' The session date is October 25, 2022, so 'last Sunday' = the Sunday before October 25 = October 23, 2022. The golden answer 'The Sunday before 25 October, 2022' is factually correct but cites the wrong dialog.",
+    "correct_answer": "The Sunday before 25 October, 2022 (October 23, 2022)."
+  },
+  {
+    "question_id": "locomo_3_qa55",
+    "question": "What is Joanna inspired by?",
+    "golden_answer": "Personal experiences,her own journey ofself discovery, Nate,nature, validation,stories about findingcourage and takingrisks, people she knows, stuff she sees, imagination",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D4:6",
+      "D7:6",
+      "D11:11",
+      "D26:3",
+      "D26:7",
+      "D25:10"
+    ],
+    "correct_evidence": [
+      "D4:16",
+      "D7:6",
+      "D11:11",
+      "D25:10",
+      "D26:3",
+      "D26:7"
+    ],
+    "reasoning": "The cited evidence D4:6 reads: 'Yeah, definitely! I'm keen to try your recipe. Always up for something sweet.' This is about trying a dessert recipe and has nothing to do with Joanna's sources of inspiration. The golden answer includes 'Personal experiences, her own journey of self-discovery' - the correct evidence for this is D4:16: 'It was inspired by personal experiences and my own journey of self-discovery.' D4:6 should be replaced with D4:16.",
+    "correct_answer": "Personal experiences, her own journey of self-discovery, Nate, nature, validation, stories about finding courage and taking risks, people she knows, stuff she sees, imagination"
+  },
+  {
+    "question_id": "locomo_3_qa58",
+    "question": "What things has Nate reccomended to Joanna?",
+    "golden_answer": "A pet,\"The Lord of the Rings\" movies,a dragon book series,coconut flavoring,\"Project Hail Mary\" book,Xenoblade Chronicles, dairy-free margarine, coconut oil",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D2:14",
+      "D9:12",
+      "D9:14",
+      "D10:11",
+      "D19:17",
+      "D27:23",
+      "D10:19"
+    ],
+    "correct_evidence": [
+      "D2:14",
+      "D9:12",
+      "D9:14",
+      "D10:11",
+      "D19:17",
+      "D20:15",
+      "D27:23"
+    ],
+    "reasoning": "The golden answer includes 'Project Hail Mary book' and 'a dragon book series' but neither title appears anywhere in the transcript text. D19:17 recommends a series with 'awesome battles and interesting characters' (image query: 'space opera book series'), but never names it as 'Project Hail Mary'. D9:14 mentions a series with 'adventures, magic, and great characters' (image query: 'fantasy novels dragon cover series'), but never calls it a 'dragon book series'. Additionally, evidence ID D10:19 does not exist in the dialog index. The golden answer also lists 'dairy-free margarine, coconut oil' which comes from D20:15, not D10:19.",
+    "correct_answer": "A pet (D2:14), 'The Lord of the Rings' movies (D9:12), a fantasy book series (D9:14), coconut flavoring (D10:11), a book series with battles and characters (D19:17), Xenoblade Chronicles (D27:23), dairy-free margarine or coconut oil (D20:15)."
+  },
+  {
+    "question_id": "locomo_3_qa61",
+    "question": "What mediums does Nate use to play games?",
+    "golden_answer": "Gamecube, PC,Playstation.",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D22:2",
+      "D27:21",
+      "D27:15"
+    ],
+    "correct_evidence": [
+      "D27:15",
+      "D27:17",
+      "D27:23"
+    ],
+    "reasoning": "The golden answer lists 'Gamecube, PC, Playstation' as mediums Nate uses to play games. The word 'Gamecube' never appears anywhere in the transcript text. 'Playstation' also never appears. The cited evidence consists of photos (trophy with controller, headphones with controller, desk with monitor), but the blip captions only show generic 'game controller' descriptions without identifying specific consoles. A PC is inferable from D27:15-17 (computer setup described as where he practices and competes). A Nintendo Switch might be inferable from D27:23 (Xenoblade Chronicles is a Nintendo game). But 'Gamecube' and 'Playstation' are not supported by any transcript evidence.",
+    "correct_answer": "PC (D27:15-17), Nintendo console (D27:23 - Xenoblade Chronicles). Other platforms cannot be determined from the transcript text alone."
+  },
+  {
+    "question_id": "locomo_3_qa66",
+    "question": "What alternative career might Nate consider after gaming?",
+    "golden_answer": "an animalkeeper at a localzoo and workingwith turtles; as heknows a great dealabout turtles andhow to care for them,and he enjoys it.",
+    "category": 3,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D5:8",
+      "D19:3",
+      "D25:19",
+      "D28:25"
+    ],
+    "correct_evidence": [
+      "D5:8",
+      "D25:27",
+      "D28:25"
+    ],
+    "reasoning": "The cited evidence shows Nate keeps turtles as pets and knows how to care for them: D5:8: 'Just keep their area clean, feed them properly, and make sure they get enough light.' D25:27: 'I've always liked turtles since I was a boy, so I know all about them!' D28:25: 'Turtles really bring me joy and peace.' However, the golden answer fabricates 'animal keeper at a local zoo' as a career path. The words 'zoo' and 'keeper' appear nowhere in the transcript. The only career discussions involve Nate's gaming career (D19:2, D22:18, D27:21). The golden answer invents a career aspiration from a pet hobby with no textual support.",
+    "correct_answer": "Cannot be determined from transcript. Nate is passionate about turtles and knows how to care for them, but he never discusses leaving gaming or pursuing animal care professionally."
+  },
+  {
+    "question_id": "locomo_3_qa67",
+    "question": "What pets does Nate have?",
+    "golden_answer": "A dog and threeturtles.",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D8:3",
+      "D12:3",
+      "D28:23"
+    ],
+    "correct_evidence": [
+      "D2:10",
+      "D12:3",
+      "D28:23",
+      "D28:25"
+    ],
+    "reasoning": "The cited evidence D8:3 reads: 'Sounds fun! I probably also have loads of books I haven't read in years. Sounds like a blast from the past!' This is about books and has nothing to do with Nate's pets. The correct evidence for Nate's pets should include D2:10 (photo of turtles), D12:3 (Max the dog), D28:23 (three turtles photo), and D28:25 (getting a third turtle).",
+    "correct_answer": "A dog (Max) and three turtles."
+  },
+  {
+    "question_id": "locomo_3_qa68",
+    "question": "How many hikes has Joanna been on?",
+    "golden_answer": "Four",
+    "category": 3,
+    "error_type": "AMBIGUOUS",
+    "cited_evidence": [
+      "D7:6",
+      "D11:5",
+      "D14:21",
+      "D28:22"
+    ],
+    "correct_evidence": [
+      "D7:6",
+      "D8:4",
+      "D11:3",
+      "D14:19",
+      "D28:22"
+    ],
+    "reasoning": "The golden answer 'Four' undercounts. Five hikes are mentioned: (1) D7:6 - hiking 'the other day' before April 15; (2) D8:4 - 'found an awesome hiking trail in my hometown yesterday' on April 16; (3) D11:3 - hiking in May; (4) D14:19 - 'I'm hiking with some buddies this weekend' on June 3; (5) D28:22 - 'on a hike last summer near Fort Wayne'. D14:19 is future tense at time of utterance, but the conversation continues for five more months (through November 2022) with no mention of cancellation, and Joanna is an established avid hiker. There is no reason to assume the hike did not take place. Even conservatively, 'Four' is too precise — 'at least four' would be the floor. Additionally, the cited evidence has errors: D14:21 ('Are you going to invite your tournament friends?') is about Nate's gaming party, not a hike; and D11:5 is cited instead of D8:4.",
+    "correct_answer": "At least five (D7:6, D8:4, D11:3, D14:19, D28:22)"
+  },
+  {
+    "question_id": "locomo_3_qa69",
+    "question": "How many turtles does Nate have?",
+    "golden_answer": "Three",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D8:3",
+      "D28:23"
+    ],
+    "correct_evidence": [
+      "D2:10",
+      "D28:23",
+      "D28:25"
+    ],
+    "reasoning": "The cited evidence D8:3 reads: 'Sounds fun! I probably also have loads of books I haven't read in years.' This is about books, not turtles. The relevant evidence for the number of turtles includes D2:10/D2:14 (two original turtles), D28:23 (photo of three turtles), and D28:25 (getting a third turtle from a pet store).",
+    "correct_answer": "Three"
+  },
+  {
+    "question_id": "locomo_3_qa73",
+    "question": "What state did Joanna visit in summer 2021?",
+    "golden_answer": "Indiana",
+    "category": 3,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D28:22"
+    ],
+    "correct_evidence": [
+      "D28:22"
+    ],
+    "reasoning": "The question asks 'What state did Joanna visit in summer 2021?' D28:22 (session: 5:54 pm on 9 November, 2022) states: 'I took that pic on a hike last summer near Fort Wayne.' 'Last summer' relative to November 2022 is summer 2022, NOT summer 2021. Fort Wayne is in Indiana, so the golden answer 'Indiana' is correct for the state, but the question's premise of 'summer 2021' is wrong - it should be summer 2022. The golden answer 'Indiana' is correct for the state, but the temporal framing of the question is erroneous.",
+    "correct_answer": "Indiana (but the visit was in summer 2022, not summer 2021 as the question states)."
+  },
+  {
+    "question_id": "locomo_3_qa81",
+    "question": "What recipes has Joanna made?",
+    "golden_answer": "dairy free vanilla cake with strawberry filling and coconut cream frosting, parfait, strawberry chocolate cake, chocolate coconut cupcakes, chocolate raspberry tart, chocolate cake with raspberries, blueberry cheesecake bars",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D10:9",
+      "D10:11",
+      "D19:8",
+      "D20:2",
+      "D20:10",
+      "D21:11",
+      "D22:1",
+      "D21:3",
+      "D21:17"
+    ],
+    "correct_evidence": [
+      "D10:9",
+      "D10:11",
+      "D19:8",
+      "D20:2",
+      "D20:10",
+      "D21:11",
+      "D22:1",
+      "D21:17"
+    ],
+    "reasoning": "Golden answer lists 7 recipes. Verification against transcript: (1) \"dairy free vanilla cake with strawberry filling and coconut cream frosting\" - CONFIRMED, directly stated in D10:11. (2) \"parfait\" - FABRICATED, D19:8 says \"delicious treat\" with no name given. (3) \"strawberry chocolate cake\" - INFERRED from blip_caption only, never named in text. (4) \"chocolate coconut cupcakes\" - CONFIRMED, stated in D20:10. (5) \"chocolate raspberry tart\" - CONFIRMED, stated in D21:11. (6) \"chocolate cake with raspberries\" - CONFIRMED, stated in D21:13 (but evidence cites D21:3 which is about data backups). (7) \"blueberry cheesecake bars\" - FABRICATED, D21:17 says \"delicious dessert made with blueberries, coconut milk, and a gluten-free crust\" but never uses the words \"cheesecake\" or \"bars\". Two recipe names are fabricated and one is inferred from an image caption rather than stated in dialog.",
+    "correct_answer": "Dairy-free vanilla cake with strawberry filling and coconut cream frosting (D10:11), a delicious treat (D19:8, unnamed), revised old recipe with strawberries and chocolate (D20:2), dairy-free chocolate coconut cupcakes with raspberry frosting (D20:10), chocolate raspberry tart (D21:11), chocolate cake with raspberries (D22:1/D21:13), blueberry coconut milk dessert with gluten-free crust (D21:17)."
+  },
+  {
+    "question_id": "locomo_3_qa88",
+    "question": "What is one of Joanna's favorite movies?",
+    "golden_answer": "\"Eternal Sunshineof the Spotless Mind\"",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D1:18",
+      "D",
+      "D1:20"
+    ],
+    "correct_evidence": [
+      "D1:16",
+      "D1:18",
+      "D1:20"
+    ],
+    "reasoning": "The evidence_ids list includes a malformed ID 'D' which does not correspond to any dialog entry in the transcript. The golden answer 'Eternal Sunshine of the Spotless Mind' is factually correct and supported by D1:18 and D1:20. The malformed 'D' should likely be 'D1:16' (where Joanna first mentions/shows the movie poster) or another valid dialog ID.",
+    "correct_answer": "'Eternal Sunshine of the Spotless Mind'"
+  },
+  {
+    "question_id": "locomo_3_qa91",
+    "question": "What is Nate's favorite book series about?",
+    "golden_answer": "dragons",
+    "category": 4,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D9:14"
+    ],
+    "correct_evidence": [
+      "D9:14"
+    ],
+    "reasoning": "The golden answer says Nate's favorite book series is about 'dragons', but the word 'dragons' never appears in the transcript text. D9:14 states: 'I love this series. It has adventures, magic, and great characters - it's a must-read!' The image search query 'fantasy novels dragon cover series' is metadata for finding the image, not part of the conversation. The transcript only describes the series as having 'adventures, magic, and great characters'.",
+    "correct_answer": "Adventures, magic, and great characters (the specific subject 'dragons' is not stated in the transcript text)."
+  },
+  {
+    "question_id": "locomo_3_qa119",
+    "question": "What does Nate feel he could do when out in cool places like Whispering Falls?",
+    "golden_answer": "write a whole movie",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D11:13"
+    ],
+    "correct_evidence": [
+      "D11:13"
+    ],
+    "reasoning": "The question asks 'What does Nate feel he could do when out in cool places like Whispering Falls?' but D11:13 is spoken by JOANNA, not Nate: 'I always feel like I could write a whole movie when I'm out there in cool places like that!' The speaker in the evidence is Joanna. It is Joanna who feels she could write a movie in cool places, not Nate. The question has a speaker attribution error.",
+    "correct_answer": "This is Joanna's statement, not Nate's. Joanna feels she could write a whole movie when out in cool places like Whispering Falls."
+  },
+  {
+    "question_id": "locomo_3_qa184",
+    "question": "What did Joanna receive from her brother that brought back childhood memories?",
+    "golden_answer": "a handwritten letter",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D27:29"
+    ],
+    "correct_evidence": [
+      "D27:28",
+      "D27:29",
+      "D27:30"
+    ],
+    "reasoning": "The golden answer says Joanna received 'a handwritten letter' from 'her brother'. The cited evidence D27:29 (Nate) reads: 'That letter is really awesome! Does it remind you of your childhood?' This is Nate's reaction and does NOT mention the brother. The crucial evidence is D27:30 (Joanna): 'Yeah, it does! My brother wrote it - he used to make me these cute notes when we were kids.' Also D27:28 introduces the letter. The citation should include D27:28 and D27:30.",
+    "correct_answer": "a handwritten letter (from her brother)"
+  }
+]

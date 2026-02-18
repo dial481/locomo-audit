@@ -1,0 +1,2 @@
+locomo_1 (conv-30): 81/81 questions audited, 7 errors found
+Error breakdown: 1 TEMPORAL_ERROR, 1 ATTRIBUTION_ERROR, 0 HALLUCINATION, 3 WRONG_CITATION, 2 AMBIGUOUS, 0 INCOMPLETE

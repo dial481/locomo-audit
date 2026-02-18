@@ -1,0 +1,114 @@
+[
+  {
+    "question_id": "locomo_1_qa24",
+    "question": "Which events has Jon participated in to promote his business venture?",
+    "golden_answer": "fair, networking events, dance competition",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D10:1",
+      "D16:6",
+      "D8:4"
+    ],
+    "correct_evidence": [
+      "D10:1",
+      "D16:6",
+      "D8:13"
+    ],
+    "reasoning": "D8:4 is Gina speaking about her own store: 'Oof, that's tough, Jon. I got some new offers and promotions going on my online store to try and bring in new customers. It's been a wild ride starting my business, but I'm not giving up!' This has nothing to do with Jon's promotional events. The 'dance competition' part of the golden answer is supported by D8:13, where Jon says: 'I'm also hosting a dance competition next month to showcase local talent and bring more attention to my studio.' The golden answer is factually correct, but the citation D8:4 should be D8:13.",
+    "correct_answer": "fair, networking events, dance competition"
+  },
+  {
+    "question_id": "locomo_1_qa31",
+    "question": "How long did it take for Jon to open his studio?",
+    "golden_answer": "six months",
+    "category": 1,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D1:2",
+      "D15:13"
+    ],
+    "correct_evidence": [
+      "D1:2",
+      "D15:5"
+    ],
+    "reasoning": "D1:2 (session_1, 20 January 2023): Jon says 'Lost my job as a banker yesterday, so I'm gonna take a shot at starting my own business.' He announced his plan to start a business on 20 January 2023 (lost his job on 19 January). D15:5 (session_15, 19 June 2023): Jon says 'The official opening night is tomorrow.' So the studio opens on 20 June 2023. From 20 January 2023 to 20 June 2023 is exactly 5 months. Even counting from 19 January (when he actually lost his job) to 20 June 2023 is 5 months and 1 day. The golden answer of 'six months' is incorrect; it should be 'five months'.",
+    "correct_answer": "five months"
+  },
+  {
+    "question_id": "locomo_1_qa43",
+    "question": "What do the dancers in the photo represent?",
+    "golden_answer": "They are performing at the festival",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D1:25"
+    ],
+    "correct_evidence": [
+      "D1:26"
+    ],
+    "reasoning": "D1:25 is Gina asking a question: 'Wow, it looks awesome! Are they yours at the festival? They're so graceful!' This is an interrogative sentence, not a factual assertion. The actual confirmation that the dancers are performing at the festival comes from Jon in D1:26: 'Yeah, they're the ones performing at the festival! They've been practicing hard and will definitely impress with their grace and skill.' The golden answer is factually correct but cites the question (D1:25) rather than the confirming answer (D1:26).",
+    "correct_answer": "They are performing at the festival"
+  },
+  {
+    "question_id": "locomo_1_qa44",
+    "question": "What does Gina say about the dancers in the photo?",
+    "golden_answer": "They look graceful",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D1:26"
+    ],
+    "correct_evidence": [
+      "D1:25"
+    ],
+    "reasoning": "The cited evidence D1:26 is Jon speaking: 'Yeah, they're the ones performing at the festival! They've been practicing hard and will definitely impress with their grace and skill.' The question asks what GINA says about the dancers. Gina's actual comment is in D1:25: 'Wow, it looks awesome! Are they yours at the festival? They're so graceful!' The golden answer 'They look graceful' correctly reflects Gina's words ('They're so graceful!'), but the wrong dialog ID is cited -- D1:26 (Jon) instead of D1:25 (Gina).",
+    "correct_answer": "They look graceful"
+  },
+  {
+    "question_id": "locomo_1_qa47",
+    "question": "What did Gina find for her clothing store on 1 February, 2023?",
+    "golden_answer": "The perfect spot for her store",
+    "category": 4,
+    "error_type": "AMBIGUOUS",
+    "cited_evidence": [
+      "D3:2"
+    ],
+    "correct_evidence": [
+      "D3:2",
+      "D3:3"
+    ],
+    "reasoning": "D3:2 (Gina): 'Hi Jon! So happy you're pushing forward with dancing! Inspiring. I emailed some wholesalers and one replied and said yes today! I'm over the moon because now I can expand my clothing store and get closer to my customers. Check it out - here's a pic!' The blip_caption for D3:2 describes 'a photography of a shopping mall with a glass entrance and a sign.' Gina's text explicitly mentions finding a WHOLESALER who agreed, not a physical store location. However, Jon in D3:3 responds: 'Wow, Gina! You found the perfect spot for your store. Way to go, hard work's paying off!' Jon's interpretation (finding a physical spot) conflicts with Gina's explicit words (finding a wholesaler). The golden answer 'The perfect spot for her store' comes from Jon's response (D3:3) rather than Gina's own statement (D3:2). The attached image showing a shopping mall adds ambiguity -- it could represent the wholesaler's location or a new store spot.",
+    "correct_answer": "A wholesaler agreed to supply her store (per Gina's own words in D3:2), though Jon interpreted the news as finding 'the perfect spot' (D3:3)"
+  },
+  {
+    "question_id": "locomo_1_qa57",
+    "question": "What advice does Gina give to Jon about running a successful business?",
+    "golden_answer": "build relationships with customers, create a strong brand image, stay positive",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D7:5"
+    ],
+    "correct_evidence": [
+      "D7:5"
+    ],
+    "reasoning": "D7:5 is Jon speaking to Gina: 'Yeah, brand identity is key. Make sure yours stands out. Also be sure to build relationships with your customers - let them know you care. And don't forget to stay positive and motivate others. Your energy will be contagious!' This is clearly JON giving advice TO GINA about running her clothing store, not the other way around. D7:6 confirms this attribution with Gina responding: 'Thanks for the advice, Jon! Building relationships and creating a strong brand image for my store is something I'm always working on.' The question asks what advice GINA gives to JON, but the cited evidence and the actual advice content show the reverse -- it is JON advising GINA. Searching the rest of the transcript, Gina does not give Jon this specific three-part advice anywhere.",
+    "correct_answer": "This advice ('build relationships with customers, create a strong brand image, stay positive') was given by JON to GINA in D7:5, not by Gina to Jon. The attribution is reversed."
+  },
+  {
+    "question_id": "locomo_1_qa63",
+    "question": "What kind of professional experience did Gina get accepted for on May 23, 2023?",
+    "golden_answer": "fashion internship",
+    "category": 4,
+    "error_type": "AMBIGUOUS",
+    "cited_evidence": [
+      "D12:1"
+    ],
+    "correct_evidence": [
+      "D12:1"
+    ],
+    "reasoning": "The question states Gina was accepted 'on May 23, 2023' but D12:1 is from session_12 dated '7:18 pm on 27 May, 2023.' Gina says 'I just got accepted for a fashion internship!' -- using 'just' to indicate it happened very recently, on or around 27 May. There is no session or dialog on May 23 in the transcript. The golden answer 'fashion internship' is correct regarding what she was accepted for, but the date premise in the question (May 23) does not match the evidence (May 27). This makes the question itself misleading, though the answer content is accurate.",
+    "correct_answer": "fashion internship (but the acceptance was announced on 27 May 2023, not May 23 as stated in the question)"
+  }
+]

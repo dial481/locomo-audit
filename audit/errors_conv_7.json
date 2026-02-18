@@ -1,0 +1,204 @@
+[
+  {
+    "question_id": "locomo_7_qa0",
+    "question": "What kind of project was Jolene working on in the beginning of January 2023?",
+    "golden_answer": "electricity engineering project",
+    "category": 2,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D1:2"
+    ],
+    "correct_evidence": [
+      "D1:2"
+    ],
+    "reasoning": "D1:2 (Jolene): \"I finished an electrical engineering project last week\". The golden answer says \"electricity engineering project\" but the transcript says \"electrical engineering project\". \"Electricity engineering\" is not a recognized field name and does not appear anywhere in the transcript. The correct term from the dialog is \"electrical engineering\".",
+    "correct_answer": "electrical engineering project"
+  },
+  {
+    "question_id": "locomo_7_qa75",
+    "question": "What card game is Deborah talking about?",
+    "golden_answer": "Exploding Kittens",
+    "category": 3,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D27:12"
+    ],
+    "correct_evidence": [
+      "D27:12"
+    ],
+    "reasoning": "D27:12 (Deborah): \"I recently played a game. I don't remember what it's called. This is a card game about cats, where you take cards one by one from a deck, and then you can attack your opponent with them.\" Deborah explicitly states she does NOT remember the name of the game. The name \"Exploding Kittens\" appears nowhere in the transcript. While the description loosely matches Exploding Kittens, the golden answer fabricates a game name that is not present in the data. The correct answer should be something like \"a card game about cats (name not remembered)\".",
+    "correct_answer": "an unnamed card game about cats where you draw cards and can attack opponents (Deborah says she does not remember the name)"
+  },
+  {
+    "question_id": "locomo_7_qa78",
+    "question": "Where did Jolene and her partner spend most of September 2023?",
+    "golden_answer": "Phuket",
+    "category": 2,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D2:1"
+    ],
+    "correct_evidence": [
+      "D27:1",
+      "D29:4"
+    ],
+    "reasoning": "The cited evidence D2:1 is Deborah saying \"my dad passed away two days ago\" from session_2 on January 27, 2023. This has absolutely nothing to do with Phuket or September 2023. The correct evidence is D27:1 (Jolene): \"Last weekend my partner and I traveled to a meditation retreat for a few weeks in Phuket\" from session_27 on September 12, 2023. The golden answer \"Phuket\" is factually correct but the citation is completely wrong.",
+    "correct_answer": "Phuket"
+  },
+  {
+    "question_id": "locomo_7_qa87",
+    "question": "Which countries has Deborah traveled to?",
+    "golden_answer": "Thailand, Brazil",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D6:10",
+      "D23:18"
+    ],
+    "correct_evidence": [
+      "D6:10",
+      "D23:18"
+    ],
+    "reasoning": "D6:10 (Deborah): \"Bali last year was one of my favs.\" Bali is in Indonesia, not Thailand. The only mention of Thailand in the entire transcript is D28:16 (Jolene): \"we tried a new style of meditation in Thailand\" - this is Jolene who went to Thailand, not Deborah. D23:18 (Deborah): \"Three years ago I was also in Rio de Janeiro\" - Rio de Janeiro is in Brazil, which is correct. The golden answer incorrectly attributes Thailand to Deborah and confuses Bali (Indonesia) with Thailand. Deborah traveled to Indonesia (Bali) and Brazil (Rio de Janeiro).",
+    "correct_answer": "Indonesia (Bali), Brazil (Rio de Janeiro)"
+  },
+  {
+    "question_id": "locomo_7_qa105",
+    "question": "What milestone did Jolene achieve recently on 4 February, 2023?",
+    "golden_answer": "Design and build a sustainable water purifier for a rural community",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D4:3"
+    ],
+    "correct_evidence": [
+      "D4:3",
+      "D4:5"
+    ],
+    "reasoning": "The cited evidence D4:3 (Jolene): \"I had a major milestone last week and it went really well - I'm so relieved and proud. It was a huge accomplishment for me as an engineer.\" This dialog mentions a milestone but does NOT specify what it was. The specific detail \"design and build a sustainable water purifier for a rural community\" comes from D4:5 (Jolene): \"I had to plan and research a lot to design and build a sustainable water purifier for a rural community in need.\" The golden answer is factually correct but the citation is incomplete - D4:5 should be included.",
+    "correct_answer": "Design and build a sustainable water purifier for a rural community"
+  },
+  {
+    "question_id": "locomo_7_qa116",
+    "question": "According to Jolene, what does exercise help her to feel?",
+    "golden_answer": "connected to her body",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D7:20"
+    ],
+    "correct_evidence": [
+      "D7:20"
+    ],
+    "reasoning": "D7:20 speaker is Deborah, not Jolene. D7:20 (Deborah): \"Exercise is key for me - it makes me feel connected to my body.\" The question asks what Jolene said, but this statement was made by Deborah. Searching the full transcript, Jolene never says exercise makes her feel \"connected to her body\" anywhere. The golden answer attributes Deborah's statement to Jolene.",
+    "correct_answer": "This is Deborah's statement, not Jolene's. Deborah said exercise makes her feel connected to her body."
+  },
+  {
+    "question_id": "locomo_7_qa117",
+    "question": "What did Deb share a photo of, which brought a smile to Jolene's face?",
+    "golden_answer": "a yellow coffee cup with a handwritten message",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D8:22"
+    ],
+    "correct_evidence": [
+      "D8:21"
+    ],
+    "reasoning": "The cited evidence D8:22 (Jolene): \"Thanks, Deb! This really cheered me up. All the best with your classes. Bye!\" This is Jolene's reaction, not the photo itself. The actual photo was shared in D8:21 (Deborah): \"Take care and good luck with your exams. I'll give you a mug just like this one! It encourages.\" with blip_caption: \"a photo of a yellow coffee cup with a handwritten message\". The golden answer is correct but the evidence citation points to Jolene's reaction instead of Deborah's photo share.",
+    "correct_answer": "a yellow coffee cup with a handwritten message"
+  },
+  {
+    "question_id": "locomo_7_qa123",
+    "question": "What did Jolene and Anna discuss while watching the sunset by the sea?",
+    "golden_answer": "They realized they inspire each other",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D10:17"
+    ],
+    "correct_evidence": [
+      "D10:17"
+    ],
+    "reasoning": "D10:17 (Deborah): \"Recently, Anna and I were sitting by the sea, watching the sunset and talking about each other. And we realized that we inspire each other.\" The question says \"Jolene and Anna\" but it was Deborah and Anna who had this conversation. Jolene was not present at this sunset scene - Deborah is telling Jolene about it. The golden answer content is correct (they realized they inspire each other) but the question wrongly attributes the interaction to Jolene instead of Deborah.",
+    "correct_answer": "Deborah and Anna (not Jolene) realized they inspire each other while watching the sunset by the sea."
+  },
+  {
+    "question_id": "locomo_7_qa152",
+    "question": "What is special about the bench at the park near Deborah's house?",
+    "golden_answer": "It holds special memories of conversations with her mom",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D19:18"
+    ],
+    "correct_evidence": [
+      "D19:19"
+    ],
+    "reasoning": "The cited evidence D19:18 (Jolene): \"Sounds lovely! Nature can be calming. What makes this bench special to you?\" This is Jolene asking the question, not providing the answer. The actual answer comes from D19:19 (Deborah): \"It holds a lot of special memories for me and my mom - we would come here and chat about dreams and life. It's full of good moments.\" The golden answer is factually correct but the citation points to the question rather than the answer.",
+    "correct_answer": "It holds special memories of conversations with her mom"
+  },
+  {
+    "question_id": "locomo_7_qa155",
+    "question": "What habits does Jolene practice to feel balanced?",
+    "golden_answer": "yoga, meditation, walks, and mindfulness",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D20:12"
+    ],
+    "correct_evidence": [
+      "D20:11",
+      "D15:32",
+      "D25:13"
+    ],
+    "reasoning": "The cited evidence D20:12 is spoken by Deborah, not Jolene. D20:12 (Deborah): \"Yoga and meditation help me find balance and inner peace. Going out for walks and staying mindful also keep me grounded.\" The question asks about Jolene's habits, but the evidence is Deborah's statement. Jolene does mention yoga and meditation in D20:11: \"I'm trying to do more yoga and meditation myself to help relax and stay focused.\" Jolene mentions walks in D15:32 and D25:13. The golden answer content is broadly supportable from scattered Jolene statements but the specific citation is wrong - it points to Deborah's habits, not Jolene's.",
+    "correct_answer": "yoga, meditation, walks, and mindfulness"
+  },
+  {
+    "question_id": "locomo_7_qa174",
+    "question": "Why did Jolene have to reschedule their meeting with Deborah on September 8, 2023?",
+    "golden_answer": "Jolene already had plans",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D26:15"
+    ],
+    "correct_evidence": [
+      "D26:15",
+      "D26:16"
+    ],
+    "reasoning": "D26:15 (Deborah): \"Sorry, I remembered that I already have plans for this day.\" It was DEBORAH who had prior plans and cancelled, not Jolene. The question and golden answer both incorrectly attribute the cancellation to Jolene. After Deborah cancelled, Jolene responded in D26:16: \"Now I'll see when it's more convenient for me.\" The reschedule happened because Deborah had plans, not Jolene.",
+    "correct_answer": "Deborah (not Jolene) already had plans for that day, causing the reschedule."
+  },
+  {
+    "question_id": "locomo_7_qa179",
+    "question": "What did Jolene recently play that she described to Deb?",
+    "golden_answer": "a card game about cats",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D27:12"
+    ],
+    "correct_evidence": [
+      "D27:12"
+    ],
+    "reasoning": "D27:12 speaker is Deborah, not Jolene. D27:12 (Deborah): \"By the way, I recently played a game. I don't remember what it's called. This is a card game about cats, where you take cards one by one from a deck, and then you can attack your opponent with them.\" The question asks what Jolene played, but it was Deborah who played the card game about cats and described it. Jolene's response in D27:13 is: \"I look forward to meeting you and playing this game!\" - confirming Jolene hasn't played it yet.",
+    "correct_answer": "Deborah (not Jolene) recently played a card game about cats."
+  },
+  {
+    "question_id": "locomo_7_qa188",
+    "question": "What outdoor activity did Jolene suggest doing together with Deborah?",
+    "golden_answer": "Surfing",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D29:27"
+    ],
+    "correct_evidence": [
+      "D29:30"
+    ],
+    "reasoning": "The cited evidence D29:27 (Deborah): \"It's okay, maybe we can try it together sometime!\" is Deborah's suggestion, not Jolene's. Jolene does suggest surfing together in D29:30 (Jolene): \"Just started learning, but haven't gone yet. Want to come with me sometime?\" The golden answer \"Surfing\" is correct and Jolene did make the suggestion, but the citation points to Deborah's line rather than Jolene's actual invitation.",
+    "correct_answer": "Surfing"
+  }
+]

@@ -1,0 +1,2 @@
+locomo_3 (conv-42): 199/199 questions audited, 22 errors found
+Error breakdown: 3 TEMPORAL_ERROR, 1 ATTRIBUTION_ERROR, 8 HALLUCINATION, 8 WRONG_CITATION, 1 AMBIGUOUS, 1 INCOMPLETE

@@ -1,0 +1,295 @@
+[
+  {
+    "question_id": "locomo_8_qa4",
+    "question": "Which hobby did Sam take up in May 2023?",
+    "golden_answer": "painting",
+    "category": 2,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D1:11"
+    ],
+    "correct_evidence": [
+      "D1:11",
+      "D1:13"
+    ],
+    "reasoning": "D1:11 (May 18, 2023) Sam says: 'Nothing so far, but I was thinking about trying painting.' D1:13 Sam explicitly says: 'Not yet, but I'm keen to give it a go.' Sam only CONSIDERED painting; he never actually took it up in May 2023. Later in D2:10 (May 24) he is still only 'thinking about trying painting.' The verb 'took up' implies Sam started doing it, but the evidence shows he did not.",
+    "correct_answer": "Sam did not take up any hobby in May 2023. He was considering painting but explicitly said 'Not yet'."
+  },
+  {
+    "question_id": "locomo_8_qa7",
+    "question": "What new hobbies did Sam consider trying?",
+    "golden_answer": "Painting, kayaking, hiking, cooking, running",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D1:11",
+      "D2:10",
+      "D10:8",
+      "D13:6",
+      "D13:8",
+      "D20:6",
+      "D7:2",
+      "D7:4",
+      "D7:6",
+      "D21:19"
+    ],
+    "correct_evidence": [
+      "D1:11",
+      "D2:10",
+      "D10:8",
+      "D13:6",
+      "D13:8",
+      "D20:6",
+      "D7:2",
+      "D7:4",
+      "D7:6",
+      "D21:9"
+    ],
+    "reasoning": "The golden answer includes 'running' but the cited evidence D21:19 says: 'I do sketch occasionally, but I haven't created anything remarkable yet.' This does NOT mention running. The actual support for running is D21:9 where Sam says: 'I've started to enjoy running in the mornings, and it's been a great way to clear my head.' D21:9 is not included in the evidence_ids. Additionally, D20:6 ('I used to love hiking, but it's been a while since I had the chance to do it') describes a past activity Sam used to do, not something new he considered trying.",
+    "correct_answer": "Painting, kayaking, hiking, cooking, running"
+  },
+  {
+    "question_id": "locomo_8_qa18",
+    "question": "What kind of healthy food suggestions has Evan given to Sam?",
+    "golden_answer": "flavored seltzer water, dark chocolate with high cocoa content, air-popped popcorn and fruit, veggies, healthy sandwich snacks, energy balls, grilled chicken salad with avocado",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D3:5",
+      "D4:10",
+      "D22:10",
+      "D22:14",
+      "D24:15"
+    ],
+    "correct_evidence": [
+      "D3:5",
+      "D4:10",
+      "D22:14",
+      "D24:15"
+    ],
+    "reasoning": "The term 'healthy sandwich snacks' does not appear anywhere in the transcript text or image captions. No dialog contains the word 'sandwich' at all. Additionally, 'veggies' as a specific suggestion from Evan to Sam is unsupported - D4:6 where Evan mentions veggies is about his OWN dietary changes, not a suggestion to Sam, and D4:6 is not even cited in the evidence. The term 'grilled chicken salad with avocado' is an inference from D24:15's blip caption ('a photo of a salad with chicken, avocado, tomatoes, corn, and cheese') but Evan's text in D24:15 just says 'focus on a balanced diet and low-impact exercises' without specifically recommending this dish.",
+    "correct_answer": "flavored seltzer water, dark chocolate with high cocoa content, air-popped popcorn and fruit, energy balls"
+  },
+  {
+    "question_id": "locomo_8_qa24",
+    "question": "What significant event happened in Sam's life towards the end of summer 2023?",
+    "golden_answer": "He fell in love with a Canadian woman",
+    "category": 2,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D5:1"
+    ],
+    "correct_evidence": [
+      "D5:1"
+    ],
+    "reasoning": "D5:1 speaker is EVAN, not Sam. Evan says: 'Last week I went on a trip to Canada and something unreal happened - I met this awesome Canadian woman and it was like something out of a movie.' The question asks about Sam's life, but the cited evidence describes an event in EVAN's life. It was Evan who fell in love with a Canadian woman, not Sam.",
+    "correct_answer": "This event happened to Evan, not Sam. No comparable significant event for Sam is documented at end of summer 2023 beyond his ongoing health journey."
+  },
+  {
+    "question_id": "locomo_8_qa28",
+    "question": "What kind of writing does Sam do to relax and cope with his health issues?",
+    "golden_answer": "journalling, creative writing",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D6:4",
+      "D11:7"
+    ],
+    "correct_evidence": [
+      "D11:17",
+      "D11:19"
+    ],
+    "reasoning": "The cited evidence D6:4 does not mention writing at all - Sam says: 'Thanks, Evan. Your support means a lot to me.' The only connection is a blip_caption 'a photo of a notepad with a pen and a note' which is an image description, not Sam stating he writes. D11:7 also does not mention writing - Sam asks: 'And how's your watercolor painting going?' The actual support for 'journalling, creative writing' is in D11:17 where Sam says: 'Writing in my journal and doing creative writing is a good way for me to express my innermost thoughts and feelings.' D11:17 and D11:19 are the correct evidence dialogs.",
+    "correct_answer": "journalling, creative writing"
+  },
+  {
+    "question_id": "locomo_8_qa33",
+    "question": "What is the recurring dream that Sam keeps having?",
+    "golden_answer": "he's flying over a cityscape.",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D6:14",
+      "D24:22"
+    ],
+    "correct_evidence": [
+      "D6:14",
+      "D24:22"
+    ],
+    "reasoning": "The transcript consistently uses \"skyscrapers\" in both D6:14 (\"soaring over skyscrapers\") and D24:22 (\"flying over skyscrapers\"). The golden answer substitutes \"cityscape\" which does not appear anywhere in the conversation text, blip_caption, or query fields. While an LLM judge may accept \"cityscape\" as semantically close to \"skyscrapers,\" the golden answer uses a word the transcript never uses.",
+    "correct_answer": "he's flying/soaring over skyscrapers"
+  },
+  {
+    "question_id": "locomo_8_qa36",
+    "question": "What kind of foods or recipes has Sam recommended to Evan?",
+    "golden_answer": "grilled vegetables, grilled chicken and veggie stir-fry, poutine",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D7:8",
+      "D8:7",
+      "D23:26"
+    ],
+    "correct_evidence": [
+      "D7:8",
+      "D8:7"
+    ],
+    "reasoning": "D23:26 is Sam saying 'Sounds amazing, Ev! Skiing, trying local dishes, and enjoying the breathtaking views - the perfect honeymoon.' Sam is responding to Evan's honeymoon plans, NOT recommending poutine. The blip caption shows 'a photo of a container of french fries covered in caramel' which does not even clearly depict poutine. Furthermore, it is EVAN who mentions poutine in D23:27: 'Yeah, Sam! Gonna try some poutine while we're there - can't wait!' Poutine is Evan's own plan, not Sam's recommendation.",
+    "correct_answer": "roasted vegetables, grilled chicken and veggie stir-fry"
+  },
+  {
+    "question_id": "locomo_8_qa37",
+    "question": "What kind of healthy meals did Sam start eating after getting a health scare?",
+    "golden_answer": "salad, grilled salmon and vegetables, grilled chicken and veggie stir-fry, Beef Merlot, fruit bowl, smoothie bowl",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D3:2",
+      "D8:1",
+      "D7:4",
+      "D8:7",
+      "D10:2",
+      "D11:1",
+      "D18:6"
+    ],
+    "correct_evidence": [
+      "D3:2",
+      "D7:4",
+      "D8:1",
+      "D8:7",
+      "D11:1",
+      "D18:6"
+    ],
+    "reasoning": "The term 'Beef Merlot' does not appear anywhere in the transcript. A search for 'merlot' or 'Merlot' in all dialog text returns zero results. D10:2's blip caption says 'a photo of a bowl of beef and vegetables with a package of healthy choice' - the meal name 'Beef Merlot' appears to be fabricated. The 'Healthy Choice' brand visible in the image was apparently interpreted as a specific dish name. Additionally, 'smoothie bowl' from D18:6 is a stretch - the blip says 'a photo of a variety of bowls of fruit and yogurt' and Sam's text discusses a Weight Watchers meeting, not a smoothie bowl specifically.",
+    "correct_answer": "salad, grilled salmon and vegetables, grilled chicken and veggie stir-fry, fruit bowl"
+  },
+  {
+    "question_id": "locomo_8_qa43",
+    "question": "How often does Sam get health checkups?",
+    "golden_answer": "every three months",
+    "category": 3,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D2:6",
+      "D7:2",
+      "D12:1"
+    ],
+    "correct_evidence": [
+      "D2:6",
+      "D7:2",
+      "D12:1",
+      "D24:12"
+    ],
+    "reasoning": "The checkup intervals are: D2:6 (~May 22) to D7:2 (Aug 15) = ~85 days (~2.8 months); D7:2 (Aug 15) to D12:1 (~Oct 2) = ~48 days (~1.6 months). These intervals are NOT consistently 'every three months.' Furthermore, in D24:12 (Jan 10, 2024), Sam says 'Haven't seen a doctor in a while, but it's probably a good idea to get some advice' - indicating he had NOT been going every three months. The pattern is irregular, not trimonthly.",
+    "correct_answer": "Irregularly, at varying intervals (approximately every 2-3 months in mid-2023, then a longer gap)"
+  },
+  {
+    "question_id": "locomo_8_qa54",
+    "question": "What personal health incidents does Evan face in 2023?",
+    "golden_answer": "heart palpitations, twisted ankle, twisted ankle",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D3:1",
+      "D9:2",
+      "D11:2"
+    ],
+    "correct_evidence": [
+      "D3:1",
+      "D9:2",
+      "D11:2"
+    ],
+    "reasoning": "D3:1 correctly identifies heart palpitations. However, D9:2 says 'Twisted my knee last Friday and it's really painful' - this is a KNEE injury, not an ankle. D11:2 says 'I had a setback last week - messed up my knee playing b-ball with the kids' - again a KNEE injury, not ankle. The golden answer says 'twisted ankle, twisted ankle' but both incidents clearly involve Evan's KNEE. Note: Evan's SON had an ankle injury (D7:1: 'hurt his ankle') but that is a different person entirely.",
+    "correct_answer": "heart palpitations, twisted knee, knee injury (from basketball)"
+  },
+  {
+    "question_id": "locomo_8_qa74",
+    "question": "When did Evan's son fall off his bike?",
+    "golden_answer": "Thursday before December 17, 2023.",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D20:3"
+    ],
+    "correct_evidence": [
+      "D20:3"
+    ],
+    "reasoning": "D20:3 (session_datetime: 6:48 pm on 17 December, 2023) states: 'my son had an accident last Tuesday, he fell off his bike and it was rough.' The dialog explicitly says 'last Tuesday', not Thursday. December 17, 2023 was a Sunday. The previous Tuesday was December 12, 2023.",
+    "correct_answer": "Tuesday before December 17, 2023 (approximately December 12, 2023)"
+  },
+  {
+    "question_id": "locomo_8_qa80",
+    "question": "When did Evan have a drunken night with his friends?",
+    "golden_answer": "January 9, 2023",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D24:3"
+    ],
+    "correct_evidence": [
+      "D24:3"
+    ],
+    "reasoning": "D24:3 (session_datetime: 12:17 am on 10 January, 2024) states: 'Yesterday I went out with my friends and had a bit too much to drink.' Yesterday from January 10, 2024 is January 9, 2024. The golden answer says 'January 9, 2023' which has the wrong year - it should be 2024.",
+    "correct_answer": "January 9, 2024"
+  },
+  {
+    "question_id": "locomo_8_qa102",
+    "question": "What dish did Sam make on 18 August, 2023 that turned out flavorful?",
+    "golden_answer": "grilled dish with salmon and vegetables",
+    "category": 4,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D7:4"
+    ],
+    "correct_evidence": [
+      "D7:4"
+    ],
+    "reasoning": "D7:4 is from session_7 with session_datetime '4:20 pm on 15 August, 2023'. Sam says: 'Last night I made this yummy grilled dish, so good!' with a blip_caption 'a photo of a plate of food with a piece of salmon and some vegetables.' 'Last night' from August 15 means the dish was made on August 14, 2023. The question states '18 August, 2023' which is incorrect - that date corresponds to no dialog in session 7. The answer content ('grilled dish with salmon and vegetables') is correct but the date in the question is wrong.",
+    "correct_answer": "grilled dish with salmon and vegetables (but made on August 14, 2023, not August 18)"
+  },
+  {
+    "question_id": "locomo_8_qa103",
+    "question": "What kind of recipe did Evan request from Sam on 19 August, 2023?",
+    "golden_answer": "recipes with more vegetables",
+    "category": 4,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D7:7"
+    ],
+    "correct_evidence": [
+      "D7:7"
+    ],
+    "reasoning": "D7:7 is from session_7 with session_datetime '4:20 pm on 15 August, 2023'. Evan says: 'That'd be great, Sam! I'm looking to add more vegetables to my meals. Do you have any recipes for that?' The question states '19 August, 2023' but D7:7 is from August 15, 2023. August 19 is the date of session_8, not session_7. The answer content is correct but the date in the question is wrong.",
+    "correct_answer": "recipes with more vegetables (but requested on August 15, 2023, not August 19)"
+  },
+  {
+    "question_id": "locomo_8_qa106",
+    "question": "What did Evan start painting years ago due to being inspired by a friend's gift?",
+    "golden_answer": "forest scene",
+    "category": 4,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D8:14"
+    ],
+    "correct_evidence": [
+      "D8:14"
+    ],
+    "reasoning": "D8:14 says: 'It all started when a friend of mine gave me this painting one day, it inspired me a lot and that's when I started painting.' The blip_caption shows 'a photo of a painting of a forest scene on a easel.' The forest scene is the GIFT the friend gave Evan, not necessarily what Evan himself started painting. The question conflates the friend's gift with what Evan began creating. D8:20 shows Evan loves painting landscapes/sunsets, and D1:14 shows a cactus in desert painting. Evan started painting in general, inspired by the forest scene gift.",
+    "correct_answer": "The friend's gift was a forest scene painting, but Evan started painting in general (landscapes, nature scenes), not specifically forest scenes."
+  },
+  {
+    "question_id": "locomo_8_qa144",
+    "question": "What did Evan share with Sam after their hiking trip?",
+    "golden_answer": "a photo of a man standing on a rock looking out over a valley",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D22:1"
+    ],
+    "correct_evidence": [
+      "D22:1"
+    ],
+    "reasoning": "D22:1 speaker is SAM, not Evan. Sam says: 'Hey Evan! I'm really getting into this healthier lifestyle - just took my friends on an epic hiking trip last Friday!' with blip_caption 'a photography of a man standing on a rock looking out over a valley'. It was SAM who shared this photo about HIS OWN hiking trip, not Evan sharing with Sam. The question incorrectly attributes the sharing to Evan.",
+    "correct_answer": "Sam (not Evan) shared the photo after Sam's own hiking trip."
+  }
+]

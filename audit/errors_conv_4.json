@@ -1,0 +1,287 @@
+[
+  {
+    "question_id": "locomo_4_qa6",
+    "question": "In which month's game did John achieve a career-high score in points?",
+    "golden_answer": "June 2023",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D3:1"
+    ],
+    "correct_evidence": [
+      "D3:1"
+    ],
+    "reasoning": "D3:1 is from session_3 dated '4:21 pm on 16 July, 2023'. John says: 'Last week I scored 40 points, my highest ever.' July 16, 2023 is a Sunday, so 'last week' refers to approximately July 9-15, 2023. The career-high score was in July 2023, not June 2023. The golden answer incorrectly computes the date as June.",
+    "correct_answer": "July 2023"
+  },
+  {
+    "question_id": "locomo_4_qa9",
+    "question": "Which endorsement deals has John been offered?",
+    "golden_answer": "basketball shoes and gear deal with Nike, potential sponsorship with Gatorade, Moxie a popular beverage company, outdoor gear company",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D3:13",
+      "D3:15",
+      "D25:2",
+      "D29:4"
+    ],
+    "correct_evidence": [
+      "D3:13",
+      "D3:15",
+      "D25:2",
+      "D29:4"
+    ],
+    "reasoning": "The golden answer includes 'Moxie a popular beverage company' but the name 'Moxie' appears nowhere in the entire transcript. D29:4 (John) says: 'I got an endorsement with a popular beverage company!' The company is never named. 'Moxie' is fabricated. The other endorsements (Nike, Gatorade, outdoor gear company) are correctly supported by the cited evidence.",
+    "correct_answer": "basketball shoes and gear deal with Nike, potential sponsorship with Gatorade, a popular beverage company (unnamed), outdoor gear company"
+  },
+  {
+    "question_id": "locomo_4_qa11",
+    "question": "What sports does John like besides basketball?",
+    "golden_answer": "surfing",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D1:7",
+      "D2:14",
+      "D3:1",
+      "D3:25"
+    ],
+    "correct_evidence": [
+      "D3:25"
+    ],
+    "reasoning": "The golden answer 'surfing' is correct and supported by D3:25 where John says: 'I had an awesome summer with my friends, surfing and riding the waves.' However, three of the four cited evidence entries are basketball-related, not about other sports: D1:7 (shooting guard), D2:14 (pic from a recent game), D3:1 (scored 40 points). Only D3:25 is relevant to the answer.",
+    "correct_answer": "surfing"
+  },
+  {
+    "question_id": "locomo_4_qa16",
+    "question": "After how many weeks did Tim reconnect with the fellow Harry Potter fan from California?",
+    "golden_answer": "three weeks",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D3:2",
+      "D5:1"
+    ],
+    "correct_evidence": [
+      "D3:2",
+      "D5:1"
+    ],
+    "reasoning": "D3:2 (Session 3, July 16, 2023): 'Last week, I had a nice chat with a Harry Potter fan in California. It was magical!' 'Last week' from July 16 (Sunday) places the initial chat approximately July 9-15. D5:1 (Session 5, August 9, 2023): 'Just skyped with that Harry Potter fan I met in CA and had a great time.' The gap from the initial chat (~July 9-15) to the reconnection (August 9) is approximately 25-31 days, or about 4 weeks. The golden answer of 'three weeks' (21 days) undercounts by approximately one week.",
+    "correct_answer": "approximately four weeks"
+  },
+  {
+    "question_id": "locomo_4_qa17",
+    "question": "How many games has John mentioned winning?",
+    "golden_answer": "6",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D3:3",
+      "D5:2",
+      "D22:4",
+      "D23:7",
+      "D24:2"
+    ],
+    "correct_evidence": [
+      "D3:3",
+      "D5:2",
+      "D13:8",
+      "D22:4",
+      "D23:7",
+      "D24:2"
+    ],
+    "reasoning": "The golden answer is 6 wins. The cited evidence provides only 5 explicit win references: D3:3 ('We pulled off a tough win!'), D5:2 ('We won it by a tight score'), D22:4 ('we fought hard and got the win!'), D23:7 ('I hit the buzzer-beater shot to win'), D24:2 ('we got the win'). The 6th win is in D13:8 where John says: 'We even won a trophy!' This dialog is not cited in the evidence but is needed to reach the count of 6.",
+    "correct_answer": "6"
+  },
+  {
+    "question_id": "locomo_4_qa26",
+    "question": "Which TV series does Tim mention watching?",
+    "golden_answer": "That, Wheel of Time",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D17:1",
+      "D17:11",
+      "D26:36"
+    ],
+    "correct_evidence": [
+      "D17:10",
+      "D26:36"
+    ],
+    "reasoning": "The golden answer is correct: Tim mentions watching 'That' and 'The Wheel of Time'. However, the evidence cites D17:1 which is just John's greeting ('Hey Tim! Great to chat again. So much has happened!') and D17:11 which is John's response ('Yeah, I saw \"That\"!'). The correct citation for Tim mentioning 'That' is D17:10 where Tim says: '\"That\" is one of my favorite fantasy shows. Have you seen it?' D17:1 is irrelevant and D17:11 is John's line, not Tim's.",
+    "correct_answer": "That, Wheel of Time"
+  },
+  {
+    "question_id": "locomo_4_qa56",
+    "question": "When did Tim start playing the violin?",
+    "golden_answer": "August 2023",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D21:13"
+    ],
+    "correct_evidence": [
+      "D21:11"
+    ],
+    "reasoning": "D21:13 (Tim, Dec 6 2023) says: 'I've been playing for about four months now.' But this is answering John's question in D21:12: 'How long have you been playing the piano again?' The 'four months' refers to the PIANO, not the violin. Tim started piano in August 2023 (D8:12, Aug 21 2023: 'I've also started learning how to play the piano'). 4 months from Aug = Dec, consistent. For violin, D21:11 (Tim, Dec 6 2023) says: 'I'm learning how to play the violin now' - indicating violin was just recently started around December 2023, not August 2023. The golden answer confuses the piano and violin timelines.",
+    "correct_answer": "approximately December 2023"
+  },
+  {
+    "question_id": "locomo_4_qa59",
+    "question": "Which career-high performances did John achieve in 2023?",
+    "golden_answer": "highest point score, highest assist",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D3:1",
+      "D23:2"
+    ],
+    "correct_evidence": [
+      "D3:1",
+      "D23:3"
+    ],
+    "reasoning": "The golden answer is correct: John achieved career-highs in points (D3:1: 'Last week I scored 40 points, my highest ever') and assists (D23:3: 'I had a career-high in assists last Friday'). However, the evidence cites D23:2 which is Tim's dialog about his English lit class: 'Hey John, I had a tough time with my English lit class.' The correct citation is D23:3 where John (not Tim) mentions the career-high assists.",
+    "correct_answer": "highest point score, highest assist"
+  },
+  {
+    "question_id": "locomo_4_qa60",
+    "question": "When did John achieve a career-high assist performance?",
+    "golden_answer": "December 11, 2023",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D23:2"
+    ],
+    "correct_evidence": [
+      "D23:3"
+    ],
+    "reasoning": "D23:3 (John, session on Dec 11, 2023) says: 'I had a career-high in assists last Friday in our big game against our rival.' December 11, 2023 is a Monday, so 'last Friday' refers to December 8, 2023. The golden answer states December 11, 2023 (the session date), but the actual event happened on December 8, 2023. Additionally, the cited evidence D23:2 is Tim's dialog about English lit class, not John's career-high assist (which is D23:3).",
+    "correct_answer": "December 8, 2023"
+  },
+  {
+    "question_id": "locomo_4_qa74",
+    "question": "What aspects of the Harry Potter universe will be discussed in John's fan project collaborations?",
+    "golden_answer": "characters, spells, magical creatures",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D1:16"
+    ],
+    "correct_evidence": [
+      "D1:16"
+    ],
+    "reasoning": "The question attributes the Harry Potter fan project to John, but it is Tim's project. D1:2 (Tim): 'Been discussing collaborations for a Harry Potter fan project I am working on.' D1:16 (Tim): 'We'll be discussing various aspects of the Harry Potter universe, like characters, spells, and magical creatures.' The answer content (characters, spells, magical creatures) is correct for Tim's project. The question should say 'Tim's fan project', not 'John's fan project'.",
+    "correct_answer": "characters, spells, magical creatures (but this is Tim's fan project, not John's)"
+  },
+  {
+    "question_id": "locomo_4_qa86",
+    "question": "What did John share with the person he skyped about?",
+    "golden_answer": "Characters from Harry Potter",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D5:1"
+    ],
+    "correct_evidence": [
+      "D5:1"
+    ],
+    "reasoning": "The question says 'John' skyped, but D5:1 is Tim's dialog: 'Hey John! Long time no see! Been super busy lately. Guess what? Just skyped with that Harry Potter fan I met in CA and had a great time. We talked characters and maybe collab-ing.' It was Tim who skyped with the Harry Potter fan, not John. There is no evidence of John skyping anyone in the transcript. The answer content ('Characters from Harry Potter') is correct for what Tim discussed, but the attribution to John is wrong.",
+    "correct_answer": "Characters from Harry Potter (but it was Tim who skyped, not John)"
+  },
+  {
+    "question_id": "locomo_4_qa128",
+    "question": "What type of meal does John often cook using a slow cooker?",
+    "golden_answer": "honey garlic chicken with roasted veg",
+    "category": 4,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D15:32",
+      "D15:33"
+    ],
+    "correct_evidence": [
+      "D15:30",
+      "D15:31",
+      "D15:32"
+    ],
+    "reasoning": "D15:30 (John) shows a slow cooker image (blip_caption: 'a photo of a slow cooker filled with a mixture of food') but does not name the meal. D15:31 (Tim) responds: 'That slow cooker meal looks yum!' D15:32 (John) then shares a DIFFERENT dish: 'I make this yummy honey garlic chicken with roasted veg a lot' with image showing 'a photo of a pan of chicken and vegetables cooking on a stove' - notably in a PAN, not a slow cooker. The slow cooker meal and the honey garlic chicken appear to be two different dishes. The question conflates them.",
+    "correct_answer": "The slow cooker meal is unspecified; honey garlic chicken with roasted veg is a separate dish cooked in a pan"
+  },
+  {
+    "question_id": "locomo_4_qa135",
+    "question": "How does Tim stay motivated during difficult study sessions?",
+    "golden_answer": "Visualizing goals and success",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D18:6"
+    ],
+    "correct_evidence": [
+      "D18:7"
+    ],
+    "reasoning": "D18:6 is John's dialog, not Tim's: 'I visualize my goals and success for focus and motivation. It really helps me stay motivated during tough studying. Do you have any study tricks?' The visualization technique belongs to John. Tim's actual study technique is described in D18:7 (Tim): 'I like breaking up my studying into smaller parts. 25 minutes on, then 5 minutes off for something fun. It's less overwhelming and keeps me on track.' This is the Pomodoro technique. The golden answer attributes John's technique to Tim.",
+    "correct_answer": "Breaking study into smaller parts: 25 minutes on, then 5 minutes off (Pomodoro technique)"
+  },
+  {
+    "question_id": "locomo_4_qa136",
+    "question": "What did Tim say about his injury on 16 November, 2023?",
+    "golden_answer": "The doctor said it's not too serious",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D18:10"
+    ],
+    "correct_evidence": [
+      "D18:2",
+      "D18:9",
+      "D18:10"
+    ],
+    "reasoning": "The question says 'Tim' and 'his injury', but the injury belongs to John, not Tim. D18:2 (John): 'it's been a tough week for me with this injury.' D18:9 (Tim): 'I hope your injury heals soon.' D18:10 (John): 'Sure thing, Tim! Got your back. I hope so too. The doctor said it's not too serious.' John reports the doctor's assessment about his own injury. Tim has no injury on this date. The question wrongly attributes the injury to Tim and the doctor's quote to Tim.",
+    "correct_answer": "Tim did not have an injury. It was John's injury. John (not Tim) said the doctor said it's not too serious."
+  },
+  {
+    "question_id": "locomo_4_qa164",
+    "question": "What language does Tim know besides German?",
+    "golden_answer": "Spanish",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D27:6"
+    ],
+    "correct_evidence": [
+      "D27:7"
+    ],
+    "reasoning": "D27:6 is John's dialog: 'Wow! Impressive you're learning German. I know a bit of it myself and Spanish, it makes travel so much easier.' John says HE knows Spanish, not Tim. Tim's language background is revealed in D27:7 (Tim): 'Learning German has been tough but worth it. I like the structure of the language, it's much easier when I took French in high school.' Tim took French in high school, not Spanish. The golden answer wrongly attributes John's Spanish knowledge to Tim.",
+    "correct_answer": "French (Tim took French in high school, per D27:7)"
+  },
+  {
+    "question_id": "locomo_4_qa165",
+    "question": "What book did Tim get in Italy that inspired him to cook?",
+    "golden_answer": "a cooking book",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D27:4"
+    ],
+    "correct_evidence": [
+      "D27:4"
+    ],
+    "reasoning": "D27:4 is John's dialog: 'Italy was awesome! Everything from the food to the history and architecture was amazing. I even got this awesome book while I was there and it's been giving me some cooking inspiration.' It was John who went to Italy (D27:2: John says 'I had a blast there last month') and John who got the cooking book. Tim never went to Italy in the transcript. The question wrongly attributes John's Italy trip and cookbook to Tim.",
+    "correct_answer": "John (not Tim) got a cooking book in Italy"
+  },
+  {
+    "question_id": "locomo_4_qa166",
+    "question": "What is John's favorite book series?",
+    "golden_answer": "Harry Potter",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D27:19"
+    ],
+    "correct_evidence": [
+      "D27:19"
+    ],
+    "reasoning": "D27:19 is Tim's dialog: 'Harry Potter is my favorite book. It's so immersive!' This is Tim's favorite, not John's. The question asks about John's favorite book series but the evidence shows Tim's preference. John's explicit favorites include The Hobbit (D20:20: 'The Hobbit is one of my favorites too') and he enjoys The Alchemist, Dune, and a fantasy series, but never declares Harry Potter as his favorite. John even asks Tim in D19:14: 'Are Harry Potter and GoT still your favorites?' confirming those are Tim's favorites.",
+    "correct_answer": "The evidence does not support Harry Potter as John's favorite. John explicitly calls The Hobbit 'one of my favorites' (D20:20)."
+  }
+]

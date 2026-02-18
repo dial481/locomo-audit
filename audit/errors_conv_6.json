@@ -1,0 +1,254 @@
+[
+  {
+    "question_id": "locomo_6_qa2",
+    "question": "Which places or events have John and James planned to meet at?",
+    "golden_answer": "VR Club, McGee's, baseball game",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D1:36",
+      "D21:15",
+      "D23:5",
+      "D23:6"
+    ],
+    "correct_evidence": [
+      "D1:33",
+      "D1:36",
+      "D21:15",
+      "D23:5",
+      "D23:6"
+    ],
+    "reasoning": "The golden answer says 'VR Club' but no 'VR Club' is mentioned anywhere in the transcript. D1:33 (John): 'Heard about VR gaming? It's pretty immersive. We can try it together!' and D1:36 (James): 'Yeah, VR gaming is awesome! Let's do it next Saturday!' They discuss VR gaming as an activity, not a specific venue called 'VR Club'. The term 'VR Club' is fabricated.",
+    "correct_answer": "VR gaming, McGee's, baseball game"
+  },
+  {
+    "question_id": "locomo_6_qa11",
+    "question": "How was John feeling on April 10, 2022?",
+    "golden_answer": "seeking solitude",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D6:7"
+    ],
+    "correct_evidence": [],
+    "reasoning": "The cited evidence D6:7 (John): 'two days ago I wanted to be alone with nature' is from session_6 dated '9:32 pm on 20 April, 2022'. Two days before April 20 = April 18, NOT April 10. The question asks about April 10 but the evidence points to April 18. There is no session covering April 10 (session_4 is April 4, session_5 is April 12), and no evidence in any session about John seeking solitude on April 10.",
+    "correct_answer": "The 'seeking solitude' event occurred on April 18, 2022, not April 10. There is no data about John's feelings on April 10."
+  },
+  {
+    "question_id": "locomo_6_qa17",
+    "question": "What is the board game where you have to find the imposter that John mentions to James?",
+    "golden_answer": "Mafia",
+    "category": 3,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D8:36"
+    ],
+    "correct_evidence": [
+      "D8:36"
+    ],
+    "reasoning": "D8:36 (John): 'It's a game to figure out who the impostors are and it's super fun.' and D8:38 (John): 'I advise you to gather a large group, it will be much more interesting to play.' The game is never named in the transcript. The description could fit Mafia, Werewolf, The Resistance, or other social deduction games. 'Mafia' is a plausible guess but is nowhere stated or confirmed in the transcript. The word 'Mafia' does not appear anywhere in the conversation.",
+    "correct_answer": "Unknown - the game is described but never named. 'Mafia' is one possibility among several social deduction games."
+  },
+  {
+    "question_id": "locomo_6_qa19",
+    "question": "Was James feeling lonely before meeting Samantha?",
+    "golden_answer": "Most likely yes, because he mentioned that the only creatures that gave him joy are dogs and he was actively trying to date.",
+    "category": 3,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D9:16"
+    ],
+    "correct_evidence": [
+      "D9:16",
+      "D6:6"
+    ],
+    "reasoning": "The golden answer's conclusion (\"most likely yes, lonely\") is defensible, but the reasoning mischaracterizes the cited evidence. The citations themselves (D9:16, D6:6) are the right dialog lines, but the golden answer describes their contents inaccurately: (1) D9:16 says \"My pets, computer games, travel and pizza are all that bring me happiness in life\" - four sources of happiness, not \"the only creatures that gave him joy are dogs.\" (2) D6:6 describes James regretting not approaching a stranger on a walk - passive wistfulness, not \"actively trying to date.\" The conclusion happens to be defensible despite the wrong reasoning. Does not affect scoring because the judge evaluates the conclusion (\"likely lonely\"), not the quality of the supporting argument.",
+    "correct_answer": "Most likely yes (defensible inference); the cited evidence supports loneliness but not for the reasons stated in the golden answer"
+  },
+  {
+    "question_id": "locomo_6_qa24",
+    "question": "What kind of games has James tried to develop?",
+    "golden_answer": "football simulator, virtual world inspired by Witcher 3",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D13:7",
+      "D1:4",
+      "D27:2"
+    ],
+    "correct_evidence": [
+      "D13:8",
+      "D6:2",
+      "D27:2",
+      "D27:6",
+      "D22:5"
+    ],
+    "reasoning": "Three citation problems: (1) D13:7 is John asking 'Are there any interesting projects you're working on?' - it is a question, not evidence of game development. The football simulator is mentioned in D13:8 (James): 'we are currently working on a new part of the football simulator.' (2) D1:4 is James talking about PLAYING Witcher 3, not developing a game inspired by it. The Witcher-inspired virtual world is in D6:2 (James): 'created this virtual world inspired by Witcher 3' and D27:6 mentions Witcher 3 inspiration. (3) Additionally, D22:5 (James): 'I decided to challenge myself and create one of my own' (strategy game like Civilization) is a third game type not included in the golden answer.",
+    "correct_answer": "football simulator (D13:8), virtual world inspired by Witcher 3 (D6:2, D27:2, D27:6), strategy game like Civilization (D22:5)"
+  },
+  {
+    "question_id": "locomo_6_qa31",
+    "question": "How many days did James plan to spend on his trip in Canada?",
+    "golden_answer": "19 days",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D16:9",
+      "D16:13"
+    ],
+    "correct_evidence": [
+      "D16:9",
+      "D16:13"
+    ],
+    "reasoning": "D16:9 (James): 'I'm leaving the day after tomorrow evening' from session_16 dated '5:13 pm on 9 July, 2022' means departure on July 11. D16:13 (James): 'I plan to return on July 20.' July 11 to July 20 = 9 days (or 10 days counting both endpoints). The golden answer '19 days' is arithmetically wrong. This appears to be a typographical error where '9' was written as '19'.",
+    "correct_answer": "9 days (July 11 to July 20)"
+  },
+  {
+    "question_id": "locomo_6_qa37",
+    "question": "When did John spend time with his sister and dogs?",
+    "golden_answer": "July 21, 2022",
+    "category": 2,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D17:28"
+    ],
+    "correct_evidence": [
+      "D17:28"
+    ],
+    "reasoning": "D17:28 speaker is JAMES, not John: 'That's my sister and my dogs. We were just chilling together yesterday, and they bring so much happiness to my life.' The question asks about JOHN spending time with his sister and dogs, but the evidence shows it was JAMES who spent time with HIS sister and HIS dogs on July 21 (yesterday from session_17 on July 22). John does not have a sister mentioned in the transcript (he has 'siblings'). John also does not have dogs (D2:18, D17:21, D31:14 confirm he wants one but doesn't have one).",
+    "correct_answer": "The question should ask about JAMES, not John. James spent time with his sister and dogs on July 21, 2022."
+  },
+  {
+    "question_id": "locomo_6_qa38",
+    "question": "What happened to John's job situation in 2022?",
+    "golden_answer": "quit his IT Job, secured his dream job, aspires to become an eSports competition organizer",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D4:36",
+      "D18:1",
+      "D18:7"
+    ],
+    "correct_evidence": [
+      "D18:1",
+      "D18:7"
+    ],
+    "reasoning": "D4:36 does not exist in the transcript. Session 4 only contains dialogs D4:1 through D4:25 (session_4, 2:13 pm on 4 April, 2022). The evidence_texts for this question marks D4:36 as 'NOT FOUND IN TRANSCRIPT'. The golden answer itself is factually correct based on D18:1 (quit IT job after 3 years, happy with new job) and D18:7 (wants to become tournament organizer), but the citation includes a non-existent dialog ID.",
+    "correct_answer": "The golden answer is factually correct; only the citation D4:36 is invalid."
+  },
+  {
+    "question_id": "locomo_6_qa53",
+    "question": "How long did it take for James to complete his Witcher-inspired game?",
+    "golden_answer": "six months",
+    "category": 2,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D6:1",
+      "D27:2"
+    ],
+    "correct_evidence": [
+      "D6:2",
+      "D27:2"
+    ],
+    "reasoning": "D6:1 is John speaking: 'I have great news! Last Tuesday I met three cool new friends in my programming course.' This is about John's social life, not about James's game development. The correct starting-point citation should be D6:2 (James): 'I got to work with one of my gaming pals on a programming project! We combined programming and gaming, and created this virtual world inspired by Witcher 3.' D6:2 is from session_6 (April 20, 2022) and D27:2 is from session_27 (October 13, 2022), giving approximately 6 months. The answer 'six months' is correct; only the citation D6:1 is wrong.",
+    "correct_answer": "six months (correct answer, wrong citation - should cite D6:2 not D6:1)"
+  },
+  {
+    "question_id": "locomo_6_qa61",
+    "question": "What was James' big moment with Samantha in October 2023?",
+    "golden_answer": "They decided to live together and rented an apartment not far from McGee's bar.",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D29:8",
+      "D29:10"
+    ],
+    "correct_evidence": [
+      "D29:8",
+      "D29:10"
+    ],
+    "reasoning": "The question refers to 'October 2023' but all events in the transcript take place in 2022. Session_29 is dated '12:37 am on 31 October, 2022'. D29:8 (James): 'Samantha and I have decided to move in together!' and D29:10 (James): 'We rented an apartment not far from McGee's bar' are both from October 2022, not 2023. The year in the question is wrong.",
+    "correct_answer": "The golden answer about the event is correct, but it happened in October 2022, not October 2023 as stated in the question."
+  },
+  {
+    "question_id": "locomo_6_qa65",
+    "question": "When did James and his family visit Mark and Josh?",
+    "golden_answer": "November 7, 2022",
+    "category": 2,
+    "error_type": "AMBIGUOUS",
+    "cited_evidence": [
+      "D31:1"
+    ],
+    "correct_evidence": [
+      "D31:1",
+      "D30:1"
+    ],
+    "reasoning": "D31:1 (James, session_31, November 7): 'Me and my family are currently on the road trip! We've already visited my friends Josh and Mark.' The phrase 'already visited' (past tense, completed action) indicates the visit happened BEFORE this message on November 7. D30:1 (session_30, November 5) confirms the road trip started November 4 ('Yesterday, we started on a road trip'). The visit to Josh and Mark could have occurred on any day from November 4-7. The golden answer assumes the visit was on November 7 (the conversation date) but this is not supported - 'already visited' suggests it was before November 7.",
+    "correct_answer": "Between November 4-7, 2022 (exact date indeterminable from transcript)"
+  },
+  {
+    "question_id": "locomo_6_qa88",
+    "question": "What did John organize with his friends on May 8, 2022?",
+    "golden_answer": "A tournament for CS:GO",
+    "category": 4,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D10:4"
+    ],
+    "correct_evidence": [
+      "D10:2",
+      "D10:4"
+    ],
+    "reasoning": "The question asks what happened 'on May 8, 2022' but D10:2 (John): 'I've been organizing something with my friends yesterday' is from session_10 dated '12:45 am on 8 May, 2022'. 'Yesterday' from 12:45 am May 8 = May 7, 2022. The CS:GO tournament was organized on May 7, not May 8. The conversation about it occurred on May 8, but the event itself was on May 7.",
+    "correct_answer": "The CS:GO tournament was organized on May 7, 2022 (not May 8 as stated in the question)"
+  },
+  {
+    "question_id": "locomo_6_qa93",
+    "question": "What did John receive for achieving second place in the tournament?",
+    "golden_answer": "money and a trophy",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D12:5",
+      "D12:6"
+    ],
+    "correct_evidence": [
+      "D12:6",
+      "D12:8"
+    ],
+    "reasoning": "The golden answer mentions 'money and a trophy'. D12:6 (John): 'I still received some money for the 2nd place' supports the money part. However, the trophy is mentioned in D12:8 (John): 'Yeah, I also got this trophy! So satisfying.' which is NOT cited. D12:5 (James) is a question asking about rewards and does not itself confirm what was received. The evidence should include D12:8 instead of D12:5.",
+    "correct_answer": "money and a trophy (correct answer, but evidence should include D12:8 for the trophy)"
+  },
+  {
+    "question_id": "locomo_6_qa113",
+    "question": "Whose phone number did James receive during the beach outing?",
+    "golden_answer": "Samantha",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D19:14"
+    ],
+    "correct_evidence": [
+      "D19:14",
+      "D19:16"
+    ],
+    "reasoning": "D19:14 (James): 'I even met one beautiful girl... She left me her phone number' does NOT mention the name 'Samantha'. The name is revealed in D19:16 (James): 'She is Samantha. I'll definitely call her!' which is NOT cited in the evidence. Without D19:16, the evidence only supports that James received a phone number from an unnamed 'beautiful girl', not specifically 'Samantha'.",
+    "correct_answer": "Samantha (correct answer, but evidence must include D19:16 where the name is stated)"
+  },
+  {
+    "question_id": "locomo_6_qa115",
+    "question": "What is John organizing with his siblings?",
+    "golden_answer": "a gaming night",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D20:17"
+    ],
+    "correct_evidence": [
+      "D20:15",
+      "D20:17"
+    ],
+    "reasoning": "D20:17 (John): 'Yep, I'm organizing one with my siblings next month' uses the pronoun 'one' which only makes sense in context of D20:15 (John): 'when we do we always try to plan a gaming night.' The cited evidence D20:17 alone does not contain the phrase 'gaming night' - it only says 'organizing one'. D20:15 is needed to establish what 'one' refers to.",
+    "correct_answer": "a gaming night (correct answer, but evidence must include D20:15 where 'gaming night' is stated)"
+  }
+]

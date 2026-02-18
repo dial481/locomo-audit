@@ -1,0 +1,2 @@
+locomo_8 (conv-49): 156/156 questions audited, 16 errors found
+Error breakdown: 4 TEMPORAL_ERROR, 2 ATTRIBUTION_ERROR, 8 HALLUCINATION, 2 WRONG_CITATION, 0 AMBIGUOUS, 0 INCOMPLETE

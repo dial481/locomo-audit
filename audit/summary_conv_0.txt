@@ -1,0 +1,2 @@
+locomo_0 (conv-26): 152/152 questions audited, 27 errors found
+Error breakdown: 2 TEMPORAL_ERROR, 3 ATTRIBUTION_ERROR, 5 HALLUCINATION, 12 WRONG_CITATION, 3 AMBIGUOUS, 2 INCOMPLETE

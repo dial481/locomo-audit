@@ -1,0 +1,2 @@
+locomo_5 (conv-44): 123/123 questions audited, 10 errors found
+Error breakdown: 3 TEMPORAL_ERROR, 0 ATTRIBUTION_ERROR, 1 HALLUCINATION, 3 WRONG_CITATION, 3 AMBIGUOUS, 0 INCOMPLETE

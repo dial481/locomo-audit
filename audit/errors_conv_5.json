@@ -1,0 +1,167 @@
+[
+  {
+    "question_id": "locomo_5_qa2",
+    "question": "What kind of indoor activities has Andrew pursued with his girlfriend?",
+    "golden_answer": "boardgames, volunteering at pet shelter, wine tasting, growing flowers",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D13:1",
+      "D23:1",
+      "D25:1",
+      "D19:15"
+    ],
+    "correct_evidence": [
+      "D13:1",
+      "D23:1",
+      "D25:1"
+    ],
+    "reasoning": "Three of the four activities are correctly attributed to Andrew and his girlfriend: boardgames (D23:1: 'my gf, Toby, and I had a really awesome night playing board games'), volunteering at pet shelter (D13:1: 'My GF and I just had a great experience volunteering at a pet shelter'), and wine tasting (D25:1: 'My girlfriend and I went to this awesome wine tasting'). However, 'growing flowers' is cited from D19:15 where Andrew says 'Here’s something I’ve been taking care of lately. Look at those flowers!' with an image of flowers on a balcony. There is NO mention of his girlfriend being involved in growing flowers anywhere in the transcript. The girlfriend association with flower growing is fabricated. Additionally, growing flowers on a balcony is arguably not an 'indoor' activity.",
+    "correct_answer": "boardgames, volunteering at pet shelter, wine tasting"
+  },
+  {
+    "question_id": "locomo_5_qa4",
+    "question": "When did Audrey make muffins for herself?",
+    "golden_answer": "The week of April 3rd to 9th",
+    "category": 2,
+    "error_type": "AMBIGUOUS",
+    "cited_evidence": [
+      "D3:18"
+    ],
+    "correct_evidence": [
+      "D3:18"
+    ],
+    "reasoning": "Session 3 takes place on Sunday, April 16, 2023. D3:18: 'Since you metioned pastries, I made some of my favorite treats last week.' (blip_caption: 'a photo of a muffin pan filled with blueberries and muffins'). The golden answer 'The week of April 3rd to 9th' is correct under ISO/Monday-start convention (where Sunday April 16 is the last day of the week April 10-16, making 'last week' = April 3-9), but incorrect under US/Sunday-start convention (where Sunday April 16 starts a new week, making 'last week' = April 9-15). The answer is defensible under one valid calendar convention but may penalize systems using the other.",
+    "correct_answer": "Either April 3-9 (Monday-start convention) or April 9-15 (Sunday-start convention), depending on calendar interpretation."
+  },
+  {
+    "question_id": "locomo_5_qa5",
+    "question": "When did Audrey see a hummingbird?",
+    "golden_answer": "first week of May 2023",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D4:1"
+    ],
+    "correct_evidence": [
+      "D4:1"
+    ],
+    "reasoning": "D4:1 is from session_4, dated '5:41 pm on 3 May, 2023' (a Wednesday). Audrey says: 'Last week I finally went on a hike and had this amazing experience with a hummingbird.' The phrase 'last week' from Wednesday May 3 refers to the prior week, approximately April 24-30, 2023. The golden answer states 'first week of May 2023' (May 1-7), but the hummingbird sighting occurred BEFORE May 3, during the last week of April 2023.",
+    "correct_answer": "last week of April 2023 (approximately April 24-30, 2023)"
+  },
+  {
+    "question_id": "locomo_5_qa8",
+    "question": "Did Andrew have a pet dog during March 2023?",
+    "golden_answer": "No",
+    "category": 2,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D2:8"
+    ],
+    "correct_evidence": [
+      "D1:12"
+    ],
+    "reasoning": "The golden answer 'No' is correct, but the cited evidence D2:8 is from session_2 dated '2:42 pm on 2 April, 2023', which is April, not March. D2:8 reads: 'I’m considering getting a dog too, but it can be challenging finding a dog-friendly place in the city.' The correct evidence for March 2023 is D1:12 from session_1 dated '1:10 pm on 27 March, 2023' where Andrew explicitly states: 'No, no pets right now. But I do love animals.'",
+    "correct_answer": "No"
+  },
+  {
+    "question_id": "locomo_5_qa18",
+    "question": "Where did Audrey get Pixie from?",
+    "golden_answer": "breeder",
+    "category": 1,
+    "error_type": "AMBIGUOUS",
+    "cited_evidence": [
+      "D11:4",
+      "D2:1"
+    ],
+    "correct_evidence": [
+      "D2:1",
+      "D11:4"
+    ],
+    "reasoning": "The two cited evidence entries contradict each other. D2:1 (session_2, April 2, 2023) specifically names Pixie and says: 'We adopted another puppy called Pixie.' The word 'adopted' suggests a shelter or rescue, not a breeder. D11:4 (session_11, July 8, 2023) says: 'I got lucky finding a breeder nearby that has the dogs I wanted.' However, D11:4 does not specifically reference Pixie - it could refer to any of Audrey's dogs. The golden answer 'breeder' directly contradicts the only evidence that specifically names Pixie (D2:1), which uses the word 'adopted.' The transcript contains an internal inconsistency about Audrey's dog acquisition method.",
+    "correct_answer": "Unclear - D2:1 says 'adopted' while D11:4 says 'breeder'. The evidence is contradictory."
+  },
+  {
+    "question_id": "locomo_5_qa37",
+    "question": "When did Audrey get into an accident in the park?",
+    "golden_answer": "between October 19 and 24, 2023",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D25:2"
+    ],
+    "correct_evidence": [
+      "D25:2"
+    ],
+    "reasoning": "D25:2 is from session_25 dated '10:14 am on 24 October, 2023' (a Tuesday). Audrey says: 'I had an accident while playing with my pups at the park' and 'I had an unexpected adventure last week.' The phrase 'last week' from Tuesday October 24 refers to approximately October 16-22. The golden answer states 'between October 19 and 24, 2023', but October 24 is the session date itself and should not be included as a possible date for an event described as happening 'last week.' The upper bound should be approximately October 22, not October 24.",
+    "correct_answer": "approximately between October 16 and 22, 2023"
+  },
+  {
+    "question_id": "locomo_5_qa41",
+    "question": "What are the breeds of Audrey's dogs?",
+    "golden_answer": "Mongrel mixed with Lab for Pepper and Panda. Mongrel mixed with Chihuahua for Precious and Pixie.",
+    "category": 1,
+    "error_type": "AMBIGUOUS",
+    "cited_evidence": [
+      "D19:12",
+      "D26:13"
+    ],
+    "correct_evidence": [
+      "D19:12",
+      "D26:13"
+    ],
+    "reasoning": "The two cited evidence entries contradict each other. D19:12 (session_19, September 24, 2023) states: 'They’re all mutts. Two of them are Jack Russell mixes and the other two are Chihuahua mixes.' D26:13 (session_26, October 28, 2023) states: 'They’re all mutts, but Pepper and Panda are Lab mixes, and Precious and Pixie are Chihuahua mixes.' The golden answer uses the D26:13 version (Lab mixes) and ignores the D19:12 version (Jack Russell mixes). Both are cited as evidence, but they are internally contradictory. The answer arbitrarily selects one version over the other without acknowledgment of the discrepancy.",
+    "correct_answer": "Contradictory evidence: D19:12 says Jack Russell mixes and Chihuahua mixes; D26:13 says Lab mixes (Pepper, Panda) and Chihuahua mixes (Precious, Pixie)"
+  },
+  {
+    "question_id": "locomo_5_qa51",
+    "question": "What items has Audrey bought or made for her dogs?",
+    "golden_answer": "dog tags, toys, dog beds, collars",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D1:2",
+      "D9:5",
+      "D18:10",
+      "D24:1"
+    ],
+    "correct_evidence": [
+      "D1:3",
+      "D9:5",
+      "D18:10",
+      "D24:1"
+    ],
+    "reasoning": "The golden answer is factually correct, but the first cited evidence D1:2 is wrong. D1:2 is Andrew speaking: 'Hey Audrey! So, I started a new job as a Financial Analyst last week - it’s been quite a change from my previous job.' This has nothing to do with items for dogs. The correct citation for 'collars and tags' is D1:3 where Audrey says: 'Congrats on the new job! So I got these new collars and tags for my dogs - so cute!' The other citations are correct: D9:5 (toys), D18:10 (dog beds), D24:1 (toys).",
+    "correct_answer": "dog tags, toys, dog beds, collars"
+  },
+  {
+    "question_id": "locomo_5_qa57",
+    "question": "When did Andrew adopt Scout?",
+    "golden_answer": "few days before November 2023",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D28:6"
+    ],
+    "correct_evidence": [
+      "D28:6"
+    ],
+    "reasoning": "D28:6 is from session_28 dated '9:02 am on 22 November, 2023'. Andrew says: 'I can’t help myself but to adpot another dog the other day.' The phrase 'the other day' means a few days before November 22, 2023. The golden answer states 'few days before November 2023' which literally means late October 2023 (a few days before November 1). The correct answer should be 'a few days before November 22, 2023' to accurately reflect that the adoption happened in mid-to-late November, not late October.",
+    "correct_answer": "a few days before November 22, 2023"
+  },
+  {
+    "question_id": "locomo_5_qa103",
+    "question": "What organization does Audrey donate a portion of his profits to?",
+    "golden_answer": "Animal shelter",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D22:7"
+    ],
+    "correct_evidence": [
+      "D22:9"
+    ],
+    "reasoning": "The golden answer 'Animal shelter' is correct, but the cited evidence D22:7 does not contain this information. D22:7 says: 'I donate a portion of my profits to a cause that’s close to my heart.' The cause is not named in D22:7. The specific mention of 'animal shelter' appears in D22:9: 'I donate to an animal shelter. They do great work, so it’s my way of helping out.' The citation should be D22:9, not D22:7.",
+    "correct_answer": "Animal shelter"
+  }
+]

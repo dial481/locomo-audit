@@ -1,0 +1,193 @@
+[
+  {
+    "question_id": "locomo_2_qa5",
+    "question": "When did Maria go to the beach?",
+    "golden_answer": "December 2022",
+    "category": 2,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D3:15"
+    ],
+    "correct_evidence": [
+      "D3:14"
+    ],
+    "reasoning": "The cited evidence D3:15 is John's line: \"Wow, nature can be so beautiful! It reminds me of the film camera I had as a kid, I took plenty of beach pics. Thanks for sharing.\" This is about John's childhood film camera, not about Maria going to the beach. The correct evidence is D3:14, where Maria says: \"I took it at the beach last month. Watching the sunset was so peaceful, it made me feel connected to nature and appreciate life's small moments.\" Since session_3 is January 1, 2023, \"last month\" = December 2022. The golden answer \"December 2022\" is correct, but the citation points to the wrong dialog.",
+    "correct_answer": "December 2022 (answer is correct, citation is wrong)"
+  },
+  {
+    "question_id": "locomo_2_qa10",
+    "question": "When did Maria meet Jean?",
+    "golden_answer": "February 24, 2023",
+    "category": 2,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D7:1"
+    ],
+    "correct_evidence": [
+      "D7:5"
+    ],
+    "reasoning": "The cited evidence D7:1 is Maria saying: \"Hey John, how's it going? Just wanted to give you the heads up on what's been happening lately- I took a creative writing class recently, and it was super enlightening!\" This says nothing about meeting Jean. The correct evidence is D7:5, where Maria says: \"While volunteering yesterday, I met this amazing woman, Jean, who had been through a lot, yet stayed optimistic and resilient.\" Session_7 is February 25, 2023. \"yesterday\" = February 24, 2023. The golden answer \"February 24, 2023\" is correct, but the citation is wrong.",
+    "correct_answer": "February 24, 2023 (answer is correct, citation is wrong)"
+  },
+  {
+    "question_id": "locomo_2_qa16",
+    "question": "When did John get his degree?",
+    "golden_answer": "The week before 2 April 2023",
+    "category": 2,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D9:2"
+    ],
+    "correct_evidence": [
+      "D9:4"
+    ],
+    "reasoning": "The cited evidence D9:2 is John saying: \"Hey Maria! Awesome to hear from you. Sounds like a great way to delve into your feelings. Since we spoke last, I've had quite the adventure!\" with a blip_caption of \"a photo of a certificate of completion of a university degree.\" While the photo implies a degree, the temporal information (\"the week before\") comes from D9:4, where John says: \"I graduated last week!\" Session_9 is April 2, 2023, so \"last week\" = the week before April 2, 2023. The golden answer is correct but the citation should include D9:4 for the temporal claim.",
+    "correct_answer": "The week before 2 April 2023 (answer is correct, citation is incomplete)"
+  },
+  {
+    "question_id": "locomo_2_qa32",
+    "question": "What outdoor activities has John done with his colleagues?",
+    "golden_answer": "Hiking, mountaineering",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D18:2",
+      "D16:2"
+    ],
+    "correct_evidence": [
+      "D18:2",
+      "D16:1"
+    ],
+    "reasoning": "D18:2 correctly supports mountaineering (John: \"I went on a mountaineering trip last week with some workmates\"). However, D16:2 is Maria's line: \"Hey John! Cool that it's going well - you and your friends look like a great team! I'm busy at the shelter getting ready for a fundraiser next week.\" This does not mention hiking with colleagues. The correct evidence for hiking is D16:1, where John says: \"I got this picture of my workmates when we went on a hiking trip.\" The golden answer \"Hiking, mountaineering\" is correct, but D16:2 should be D16:1.",
+    "correct_answer": "Hiking, mountaineering (answer is correct, citation D16:2 should be D16:1)"
+  },
+  {
+    "question_id": "locomo_2_qa44",
+    "question": "What activities has Maria done with her church friends?",
+    "golden_answer": "Hiking, picnic, volunteer work",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D25:2",
+      "D24:6",
+      "D28:5"
+    ],
+    "correct_evidence": [
+      "D25:2",
+      "D24:6",
+      "D28:8"
+    ],
+    "reasoning": "D25:2 (hiking with church friends) and D24:6 (picnic with friends from church) are correct citations. However, D28:5 is John's line about finding a tech company job: \"Thanks Maria! I may have found a job at a tech company I like that needs my mechanical skills for their hardware team.\" This has nothing to do with Maria's activities with church friends. The correct evidence for volunteer/community work is D28:8, where Maria says: \"Yesterday, I took up some community work with my friends from church. It was super rewarding!\"",
+    "correct_answer": "Hiking, picnic, volunteer work (answer is correct, D28:5 should be D28:8)"
+  },
+  {
+    "question_id": "locomo_2_qa48",
+    "question": "When did John have his first firefighter call-out?",
+    "golden_answer": "The sunday before 3` July 2023",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D26:4"
+    ],
+    "correct_evidence": [
+      "D26:4"
+    ],
+    "reasoning": "D26:4 is from session_26, dated \"1:59 pm on 31 July, 2023\" (not July 3). John says: \"Last Sunday we had our first call-out.\" July 31, 2023 is a Monday, so \"Last Sunday\" = July 30, 2023. The golden answer states \"The sunday before 3 July 2023\" which would be July 2, 2023 -- a completely different date. The answer also contains a typographical backtick (3` instead of 3). The correct answer should be \"The Sunday before 31 July 2023\" (i.e., July 30, 2023).",
+    "correct_answer": "The Sunday before 31 July 2023 (July 30, 2023)"
+  },
+  {
+    "question_id": "locomo_2_qa49",
+    "question": "What food item did Maria drop off at the homeless shelter?",
+    "golden_answer": "Cakes",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D26:1",
+      "D25:19"
+    ],
+    "correct_evidence": [
+      "D26:1",
+      "D25:20"
+    ],
+    "reasoning": "D26:1 correctly states Maria dropped off baked goods at the shelter (\"last week I dropped off that stuff I baked at the homeless shelter\") but does not specify what she baked. D25:19 is John's line: \"Yeah, it's been great for me. Let me know if you need any advice to get started\" -- completely unrelated to baking or cakes. The correct evidence for the specific item \"cakes\" is D25:20, where Maria says: \"I'm off to bake some cakes. Talk to you soon!\" This establishes that the baked items were cakes.",
+    "correct_answer": "Cakes (answer is correct, D25:19 should be D25:20)"
+  },
+  {
+    "question_id": "locomo_2_qa63",
+    "question": "How many weeks passed between Maria adopting Coco and Shadow?",
+    "golden_answer": "two weeks",
+    "category": 2,
+    "error_type": "AMBIGUOUS",
+    "cited_evidence": [
+      "D30:1",
+      "D31:2"
+    ],
+    "correct_evidence": [
+      "D30:1",
+      "D31:2"
+    ],
+    "reasoning": "D30:1 (Aug 11, 2023): Maria says she got Coco \"two weeks ago,\" giving a hard anchor of ~July 28, 2023. D31:2 (Aug 13, 2023): Maria says she adopted Shadow \"last week,\" a vague range of approximately Aug 4-12, 2023. The hard date (July 28) does not fall within the vague range, so the adoptions are definitively separate events, but the gap cannot be resolved to a point: it spans approximately 7-15 days (~1 to ~2 weeks) depending on when during \"last week\" Shadow was adopted. The golden answer of \"two weeks\" is the upper extreme of this range, not a confirmed value.",
+    "correct_answer": "Approximately 1-2 weeks (7-15 days); one adoption date is hard (~July 28, 2023) but the other is a vague range (\"last week\" = ~Aug 4-12, 2023), so the exact gap is unresolvable"
+  },
+  {
+    "question_id": "locomo_2_qa68",
+    "question": "What type of workout class did Maria start doing in December 2023?",
+    "golden_answer": "aerial yoga",
+    "category": 4,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D1:3"
+    ],
+    "correct_evidence": [
+      "D1:3"
+    ],
+    "reasoning": "The question asks about \"December 2023\" but the cited evidence D1:3 is from session_1, dated \"11:01 am on 17 December, 2022\" (December 2022, not 2023). Maria says: \"Just started doing aerial yoga, it's great.\" The entire conversation dataset spans December 2022 to August 2023, so there is no December 2023 data. The golden answer \"aerial yoga\" is correct for the evidence, but the question references the wrong year. The question should say \"December 2022.\"",
+    "correct_answer": "aerial yoga (answer is correct, but question says 2023 when it should say 2022)"
+  },
+  {
+    "question_id": "locomo_2_qa69",
+    "question": "What did Maria donate to a homeless shelter in December 2023?",
+    "golden_answer": "old car",
+    "category": 4,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D2:1"
+    ],
+    "correct_evidence": [
+      "D2:1"
+    ],
+    "reasoning": "The question asks about \"December 2023\" but the cited evidence D2:1 is from session_2, dated \"6:10 pm on 22 December, 2022\" (December 2022, not 2023). Maria says: \"I donated my old car to a homeless shelter I volunteer at yesterday.\" The conversation dataset ends in August 2023, so December 2023 does not exist in the data. The golden answer \"old car\" is correct for the evidence, but the question references the wrong year. The question should say \"December 2022.\"",
+    "correct_answer": "old car (answer is correct, but question says 2023 when it should say 2022)"
+  },
+  {
+    "question_id": "locomo_2_qa116",
+    "question": "Why did Maria need to help her cousin find a new place to live?",
+    "golden_answer": "Her cousin had to leave and find a new place in a hurry.",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D21:5"
+    ],
+    "correct_evidence": [
+      "D21:5",
+      "D21:7"
+    ],
+    "reasoning": "The cited evidence D21:5 says: \"my cousin just had a tough time recently, so I'm lending a hand in helping her find a new place.\" This gives the general context but does not contain the specific detail about leaving \"in a hurry.\" The golden answer states \"Her cousin had to leave and find a new place in a hurry\" which comes from D21:7 (uncited): \"Things have been tough for her lately. She had to leave and find a new place in a hurry, which has been really stressful, but she's making progress.\" The citation should include D21:7.",
+    "correct_answer": "Her cousin had to leave and find a new place in a hurry (answer is correct, citation should include D21:7)"
+  },
+  {
+    "question_id": "locomo_2_qa129",
+    "question": "What does John think about trying new classes at the yoga studio?",
+    "golden_answer": "Trying new classes is a fun way to switch up the exercise routine.",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D25:14"
+    ],
+    "correct_evidence": [
+      "D25:15"
+    ],
+    "reasoning": "The cited evidence D25:14 is Maria's line (not John's): \"Cool, John! Trying new classes sounds like a fun way to switch up your exercise routine - I should give it a go!\" The golden answer directly quotes Maria's words but attributes them to John. John's actual response is in D25:15: \"Yeah, Maria! Trying new stuff is a great way to push yourself and mix things up. Let me know if you need any suggestions!\" The question asks what John thinks, but the answer uses Maria's phrasing.",
+    "correct_answer": "Trying new stuff is a great way to push yourself and mix things up (from D25:15, John's actual words)"
+  }
+]

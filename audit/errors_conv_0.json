@@ -1,0 +1,460 @@
+[
+  {
+    "question_id": "locomo_0_qa1",
+    "question": "When did Melanie paint a sunrise?",
+    "golden_answer": "2022",
+    "category": 2,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D1:12"
+    ],
+    "correct_evidence": [
+      "D1:14"
+    ],
+    "reasoning": "D1:12 (cited) says 'By the way, take a look at this' with an image of a painting, but does NOT mention when it was painted. D1:14 (not cited) says 'Yeah, I painted that lake sunrise last year! It's special to me.' Session 1 is May 8, 2023, so 'last year' = 2022. The golden answer '2022' is correct, but the citation should be D1:14, not D1:12.",
+    "correct_answer": "2022"
+  },
+  {
+    "question_id": "locomo_0_qa2",
+    "question": "What fields would Caroline be likely to pursue in her educaton?",
+    "golden_answer": "Psychology, counseling certification",
+    "category": 3,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D1:9",
+      "D1:11"
+    ],
+    "correct_evidence": [
+      "D1:9",
+      "D1:11"
+    ],
+    "reasoning": "D1:9 says 'Gonna continue my edu and check out career options'. D1:11 says 'I'm keen on counseling or working in mental health'. Neither 'psychology' nor 'counseling certification' appears anywhere in the transcript. The golden answer infers specific academic fields that Caroline never mentions. A more accurate answer would be 'counseling or mental health'.",
+    "correct_answer": "Counseling or mental health"
+  },
+  {
+    "question_id": "locomo_0_qa4",
+    "question": "What is Caroline's identity?",
+    "golden_answer": "Transgender woman",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D1:5"
+    ],
+    "correct_evidence": [
+      "D3:1",
+      "D11:14"
+    ],
+    "reasoning": "D1:5 (cited) says 'The transgender stories were so inspiring!' which shows Caroline finds transgender stories inspiring, but does NOT explicitly state she IS transgender. D3:1 says 'I talked about my transgender journey' which directly confirms Caroline's identity. D11:14 says 'Art's allowed me to explore my transition and my changing body'. The golden answer is correct but D1:5 is insufficient evidence.",
+    "correct_answer": "Transgender woman"
+  },
+  {
+    "question_id": "locomo_0_qa5",
+    "question": "When did Melanie run a charity race?",
+    "golden_answer": "The sunday before 25 May 2023",
+    "category": 2,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D2:1"
+    ],
+    "correct_evidence": [
+      "D2:1"
+    ],
+    "reasoning": "D2:1 says 'I ran a charity race for mental health last Saturday'. Session 2 is 1:14 pm on 25 May, 2023, which is a Thursday. 'Last Saturday' before Thursday May 25 is Saturday May 20, 2023. The golden answer says 'The sunday before 25 May 2023' (Sunday May 21), but D2:1 explicitly says 'Saturday', not 'Sunday'.",
+    "correct_answer": "The Saturday before 25 May 2023 (approximately May 20, 2023)"
+  },
+  {
+    "question_id": "locomo_0_qa23",
+    "question": "What books has Melanie read?",
+    "golden_answer": "\"Nothing is Impossible\", \"Charlotte's Web\"",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D7:8",
+      "D6:10"
+    ],
+    "correct_evidence": [
+      "D7:8",
+      "D6:10"
+    ],
+    "reasoning": "D7:8 says 'This book I read last year reminds me to always pursue my dreams' but does NOT name any book title. D6:10 says 'I loved reading Charlotte’s Web as a kid' which supports 'Charlotte’s Web'. The title 'Nothing is Impossible' does not appear anywhere in the conversation transcript. It is fabricated in the golden answer. The correct answer should reference the unnamed book from D7:8 and 'Charlotte’s Web' from D6:10. D7:11 also mentions 'Becoming Nicole' which the golden answer omits.",
+    "correct_answer": "Charlotte's Web, an unnamed book about pursuing dreams, and Becoming Nicole"
+  },
+  {
+    "question_id": "locomo_0_qa26",
+    "question": "When did Melanie read the book \"nothing is impossible\"?",
+    "golden_answer": "2022",
+    "category": 2,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D7:8"
+    ],
+    "correct_evidence": [
+      "D7:8"
+    ],
+    "reasoning": "The question premise is based on the fabricated book title 'Nothing is Impossible' which does not appear anywhere in the transcript. D7:8 says 'This book I read last year' without naming any title. Session 7 is July 12, 2023, so 'last year' = 2022. The date '2022' is inferable for the unnamed book, but the question itself contains a hallucinated title, making it unanswerable as stated.",
+    "correct_answer": "2022 (but the book title 'Nothing is Impossible' is fabricated; the transcript only says 'This book I read last year')"
+  },
+  {
+    "question_id": "locomo_0_qa32",
+    "question": "What LGBTQ+ events has Caroline participated in?",
+    "golden_answer": "Pride parade, school speech, support group",
+    "category": 1,
+    "error_type": "INCOMPLETE",
+    "cited_evidence": [
+      "D5:1",
+      "D8:17",
+      "D3:1",
+      "D1:3"
+    ],
+    "correct_evidence": [
+      "D5:1",
+      "D8:17",
+      "D3:1",
+      "D1:3",
+      "D7:1",
+      "D9:2",
+      "D10:3"
+    ],
+    "reasoning": "The golden answer lists only 3 events (pride parade, school speech, support group) but Caroline also participated in: an LGBTQ conference (D7:1: 'I went to an LGBTQ conference two days ago'), a mentorship program for LGBTQ youth (D9:2), and an LGBTQ activist group (D10:3). The answer is incomplete. While the 3 listed events are correct, the question asks broadly 'What LGBTQ+ events has Caroline participated in?' and the answer omits several significant events.",
+    "correct_answer": "Pride parade, school speech, support group, LGBTQ conference, mentorship program, activist group"
+  },
+  {
+    "question_id": "locomo_0_qa37",
+    "question": "What did Melanie paint recently?",
+    "golden_answer": "sunset",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D8:6; D9:17"
+    ],
+    "correct_evidence": [
+      "D8:6",
+      "D9:17"
+    ],
+    "reasoning": "The evidence ID 'D8:6; D9:17' is a malformed compound ID that doesn't resolve in the transcript (error: NOT FOUND IN TRANSCRIPT). The correct citations are D8:6 and D9:17 as separate IDs. D8:6 shows a painting of a sunset with a palm tree (blip_caption). D9:17 says 'My kids and I just finished another painting like our last one.' The golden answer 'sunset' is correct based on D8:6's blip_caption.",
+    "correct_answer": "sunset"
+  },
+  {
+    "question_id": "locomo_0_qa38",
+    "question": "What activities has Melanie done with her family?",
+    "golden_answer": "Pottery, painting, camping, museum, swimming, hiking",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D8:4",
+      "D8:6",
+      "D9:1",
+      "D6:4",
+      "D1:18",
+      "D3:14"
+    ],
+    "correct_evidence": [
+      "D8:4",
+      "D8:6",
+      "D9:1",
+      "D6:4",
+      "D1:18",
+      "D4:8"
+    ],
+    "reasoning": "D3:14 (cited) says 'I'm lucky to have my husband and kids; they keep me motivated' which does NOT mention any specific activity. It provides no evidence for any of the listed activities. The citation for hiking should be D4:8 which says 'We explored nature, roasted marshmallows around the campfire and even went on a hike.' The golden answer is factually correct but D3:14 is the wrong citation.",
+    "correct_answer": "Pottery, painting, camping, museum, swimming, hiking"
+  },
+  {
+    "question_id": "locomo_0_qa43",
+    "question": "What kind of art does Caroline make?",
+    "golden_answer": "abstract art",
+    "category": 1,
+    "error_type": "AMBIGUOUS",
+    "cited_evidence": [
+      "D11:12",
+      "D11:8",
+      "D9:14"
+    ],
+    "correct_evidence": [
+      "D17:13",
+      "D11:12",
+      "D14:5",
+      "D13:11",
+      "D14:17"
+    ],
+    "reasoning": "The cited evidence shows: D11:12 (painting of a woman with a red shirt - representational, not abstract), D11:8 (painting with brush - indeterminate), D9:14 (painting of a tree with a bright sun - representational, not abstract). Caroline mentions 'abstract stuff' in D17:13 ('I've been trying out abstract stuff recently') but this is a recent experiment, not her primary art form. Her art is predominantly representational: portraits (D13:11 self-portrait), women (D11:12), sunsets (D14:5), stained glass (D14:17). Labeling her art as 'abstract art' based on one mention of trying abstract stuff is reductive and not supported by the cited evidence.",
+    "correct_answer": "Paintings including portraits, figurative works, nature scenes, and stained glass; she has recently experimented with abstract art"
+  },
+  {
+    "question_id": "locomo_0_qa48",
+    "question": "What types of pottery have Melanie and her kids made?",
+    "golden_answer": "bowls, cup",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D12:14",
+      "D8:4",
+      "D5:6"
+    ],
+    "correct_evidence": [
+      "D5:6",
+      "D5:8",
+      "D8:4",
+      "D12:4"
+    ],
+    "reasoning": "D12:14 (cited) says 'I appreciate our friendship too, Caroline. You've always been there for me.' This has NOTHING to do with pottery types. The correct evidence for bowls includes D5:6/D5:8 (bowl with black and white flower design), D12:4 (bowl with colorful design). D8:4 supports the cup (cup with dog face). The golden answer is factually correct but D12:14 is completely wrong as a citation. Also missing: pots (D8:2: 'We all made our own pots').",
+    "correct_answer": "bowls, cup, pots"
+  },
+  {
+    "question_id": "locomo_0_qa56",
+    "question": "What symbols are important to Caroline?",
+    "golden_answer": "Rainbow flag, transgender symbol",
+    "category": 1,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D14:15",
+      "D4:1"
+    ],
+    "correct_evidence": [
+      "D14:15"
+    ],
+    "reasoning": "D14:15 explicitly mentions 'The rainbow flag mural is important to me' and 'The eagle symbolizes freedom and pride'. The 'rainbow flag' part of the golden answer is correct. However, 'transgender symbol' does not appear anywhere in the transcript text. D4:1 shows a necklace (blip: 'a photo of a person holding a necklace with a cross and a heart') but Caroline describes it in D4:3 as symbolizing 'love, faith and strength' as a gift from her grandma - not as a transgender symbol. The image search query for D4:1 was 'pendant transgender symbol' but that is metadata, not part of the conversation. The eagle from D14:15 would be a more accurate second symbol.",
+    "correct_answer": "Rainbow flag, eagle (symbolizing freedom and pride)"
+  },
+  {
+    "question_id": "locomo_0_qa66",
+    "question": "What does Melanie do with her family on hikes?",
+    "golden_answer": "Roast marshmallows, tell stories",
+    "category": 1,
+    "error_type": "AMBIGUOUS",
+    "cited_evidence": [
+      "D16:4",
+      "D10:12"
+    ],
+    "correct_evidence": [
+      "D4:8",
+      "D8:34",
+      "D10:12",
+      "D16:2",
+      "D16:4"
+    ],
+    "reasoning": "The question asks what Melanie does 'on hikes' but the golden answer describes camping/campfire activities, not hiking activities. D10:12: 'We always look forward to our family camping trip. We roast marshmallows, tell stories around the campfire and just enjoy each other's company.' D16:4: 'We roasted marshmallows and shared stories around the campfire.' Both cited evidence lines explicitly place these activities 'around the campfire' during camping trips. Actual hiking activities are described separately: D4:8: 'We explored nature...and even went on a hike. The view from the top was amazing!' D8:34: 'We enjoy hiking in the mountains and exploring forests.' The golden answer conflates camping with hiking.",
+    "correct_answer": "On hikes, Melanie's family explores nature, enjoys mountain views, and explores forests (D4:8, D8:34). The marshmallow roasting and storytelling happen around the campfire during camping trips, not on hikes."
+  },
+  {
+    "question_id": "locomo_0_qa70",
+    "question": "What transgender-specific events has Caroline attended?",
+    "golden_answer": "Poetry reading, conference",
+    "category": 1,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D17:19",
+      "D15:13"
+    ],
+    "correct_evidence": [
+      "D17:19",
+      "D7:1"
+    ],
+    "reasoning": "D15:13 (cited) says 'Wow! Did you see that band?' which has NOTHING to do with transgender events or conferences. The conference evidence should be D7:1 ('I went to an LGBTQ conference two days ago') or D5:13 ('I'm going to a transgender conference this month'). D17:19 correctly supports the poetry reading. The golden answer is factually correct but D15:13 is completely wrong as a citation for 'conference'.",
+    "correct_answer": "Poetry reading, conference"
+  },
+  {
+    "question_id": "locomo_0_qa72",
+    "question": "When did Melanie's friend adopt a child?",
+    "golden_answer": "2022",
+    "category": 2,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D17:3"
+    ],
+    "correct_evidence": [
+      "D17:4"
+    ],
+    "reasoning": "D17:3 (cited) is Caroline speaking: 'Do you have any experience with adoption, or know anyone who's gone through the process?' This is a question, not evidence of when someone adopted. D17:4 is Melanie's answer: 'Yeah, a buddy of mine adopted last year.' Session 17 is October 13, 2023, so 'last year' = 2022. The golden answer is correct but the citation should be D17:4, not D17:3.",
+    "correct_answer": "2022"
+  },
+  {
+    "question_id": "locomo_0_qa77",
+    "question": "Would Melanie go on another roadtrip soon?",
+    "golden_answer": "Likely no; since this one went badly",
+    "category": 3,
+    "error_type": "AMBIGUOUS",
+    "cited_evidence": [
+      "D18:3",
+      "D18:1"
+    ],
+    "correct_evidence": [
+      "D18:1",
+      "D18:3",
+      "D18:5",
+      "D18:17"
+    ],
+    "reasoning": "The golden answer says 'Likely no; since this one went badly' but the evidence tells a more nuanced story. D18:1 says 'We were so lucky he was okay' and D18:3 says 'that was a reminder that life is precious and to cherish our family'. Crucially, the family CONTINUED the trip after the accident: D18:5 says 'Thankfully, they enjoyed the Grand Canyon a lot!' and D18:17 confirms they went hiking the next day. The trip started badly but ended positively. Melanie took it as a reminder to cherish family, not as a reason to avoid future trips. One could argue she would be cautious, but the evidence equally supports that she would continue family adventures.",
+    "correct_answer": "Uncertain; although the trip started badly with the accident, the family continued and enjoyed the Grand Canyon, suggesting Melanie values family trips"
+  },
+  {
+    "question_id": "locomo_0_qa94",
+    "question": "What is Melanie's hand-painted bowl a reminder of?",
+    "golden_answer": "art and self-expression",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D4:5"
+    ],
+    "correct_evidence": [
+      "D4:5"
+    ],
+    "reasoning": "The question says 'Melanie's hand-painted bowl' but D4:5 is CAROLINE speaking: 'I've got some other stuff with sentimental value, like my hand-painted bowl. A friend made it for my 18th birthday ten years ago. The pattern and colors are awesome-- it reminds me of art and self-expression.' The bowl belongs to Caroline, not Melanie. The golden answer ('art and self-expression') correctly reflects what D4:5 says the bowl reminds of, but the question wrongly attributes the bowl to Melanie.",
+    "correct_answer": "art and self-expression (but this is Caroline's bowl, not Melanie's)"
+  },
+  {
+    "question_id": "locomo_0_qa106",
+    "question": "What are the new shoes that Melanie got used for?",
+    "golden_answer": "Running",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D7:19"
+    ],
+    "correct_evidence": [
+      "D7:20"
+    ],
+    "reasoning": "D7:19 (cited) is Caroline asking 'Love that purple color! For walking or running?' This is a question, not the answer. D7:20 is Melanie answering: 'Thanks, Caroline! These are for running. Been running longer since our last chat - a great way to destress and clear my mind.' The golden answer 'Running' is correct but the citation should be D7:20, not D7:19.",
+    "correct_answer": "Running"
+  },
+  {
+    "question_id": "locomo_0_qa107",
+    "question": "What is Melanie's reason for getting into running?",
+    "golden_answer": "To de-stress and clear her mind",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D7:21"
+    ],
+    "correct_evidence": [
+      "D7:20",
+      "D7:22"
+    ],
+    "reasoning": "D7:21 (cited) is Caroline asking 'Wow! What got you into running?' This is a question, not the answer. The answer comes from D7:20 ('a great way to destress and clear my mind') and D7:22 ('I've been running farther to de-stress, which has been great for my headspace'). The golden answer 'To de-stress and clear her mind' is correct but the citation should be D7:20 or D7:22, not D7:21.",
+    "correct_answer": "To de-stress and clear her mind"
+  },
+  {
+    "question_id": "locomo_0_qa111",
+    "question": "What creative project do Mel and her kids do together besides pottery?",
+    "golden_answer": "painting",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D8:5"
+    ],
+    "correct_evidence": [
+      "D8:6"
+    ],
+    "reasoning": "D8:5 (cited) is Caroline asking 'What other creative projects do you do with them, besides pottery?' This is a question, not the answer. D8:6 is Melanie answering: 'We love painting together lately, especially nature-inspired ones.' The golden answer 'painting' is correct but the citation should be D8:6, not D8:5.",
+    "correct_answer": "painting"
+  },
+  {
+    "question_id": "locomo_0_qa132",
+    "question": "How long has Melanie been creating art?",
+    "golden_answer": "7 years",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D16:7"
+    ],
+    "correct_evidence": [
+      "D16:8"
+    ],
+    "reasoning": "D16:7 (cited) is Caroline speaking: 'Since I was 17 or so... How long have you been into art?' This is Caroline answering about herself and then asking Melanie. D16:8 is Melanie answering: 'Seven years now, and I've finally found my real muses: painting and pottery.' The golden answer '7 years' is correct but the citation should be D16:8, not D16:7.",
+    "correct_answer": "7 years"
+  },
+  {
+    "question_id": "locomo_0_qa135",
+    "question": "What setback did Melanie face in October 2023?",
+    "golden_answer": "She got hurt and had to take a break from pottery.",
+    "category": 4,
+    "error_type": "TEMPORAL_ERROR",
+    "cited_evidence": [
+      "D17:8"
+    ],
+    "correct_evidence": [
+      "D17:8"
+    ],
+    "reasoning": "Session 17 takes place on October 13, 2023. In D17:8, Melanie says: 'recently I had a setback. Last month I got hurt and had to take a break from pottery, which I use for self-expression and peace.' 'Last month' from October 13 = September 2023. The injury occurred in September 2023, not October. The question incorrectly frames this as an October setback; Melanie merely reported the September injury during an October session.",
+    "correct_answer": "The setback (getting hurt, taking a break from pottery) occurred in September 2023, not October. Melanie reported it on October 13, 2023."
+  },
+  {
+    "question_id": "locomo_0_qa137",
+    "question": "What painting did Melanie show to Caroline on October 13, 2023?",
+    "golden_answer": "A painting inspired by sunsets with a pink sky.",
+    "category": 4,
+    "error_type": "INCOMPLETE",
+    "cited_evidence": [
+      "D17:12"
+    ],
+    "correct_evidence": [
+      "D17:12",
+      "D17:14"
+    ],
+    "reasoning": "Melanie showed TWO paintings in Session 17 (October 13, 2023). D17:12: 'Here's one I did last week. It's inspired by the sunsets.' (blip_caption: 'a photo of a painting of a sunset with a pink sky'). D17:14: 'I've done an abstract painting too, take a look!' (blip_caption: 'a photo of a painting on a wall with a blue background'). The golden answer only mentions the sunset painting, omitting the abstract painting with blue background.",
+    "correct_answer": "Two paintings: (1) a sunset-inspired painting with a pink sky (D17:12), and (2) an abstract painting with a blue background (D17:14)."
+  },
+  {
+    "question_id": "locomo_0_qa138",
+    "question": "What kind of painting did Caroline share with Melanie on October 13, 2023?",
+    "golden_answer": "An abstract painting with blue streaks on a wall.",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D17:14"
+    ],
+    "correct_evidence": [
+      "D17:14",
+      "D17:21"
+    ],
+    "reasoning": "D17:14 is MELANIE speaking: 'I've done an abstract painting too, take a look!' with blip_caption 'a photo of a painting on a wall with a blue background'. The abstract painting with blue is Melanie's work, NOT Caroline's. Caroline mentions trying abstract stuff in D17:13 but doesn't share an abstract painting. Caroline's images in session 17 are: a poster (D17:17), a 'Trans Lives Matter' sign (D17:19), and a drawing of a woman in a dress (D17:21). The golden answer incorrectly attributes Melanie's abstract painting to Caroline.",
+    "correct_answer": "A drawing of a woman in a dress (D17:21), a poster (D17:17), and a 'Trans Lives Matter' sign (D17:19)"
+  },
+  {
+    "question_id": "locomo_0_qa139",
+    "question": "What was the poetry reading that Caroline attended about?",
+    "golden_answer": "It was a transgender poetry reading where transgender people shared their stories.",
+    "category": 4,
+    "error_type": "WRONG_CITATION",
+    "cited_evidence": [
+      "D17:18"
+    ],
+    "correct_evidence": [
+      "D17:19"
+    ],
+    "reasoning": "D17:18 (cited) is Melanie asking: 'Nope, never been to something like that. What was it about? What made it so special?' This is a question, not the answer. D17:19 is Caroline answering: 'It was a transgender poetry reading where transgender people shared their stories through poetry.' The golden answer is correct but the citation should be D17:19, not D17:18.",
+    "correct_answer": "It was a transgender poetry reading where transgender people shared their stories."
+  },
+  {
+    "question_id": "locomo_0_qa144",
+    "question": "How did Melanie's son handle the accident?",
+    "golden_answer": "He was scared but reassured by his family",
+    "category": 4,
+    "error_type": "ATTRIBUTION_ERROR",
+    "cited_evidence": [
+      "D18:6",
+      "D18:7"
+    ],
+    "correct_evidence": [
+      "D18:1",
+      "D18:3"
+    ],
+    "reasoning": "D18:7 says 'They were scared but we reassured them and explained their brother would be OK. They're tough kids.' Here 'They' refers to the OTHER children (siblings), NOT the son. 'Their brother' is the son. The evidence describes the siblings' fear about their brother, not the son's own emotional reaction. The golden answer claims 'He was scared' (the son) but the evidence says 'They were scared' (the siblings). D18:1 and D18:3 only tell us the son 'got into an accident' and that he's 'ok' - not that he was 'scared'.",
+    "correct_answer": "The son was in the accident and is OK (D18:1, D18:3); the evidence does not describe the son's emotional reaction directly"
+  },
+  {
+    "question_id": "locomo_0_qa149",
+    "question": "What do Melanie's family give her?",
+    "golden_answer": "Strength and motivation",
+    "category": 4,
+    "error_type": "HALLUCINATION",
+    "cited_evidence": [
+      "D18:9"
+    ],
+    "correct_evidence": [
+      "D18:9"
+    ],
+    "reasoning": "D18:9 says 'They're really amazing. Wish I was that resilient too. But they give me the strength to keep going.' The word 'strength' is supported by the evidence. However, 'motivation' does not appear in D18:9 or anywhere nearby in the transcript in this context. The golden answer adds 'motivation' which is not present in the cited evidence. A search of the broader transcript shows D3:14 mentions 'they keep me motivated' but that is not cited and is from a different context months earlier.",
+    "correct_answer": "Strength (to keep going)"
+  }
+]
