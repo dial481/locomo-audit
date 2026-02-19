@@ -15,6 +15,9 @@ venv/
 # Claude
 .claude/
 
+# Runtime artifacts
+scoring_checkpoint.json
+
 # Editor
 *.swp
 *.swo
