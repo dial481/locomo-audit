@@ -17,7 +17,7 @@ We ran four full-context configurations: two models (GPT-4o-mini, GPT-4.1-mini) 
 | GPT-4o-mini | `answer_prompt_memos` | 74.29% | 0.05% | 74.35% |
 | GPT-4o-mini | `answer_prompt_cot` | 79.89% | 0.12% | 79.94% |
 | GPT-4.1-mini | `answer_prompt_memos` | 81.95% | 0.09% | 82.08% |
-| GPT-4.1-mini | `answer_prompt_cot` | 92.62% | 0.13% | **92.66%** |
+| GPT-4.1-mini | `answer_prompt_cot` | **92.62%** | 0.13% | 92.66% |
 
 ### Per-Category Accuracy (Per-Run Mean)
 
@@ -32,13 +32,13 @@ The GPT-4.1-mini CoT configuration exceeds EverMemOS's claimed full-context base
 
 ### Key Finding: Prompt Explains the Gap
 
-The answer prompt alone accounts for a 10.58-point accuracy difference with the same model and identical context:
+The answer prompt alone accounts for a 10.67-point accuracy difference with the same model and identical context:
 
 | Configuration | Overall |
 |---------------|---------|
-| GPT-4.1-mini + `answer_prompt_cot` | 92.66% |
-| GPT-4.1-mini + `answer_prompt_memos` | 82.08% |
-| **Delta (prompt only)** | **+10.58 points** |
+| GPT-4.1-mini + `answer_prompt_cot` | 92.62% |
+| GPT-4.1-mini + `answer_prompt_memos` | 81.95% |
+| **Delta (prompt only)** | **+10.67 points** |
 
 The CoT prompt produces answers averaging 67.9 words vs. 4.8 words with the memos prompt. Longer answers provide more surface area for the judge's "be generous, as long as it touches on the same topic" matching. See [prompts.md](prompts.md) and [word_counts.md](word_counts.md).
 
@@ -76,7 +76,7 @@ Source: `mem0ai/mem0/evaluation/Makefile`, lines 18-19
 
 However, no result files are published in the repository (the `results/` directory is gitignored). The 72.90% figure comes from the paper only.
 
-**Our measurement:** 74.35% (GPT-4o-mini + `answer_prompt_memos`). The 1.45-point gap is small and likely reflects prompt differences between our `answer_prompt_memos` and Mem0's own prompt.
+**Our measurement:** 74.29% (GPT-4o-mini + `answer_prompt_memos`). The 1.39-point gap is small and likely reflects prompt differences between our `answer_prompt_memos` and Mem0's own prompt.
 
 ### GPT-4.1-mini (EverMemOS Upstream Claim)
 
@@ -105,15 +105,15 @@ Footnote from the README (line 50):
 
 3. **No eval_results.json:** The HuggingFace dataset ([EverMind-AI/EverMemOS_Eval_Results](https://huggingface.co/datasets/EverMind-AI/EverMemOS_Eval_Results)) contains results for 5 systems only: `evermemos`, `mem0`, `memos`, `memu`, `zep`. There is no `full_context` or `llm` directory. This is confirmed by the download script at `results-audit/download_results.py`, line 13: `SYSTEMS = ["evermemos", "mem0", "memos", "memu", "zep"]`.
 
-**Our measurement:** With `answer_prompt_memos` (5-6 word constraint), GPT-4.1-mini scores 82.08% -- 9.13 points below the claim. With `answer_prompt_cot` (the prompt EverMemOS uses for its own system), GPT-4.1-mini scores 92.66% -- 1.45 points above the claim. The most likely explanation is that EverMemOS used `answer_prompt_cot` for their full-context claim. The EverMemOS README does not specify which prompt was used.
+**Our measurement:** With `answer_prompt_memos` (5-6 word constraint), GPT-4.1-mini scores 81.95% -- 9.26 points below the claim. With `answer_prompt_cot` (the prompt EverMemOS uses for its own system), GPT-4.1-mini scores 92.62% -- 1.41 points above the claim. The most likely explanation is that EverMemOS used `answer_prompt_cot` for their full-context claim. The EverMemOS README does not specify which prompt was used.
 
 ### Comparison: Our Results vs. Published Claims
 
 | Baseline | Model | Prompt | Claimed | Measured | Delta |
 |----------|-------|--------|---------|----------|-------|
-| Mem0 paper | GPT-4o-mini | Not specified | 72.90% | 74.35% (memos) | +1.45 |
-| EverMemOS README | GPT-4.1-mini | Not specified | 91.21% | 82.08% (memos) | -9.13 |
-| EverMemOS README | GPT-4.1-mini | Not specified | 91.21% | 92.66% (cot) | +1.45 |
+| Mem0 paper | GPT-4o-mini | Not specified | 72.90% | 74.29% (memos) | +1.39 |
+| EverMemOS README | GPT-4.1-mini | Not specified | 91.21% | 81.95% (memos) | -9.26 |
+| EverMemOS README | GPT-4.1-mini | Not specified | 91.21% | 92.62% (cot) | +1.41 |
 
 ---
 
@@ -123,13 +123,13 @@ When the full-context baseline is measured with the same prompt each system uses
 
 | System | Overall | Answer Prompt | FC Baseline (same prompt) | Delta |
 |--------|---------|---------------|---------------------------|-------|
-| EverMemOS | 92.32% | `answer_prompt_cot` | 92.66% | -0.34% |
+| EverMemOS | 92.32% | `answer_prompt_cot` | 92.62% | -0.30% |
 | Zep | 85.22% | `answer_prompt_zep` | N/A (not tested) | -- |
-| MemOS | 80.76% | `answer_prompt_memos` | 82.08% | -1.32% |
-| MemU | 66.67% | `answer_prompt_memos` | 82.08% | -15.41% |
-| Mem0 | 64.20% | `answer_prompt_memos` | 82.08% | -17.88% |
+| MemOS | 80.76% | `answer_prompt_memos` | 81.95% | -1.19% |
+| MemU | 66.67% | `answer_prompt_memos` | 81.95% | -15.28% |
+| Mem0 | 64.20% | `answer_prompt_memos` | 81.95% | -17.75% |
 
-No published memory system exceeds the full-context baseline when compared with the same answer prompt. EverMemOS is 0.34 points below full context. MemOS, MemU, and Mem0 fall further below.
+No published memory system exceeds the full-context baseline when compared with the same answer prompt. EverMemOS is 0.30 points below full context. MemOS, MemU, and Mem0 fall further below.
 
 ---
 
@@ -172,12 +172,12 @@ This is Zep's memory system score, not a full-context baseline. The Zep locomo_e
 
 | Baseline | Model | Prompt | Score | Source | Verifiable |
 |----------|-------|--------|-------|--------|------------|
-| This evaluation | GPT-4o-mini | `answer_prompt_memos` | 74.35% | `fc-baseline/results/gpt-4o-mini-memos/eval_results.json` | Yes |
-| This evaluation | GPT-4o-mini | `answer_prompt_cot` | 79.94% | `fc-baseline/results/gpt-4o-mini-cot/eval_results.json` | Yes |
-| This evaluation | GPT-4.1-mini | `answer_prompt_memos` | 82.08% | `fc-baseline/results/gpt-4.1-mini-memos/eval_results.json` | Yes |
-| This evaluation | GPT-4.1-mini | `answer_prompt_cot` | 92.66% | `fc-baseline/results/gpt-4.1-mini-cot/eval_results.json` | Yes |
+| This evaluation | GPT-4o-mini | `answer_prompt_memos` | 74.29% | `fc-baseline/results/gpt-4o-mini-memos/eval_results.json` | Yes |
+| This evaluation | GPT-4o-mini | `answer_prompt_cot` | 79.89% | `fc-baseline/results/gpt-4o-mini-cot/eval_results.json` | Yes |
+| This evaluation | GPT-4.1-mini | `answer_prompt_memos` | 81.95% | `fc-baseline/results/gpt-4.1-mini-memos/eval_results.json` | Yes |
+| This evaluation | GPT-4.1-mini | `answer_prompt_cot` | 92.62% | `fc-baseline/results/gpt-4.1-mini-cot/eval_results.json` | Yes |
 | Mem0 paper | GPT-4o-mini | Not specified | 72.90% | arxiv 2504.19413 | Reproducible from code |
 | EverMemOS claim | GPT-4.1-mini | Not specified | 91.21% | EverMemOS README | No |
 | EverMemBench LLM | GPT-4.1-mini | Not reported | Not reported | Different dataset | Not applicable to LoCoMo |
 
-The full-context baseline is a critical reference point for evaluating memory systems. Our measurements show that the answer prompt is the dominant variable: the same model with the same context scores between 82.08% and 92.66% depending solely on the prompt. When using the same prompt as EverMemOS (`answer_prompt_cot`), full context exceeds EverMemOS's system score (92.66% vs. 92.32%), leaving no measurable accuracy gain from the memory system.
+The full-context baseline is a critical reference point for evaluating memory systems. Our measurements show that the answer prompt is the dominant variable: the same model with the same context scores between 81.95% and 92.62% depending solely on the prompt. When using the same prompt as EverMemOS (`answer_prompt_cot`), full context exceeds EverMemOS's system score (92.62% vs. 92.32%), leaving no measurable accuracy gain from the memory system.

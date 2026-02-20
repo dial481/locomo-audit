@@ -12,7 +12,7 @@ Independent audit of the [LoCoMo](https://github.com/snap-research/locomo) (Long
 | Scores exceed corrupted ceiling | EverMemOS single-hop (95.96%) and multi-hop (91.37%) exceed their category ceilings (95.72% and 90.07%), mathematically impossible without credit from wrong golden answers. Overall 92.32% is within 1.25 points of the 93.57% aggregate ceiling. | [results-audit/RESULTS_AUDIT.md](results-audit/RESULTS_AUDIT.md) |
 | Not apples-to-apples | EverMemOS uses 2-3 sequential LLM calls, a 729-token CoT prompt, and agentic retrieval. All other systems: 1 call, simple prompt, no overhead. All reported in the same "Avg. Tokens" column. | [methodology/token_efficiency.md](methodology/token_efficiency.md), [methodology/prompts.md](methodology/prompts.md) |
 | Reproducibility failures | Third parties report 38.38% vs. claimed 92.32% ([EverMemOS#73](https://github.com/EverMind-AI/EverMemOS/issues/73)). Multiple Mem0 reproducibility issues open. | [methodology/reproducibility.md](methodology/reproducibility.md) |
-| Full-context baseline exceeds EverMemOS | GPT-4.1-mini with `answer_prompt_cot` on full context scores 92.66%, exceeding EverMemOS (92.32%) and the claimed FC baseline (91.21%). The answer prompt, not the memory system, explains the score. | [fc-baseline/README.md](fc-baseline/README.md) |
+| Full-context baseline exceeds EverMemOS | GPT-4.1-mini with `answer_prompt_cot` on full context scores 92.62%, exceeding EverMemOS (92.32%) and the claimed FC baseline (91.21%). The answer prompt, not the memory system, explains the score. | [fc-baseline/README.md](fc-baseline/README.md) |
 
 ## Repository Structure
 

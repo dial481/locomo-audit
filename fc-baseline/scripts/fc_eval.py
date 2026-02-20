@@ -787,7 +787,7 @@ async def run_evaluation(args: argparse.Namespace) -> None:
     eval_output = {
         "total_questions": len(detailed_results),
         "correct": majority_correct,
-        "accuracy": majority_accuracy,
+        "accuracy": mean_accuracy,
         "detailed_results": dict(grouped),
         "metadata": {
             "answer_model": args.answer_model,

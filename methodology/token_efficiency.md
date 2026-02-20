@@ -238,18 +238,18 @@ The README compares only row 1. The real cost comparison is the "Real total" row
 
 | System | Overall Accuracy | Answer Prompt |
 |--------|-----------------|---------------|
-| FC Baseline (measured, GPT-4.1-mini) | 92.66% | `answer_prompt_cot` |
+| FC Baseline (measured, GPT-4.1-mini) | 92.62% | `answer_prompt_cot` |
 | EverMemOS | 92.32% | `answer_prompt_cot` |
-| **Delta** | **-0.34 points** | Same prompt |
+| **Delta** | **-0.30 points** | Same prompt |
 
-When compared with the same answer prompt (`answer_prompt_cot`), EverMemOS scores 0.34 percentage points *below* the full-context baseline. The memory system provides no measurable accuracy gain.
+When compared with the same answer prompt (`answer_prompt_cot`), EverMemOS scores 0.30 percentage points *below* the full-context baseline. The memory system provides no measurable accuracy gain.
 
-The previously claimed delta was based on an unverified 91.21% full-context figure. Our independently measured full-context baseline (92.66%) exceeds both that claim and the EverMemOS system score.
+The previously claimed delta was based on an unverified 91.21% full-context figure. Our independently measured full-context baseline (92.62%) exceeds both that claim and the EverMemOS system score.
 
 | Comparison | FC Baseline | EverMemOS | Delta |
 |------------|-------------|-----------|-------|
 | Claimed (unverified) | 91.21% | 92.32% | +1.11 |
-| Measured (same prompt) | 92.66% | 92.32% | -0.34 |
+| Measured (same prompt) | 92.62% | 92.32% | -0.30 |
 
 Source: [fc-baseline/README.md](../fc-baseline/README.md)
 
@@ -261,7 +261,7 @@ Source: [fc-baseline/README.md](../fc-baseline/README.md)
 
 3. **Ground truth errors:** 99 of 1,540 questions (6.4%) have corrupted golden answers. The judge marks systems correct on corrupted questions at rates from 34.3% to 60.6% (source: [results-audit/RESULTS_AUDIT.md](../results-audit/RESULTS_AUDIT.md)). The theoretical scoring ceiling is 93.57%.
 
-4. **Full-context baseline now measured:** Our independent evaluation with `answer_prompt_cot` on GPT-4.1-mini scores 92.66% -- exceeding both the claimed 91.21% and the EverMemOS system score of 92.32%. See [full_context_baseline.md](full_context_baseline.md) for full results across 4 configurations.
+4. **Full-context baseline now measured:** Our independent evaluation with `answer_prompt_cot` on GPT-4.1-mini scores 92.62% -- exceeding both the claimed 91.21% and the EverMemOS system score of 92.32%. See [full_context_baseline.md](full_context_baseline.md) for full results across 4 configurations.
 
 5. **No statistical significance test** is present in any of the evaluated repositories.
 
@@ -294,18 +294,18 @@ The 2-3 LLM calls per question are sequential and cannot be parallelized: the mu
 | Metric | Value | Source |
 |--------|------:|--------|
 | EverMemOS accuracy | 92.32% | `results-audit/results/evermemos_eval_results.json` |
-| FC baseline (measured, same prompt) | 92.66% | `fc-baseline/results/gpt-4.1-mini-cot/eval_results.json` |
-| Delta | -0.34 points | EverMemOS scores below full context |
+| FC baseline (measured, same prompt) | 92.62% | `fc-baseline/results/gpt-4.1-mini-cot/eval_results.json` |
+| Delta | -0.30 points | EverMemOS scores below full context |
 | FC baseline (claimed, unverified) | 91.21% | `EverMind-AI/EverMemOS/evaluation/README.md`, line 43 |
 | AP v2 baseline (intentionally wrong) | 62.81% | `ap-baseline/README.md` |
 | Corrupted ground truth | 99/1,540 questions (6.4%) | `results-audit/RESULTS_AUDIT.md` |
 | Theoretical scoring ceiling | 93.57% | 1,441 answerable questions / 1,540 total |
 
-With the same answer prompt (`answer_prompt_cot`) and same answer model (GPT-4.1-mini), full context scores 92.66% vs. EverMemOS's 92.32%. The memory system produces a net negative delta of 0.34 points. The LLM judge accepts 62.81% of intentionally wrong vague-but-topical answers (AP v2 baseline, source: `ap-baseline/README.md`). No statistical significance test is published in any evaluated repository. The reported 92.32% approaches the theoretical scoring ceiling of 93.57% (within 1.25 points), imposed by the 6.4% corrupted ground truth rate (source: [results-audit/RESULTS_AUDIT.md](../results-audit/RESULTS_AUDIT.md)).
+With the same answer prompt (`answer_prompt_cot`) and same answer model (GPT-4.1-mini), full context scores 92.62% vs. EverMemOS's 92.32%. The memory system produces a net negative delta of 0.30 points. The LLM judge accepts 62.81% of intentionally wrong vague-but-topical answers (AP v2 baseline, source: `ap-baseline/README.md`). No statistical significance test is published in any evaluated repository. The reported 92.32% approaches the theoretical scoring ceiling of 93.57% (within 1.25 points), imposed by the 6.4% corrupted ground truth rate (source: [results-audit/RESULTS_AUDIT.md](../results-audit/RESULTS_AUDIT.md)).
 
 ### Net Result
 
-Two to three sequential LLM calls per question (Paper Table 8), 6,045-6,669 total tokens per question (Paper Table 8, vs. claimed 2,298), with the majority of answer completion tokens discarded after "FINAL ANSWER:" extraction, for a net accuracy loss of 0.34 percentage points compared to the independently measured full-context baseline (same prompt, same model), with no published significance test, measured by a judge that accepts 62.81% of intentionally wrong answers.
+Two to three sequential LLM calls per question (Paper Table 8), 6,045-6,669 total tokens per question (Paper Table 8, vs. claimed 2,298), with the majority of answer completion tokens discarded after "FINAL ANSWER:" extraction, for a net accuracy loss of 0.30 percentage points compared to the independently measured full-context baseline (same prompt, same model), with no published significance test, measured by a judge that accepts 62.81% of intentionally wrong answers.
 
 ---
 
@@ -318,5 +318,5 @@ Two to three sequential LLM calls per question (Paper Table 8), 6,045-6,669 tota
 | 89% reduction vs. full-context | Overstated. Real reduction is 67.1-70.2% per the paper's own logged token data (Table 8). Our independent tiktoken + API estimates (5,190-6,883 tokens) are consistent. |
 | CoT completion cost | Not reported in README. Paper Table 8 shows 773 completion tokens per question on average (GPT-4.1-mini: (5.82M - 4.63M) / 1,540). The published `generated_answer` field contains only the text after "FINAL ANSWER:" extraction (mean 48.7 words), indicating the majority of completion tokens are discarded. |
 | Insufficiency rate | 31.0% of questions trigger multi-query rewriting (Paper Appendix A.1, GPT-4.1-mini); 44.1% for GPT-4o-mini (derived from Table 8 call counts) |
-| EverMemOS outperforms full-context by 1.11 points (claimed) | Based on unverified 91.21% FC baseline. Our measured FC baseline with the same prompt (92.66%) shows EverMemOS scores 0.34 points *below* full context. Source: [fc-baseline/README.md](../fc-baseline/README.md) |
-| Full-context baseline: 91.21% (claimed) | Independently measured at 92.66% with `answer_prompt_cot` on GPT-4.1-mini, and 82.08% with `answer_prompt_memos`. The claimed 91.21% falls between these, consistent with use of a prompt without the word-count constraint. Source: [full_context_baseline.md](full_context_baseline.md) |
+| EverMemOS outperforms full-context by 1.11 points (claimed) | Based on unverified 91.21% FC baseline. Our measured FC baseline with the same prompt (92.62%) shows EverMemOS scores 0.30 points *below* full context. Source: [fc-baseline/README.md](../fc-baseline/README.md) |
+| Full-context baseline: 91.21% (claimed) | Independently measured at 92.62% with `answer_prompt_cot` on GPT-4.1-mini, and 81.95% with `answer_prompt_memos`. The claimed 91.21% falls between these, consistent with use of a prompt without the word-count constraint. Source: [full_context_baseline.md](full_context_baseline.md) |

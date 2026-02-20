@@ -42,7 +42,7 @@ The original LoCoMo used deterministic F1 scoring with GPT-3.5-turbo. Current im
 
 ### Full-Context Baselines
 
-We independently measured full-context baselines across 4 configurations (2 models x 2 prompts). GPT-4.1-mini with `answer_prompt_cot` scores 92.66% -- exceeding both EverMemOS (92.32%) and the claimed 91.21% FC baseline. The gap between the two published claims (72.90% and 91.21%) is explained by the model upgrade and the answer prompt difference, not by missing artifacts. See [full_context_baseline.md](full_context_baseline.md).
+We independently measured full-context baselines across 4 configurations (2 models x 2 prompts). GPT-4.1-mini with `answer_prompt_cot` scores 92.62% -- exceeding both EverMemOS (92.32%) and the claimed 91.21% FC baseline. The gap between the two published claims (72.90% and 91.21%) is explained by the model upgrade and the answer prompt difference, not by missing artifacts. See [full_context_baseline.md](full_context_baseline.md).
 
 ### Image-Dependent Questions
 

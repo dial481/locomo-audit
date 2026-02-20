@@ -142,7 +142,7 @@ def analyze():
     # --- Table 4: Comparison with Published Systems ---
     print("## Table 4: Full-Context vs. Published System Scores")
     print()
-    print("All scores are majority-vote accuracy on 1,540 questions (category 5 excluded).")
+    print("All scores are per-run mean accuracy on 1,540 questions (category 5 excluded).")
     print()
     print("| System | Overall | Answer Model | Source |")
     print("|--------|---------|-------------|--------|")
@@ -152,7 +152,7 @@ def analyze():
         model = m["answer_model"]
         prompt = m.get("answer_prompt", "unknown")
         prompt_short = "CoT" if "cot" in prompt else "memos"
-        acc = m["majority_vote_accuracy"] * 100
+        acc = m["mean_accuracy"] * 100
         print(f"| FC Baseline ({model}, {prompt_short}) | {acc:.2f}% | {model} | This evaluation |")
 
     print("| FC Baseline (claimed) | 91.21% | GPT-4.1-mini | EverMemOS README (unverified) |")
@@ -168,8 +168,8 @@ def analyze():
     cot_key = "GPT-4.1-mini (cot)"
     memos_key = "GPT-4.1-mini (memos)"
     if cot_key in results:
-        cot_acc = results[cot_key]["eval"]["metadata"]["majority_vote_accuracy"] * 100
-        memos_acc = results[memos_key]["eval"]["metadata"]["majority_vote_accuracy"] * 100 if memos_key in results else None
+        cot_acc = results[cot_key]["eval"]["metadata"]["mean_accuracy"] * 100
+        memos_acc = results[memos_key]["eval"]["metadata"]["mean_accuracy"] * 100 if memos_key in results else None
         print("## Table 5: Delta from Full-Context Baseline (GPT-4.1-mini)")
         print()
         print("Positive delta = system exceeds full-context (memory system adds value).")

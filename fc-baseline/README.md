@@ -12,14 +12,14 @@ Four runs: two models (GPT-4o-mini, GPT-4.1-mini) x two answer prompts (`answer_
 
 **The answer prompt accounts for the gap between our baseline and EverMemOS's claimed 91.21%.**
 
-GPT-4.1-mini with `answer_prompt_cot` (the same prompt EverMemOS uses for its own system) achieves **92.66%** on full context alone -- exceeding both EverMemOS's claimed full-context baseline (91.21%) and their published system score (92.32%). No memory system is involved.
+GPT-4.1-mini with `answer_prompt_cot` (the same prompt EverMemOS uses for its own system) achieves **92.62%** on full context alone -- exceeding both EverMemOS's claimed full-context baseline (91.21%) and their published system score (92.32%). No memory system is involved.
 
 | Configuration | Overall | Answer Prompt |
 |---------------|---------|---------------|
-| FC Baseline (ours, GPT-4.1-mini, CoT) | **92.66%** | `answer_prompt_cot` (no word limit) |
+| FC Baseline (ours, GPT-4.1-mini, CoT) | **92.62%** | `answer_prompt_cot` (no word limit) |
 | EverMemOS system | 92.32% | `answer_prompt_cot` (no word limit) |
 | FC Baseline (EverMemOS claim) | 91.21% | Not specified |
-| FC Baseline (ours, GPT-4.1-mini, memos) | 82.08% | `answer_prompt_memos` (5-6 words) |
+| FC Baseline (ours, GPT-4.1-mini, memos) | 81.95% | `answer_prompt_memos` (5-6 words) |
 
 The CoT prompt produces answers averaging 67.9 words (GPT-4.1-mini) vs. 4.8 words with the memos prompt. Longer answers provide more surface area for the judge's "be generous, as long as it touches on the same topic" matching. See [methodology/prompts.md](../methodology/prompts.md) and [methodology/word_counts.md](../methodology/word_counts.md).
 
@@ -43,9 +43,9 @@ Published claims for comparison:
 | EverMemOS README (unverified) | GPT-4.1-mini | 91.21% |
 | Mem0 paper (arxiv 2504.19413) | GPT-4o-mini | 72.90% +/- 0.19% |
 
-Our GPT-4o-mini memos result (74.35%) is 1.45 points above Mem0's claim (72.90%). This gap is small and may reflect prompt differences.
+Our GPT-4o-mini memos result (74.29%) is 1.39 points above Mem0's claim (72.90%). This gap is small and may reflect prompt differences.
 
-Our GPT-4.1-mini memos result (82.08%) is 9.13 points below EverMemOS's claim (91.21%). The CoT run (92.66%) exceeds it by 1.45 points. The most likely explanation: EverMemOS used `answer_prompt_cot` for their full-context claim, not `answer_prompt_memos`.
+Our GPT-4.1-mini memos result (81.95%) is 9.26 points below EverMemOS's claim (91.21%). The CoT run (92.62%) exceeds it by 1.41 points. The most likely explanation: EverMemOS used `answer_prompt_cot` for their full-context claim, not `answer_prompt_memos`.
 
 ### Per-Category Accuracy (Per-Run Mean)
 
@@ -60,22 +60,22 @@ The GPT-4.1-mini CoT run exceeds the EverMemOS claim in every category except te
 
 ### Full-Context vs. Published System Scores
 
-All scores are majority-vote accuracy on 1,540 questions (category 5 excluded).
+All scores are per-run mean accuracy on 1,540 questions (category 5 excluded).
 
 | System | Overall | Delta from FC (CoT) | Answer Prompt |
 |--------|---------|---------------------|---------------|
-| FC Baseline (ours, GPT-4.1-mini, CoT) | 92.66% | 0.00% | `answer_prompt_cot` |
-| EverMemOS | 92.32% | -0.34% | `answer_prompt_cot` |
-| Zep | 85.22% | -7.44% | `answer_prompt_zep` |
-| FC Baseline (ours, GPT-4.1-mini, memos) | 82.08% | -10.58% | `answer_prompt_memos` |
-| MemOS | 80.76% | -11.90% | `answer_prompt_memos` |
-| FC Baseline (EverMemOS claim) | 91.21% | -1.45% | Not specified |
-| MemU | 66.67% | -25.99% | `answer_prompt_memos` |
-| Mem0 | 64.20% | -28.46% | `answer_prompt_memos` |
+| FC Baseline (ours, GPT-4.1-mini, CoT) | 92.62% | 0.00% | `answer_prompt_cot` |
+| EverMemOS | 92.32% | -0.30% | `answer_prompt_cot` |
+| Zep | 85.22% | -7.40% | `answer_prompt_zep` |
+| FC Baseline (ours, GPT-4.1-mini, memos) | 81.95% | -10.67% | `answer_prompt_memos` |
+| MemOS | 80.76% | -11.86% | `answer_prompt_memos` |
+| FC Baseline (EverMemOS claim) | 91.21% | -1.41% | Not specified |
+| MemU | 66.67% | -25.95% | `answer_prompt_memos` |
+| Mem0 | 64.20% | -28.42% | `answer_prompt_memos` |
 
-When using the same prompt (`answer_prompt_cot`), full context alone (92.66%) exceeds EverMemOS (92.32%) by 0.34 points. The memory system provides no measurable accuracy gain over full context.
+When using the same prompt (`answer_prompt_cot`), full context alone (92.62%) exceeds EverMemOS (92.32%) by 0.30 points. The memory system provides no measurable accuracy gain over full context.
 
-Systems using prompts with the 5-6 word constraint (`answer_prompt_memos`) all score at or below our GPT-4.1-mini memos baseline (82.08%), consistent with the answer prompt being the primary variable.
+Systems using prompts with the 5-6 word constraint (`answer_prompt_memos`) all score at or below our GPT-4.1-mini memos baseline (81.95%), consistent with the answer prompt being the primary variable.
 
 ### Token and Word Count Statistics
 
@@ -110,7 +110,7 @@ The EverMemOS README does not specify which prompt was used for the 91.21% full-
 
 1. Answers constrained to 5-6 words provide less surface area for the judge's "be generous, as long as it touches on the same topic" matching (see [methodology/prompts.md](../methodology/prompts.md))
 2. The CoT prompt produces answers averaging 67.9 words (GPT-4.1-mini) vs. 4.8 words with `answer_prompt_memos`
-3. The prompt alone accounts for a 10.58-point accuracy difference (82.08% vs. 92.66%) with the same model and identical context
+3. The prompt alone accounts for a 10.67-point accuracy difference (81.95% vs. 92.62%) with the same model and identical context
 4. Systems using the CoT prompt or no word limit consistently score higher than systems using the 5-6 word constraint, independent of the underlying retrieval system
 
 ---
@@ -235,10 +235,10 @@ The `answer_results.json` files (~141MB each, containing full conversation conte
 
 | File | SHA256 |
 |------|--------|
-| `results/gpt-4o-mini-memos/eval_results.json` | `c1a89b6e0d33baccb6dff5c455f0c4399758c7871db864b81a4d06e2124f1388` |
-| `results/gpt-4o-mini-cot/eval_results.json` | `acb41ed0c1386152436a8ab0c37d560fd9be1afcdc68e55aef2723c6dc7fc1f3` |
-| `results/gpt-4.1-mini-memos/eval_results.json` | `8f25b819a845caa4381d60d3f4893f8f939f832513fd0760ca4b3cde3873d55f` |
-| `results/gpt-4.1-mini-cot/eval_results.json` | `8636f84251a73126af020ccf278c52df5fa817a6ec184a57e44789f1a1b9dbf1` |
+| `results/gpt-4o-mini-memos/eval_results.json` | `1c55eb0ee66f9eb784c222ec54492cc39702652baa4e6c66b7fb89a7bb8a3d8f` |
+| `results/gpt-4o-mini-cot/eval_results.json` | `08212320401c65fa9a97f78dd18adfb1d527137ec9f04b1b518420aa8e651bfe` |
+| `results/gpt-4.1-mini-memos/eval_results.json` | `f573c091606b5c7691d7801ef30aada0bc8c54e406e31da3a2f807ab1ffa02e8` |
+| `results/gpt-4.1-mini-cot/eval_results.json` | `7fa10ba1d8976bdc215172f9d4e1840c015644b28e8e97de840b690051e354f3` |
 
 ---
 
