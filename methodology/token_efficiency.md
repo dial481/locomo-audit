@@ -1,0 +1,312 @@
+<!-- SPDX-License-Identifier: CC-BY-NC-4.0 -->
+
+# Token Efficiency Analysis
+
+EverMemOS claims an 89% reduction in average tokens compared to full-context evaluation. This document examines what the "Average Tokens" figure actually measures, what it omits, and whether the claimed efficiency translates to meaningful accuracy gains.
+
+---
+
+## Paper Claims
+
+From the EverMemOS evaluation [README results table](https://github.com/EverMind-AI/EverMemOS/blob/main/evaluation/README.md):
+
+| System | Overall | Avg. Tokens |
+|--------|---------|-------------|
+| Full-context | 91.21% | 20,281 |
+| Mem0 | 64.20% | 1,016 |
+| Zep | 85.22% | 1,411 |
+| MemoS | 80.76% | 2,498 |
+| MemU | 66.67% | 3,964 |
+| EverMemOS | 92.32% | 2,298 |
+
+Source: `EverMind-AI/EverMemOS/evaluation/README.md`, lines 39-49
+
+The implied claim: EverMemOS uses 2,298 tokens vs. 20,281 for full-context, an 88.7% reduction.
+
+---
+
+## Paper Cost Data
+
+The EverMemOS paper itself provides a token-level cost breakdown (Table 8, Appendix A.3) that reports substantially higher per-question costs than the "Avg. Tokens" figure in the README. The paper states:
+
+> "Phase III consumes 10.27M tokens (~6.7k/question) with GPT-4.1-mini and 9.31M tokens (~6.0k/question) with GPT-4o-mini"
+
+### Table 8: Token-Level Cost Breakdown on LoCoMo (1,540 questions)
+
+**GPT-4.1-mini backbone:**
+
+| Stage | Phase | #Calls | Prompt (M) | Total (M) | Per Question |
+|-------|-------|-------:|-----------:|----------:|-------------:|
+| add | I | 7,056 | 8.66 | 9.42 | -- |
+| search | III | 2,017 | 4.12 | 4.45 | 2,890 |
+| answer | III | 1,540 | 4.63 | 5.82 | 3,779 |
+| **search+answer** | **III** | **3,557** | **8.75** | **10.27** | **6,669** |
+| evaluate | -- | 4,620 | 2.35 | 2.38 | -- |
+
+**GPT-4o-mini backbone:**
+
+| Stage | Phase | #Calls | Prompt (M) | Total (M) | Per Question |
+|-------|-------|-------:|-----------:|----------:|-------------:|
+| add | I | 7,250 | 8.60 | 9.34 | -- |
+| search | III | 2,219 | 4.37 | 4.62 | 3,000 |
+| answer | III | 1,540 | 3.84 | 4.69 | 3,045 |
+| **search+answer** | **III** | **3,759** | **8.21** | **9.31** | **6,045** |
+| evaluate | -- | 4,620 | 2.14 | 2.17 | -- |
+
+Source: Hu et al. (2026), [*EverMemOS: A Self-Organizing Memory Operating System for Structured Long-Horizon Reasoning*](https://arxiv.org/abs/2601.02163), arXiv:2601.02163v2, Table 8 (Appendix A.3). Tokens reported in millions (M); Total includes both prompt and completion.
+
+The README claims 2,298 "Average Tokens" per question. The paper's own logged data shows the real Phase III cost is **6,045-6,669 tokens per question** -- 2.6-2.9x the README figure.
+
+### Insufficiency Rate and Call Counts
+
+The paper reports (Appendix A.1):
+
+> "Multi-round query rewriting frequency. On LoCoMo (GPT-4.1-mini), the sufficiency checker triggers a second-round query rewriting for 31.0% of questions."
+
+The call counts in Table 8 confirm this: 2,017 search calls for 1,540 questions = 1,540 sufficiency checks + 477 multi-query generations (477 / 1,540 = 31.0%). For GPT-4o-mini, the rate is higher: (2,219 - 1,540) / 1,540 = 44.1%.
+
+Phase III makes 3,557 calls for 1,540 questions (GPT-4.1-mini), or 2.31 calls per question on average. Every question receives at least 2 calls (sufficiency check + answer generation); 31% receive a third (multi-query generation).
+
+---
+
+## What the Published Data Contains
+
+The published `eval_results.json` files on HuggingFace contain 6 fields per question entry:
+
+- `question_id`
+- `question`
+- `golden_answer`
+- `generated_answer`
+- `llm_judgments`
+- `category`
+
+**There is no `formatted_context` field.** The evaluation pipeline does track `formatted_context` in an intermediate file (`answer_results.json`), but that file was not published. The pipeline code saves it at `EverMind-AI/EverMemOS/evaluation/src/core/stages/answer_stage.py`, line 212:
+
+```python
+"formatted_context": result.formatted_context,  # Save formatted_context
+```
+
+The README confirms this intermediate file exists (line 263): `answer_results.json - Generated answers and retrieved context`. But the HuggingFace dataset ([EverMind-AI/EverMemOS_Eval_Results](https://huggingface.co/datasets/EverMind-AI/EverMemOS_Eval_Results)) contains only `eval_results.json` for 5 systems. The `answer_results.json` files with context data were not published.
+
+**Token counts cannot be independently verified from the published artifacts.**
+
+---
+
+## No Token-Counting Code Exists
+
+A search of the entire EverMemOS repository found no token-counting code:
+
+- No `tiktoken` import
+- No `count_tokens` or `token_count` functions
+- No cost tracking or token logging
+
+The `_generate_report` method at `EverMind-AI/EverMemOS/evaluation/src/core/pipeline.py`, line 668 generates only accuracy statistics (total questions, correct count, accuracy percentage). No token metrics are computed.
+
+**The "Average Tokens" column in the README is not generated by any code in the published repository.** It was computed externally or manually.
+
+---
+
+## What "Average Tokens" Appears to Measure
+
+Based on the pipeline architecture, the "Average Tokens" figure likely counts only the **retrieval context** passed to the answer prompt -- the content that fills the `{context}` placeholder in the answer prompt template.
+
+However, the actual LLM input per question includes additional components that are not counted:
+
+### Component 1: Answer Prompt Template
+
+| System | Prompt | Template Tokens |
+|--------|--------|----------------:|
+| EverMemOS | `answer_prompt_cot` | 729 |
+| Mem0 | `answer_prompt_mem0` | 410 |
+| MemoS/MemU | `answer_prompt_memos` | 424 |
+| Zep | `answer_prompt_zep` | 423 |
+
+Token counts measured with tiktoken (o200k_base encoding, used by gpt-4o-mini) on the prompt template text with `{context}` and `{question}` placeholders removed.
+
+Source: `evaluation/config/prompts.yaml`, lines 37-215. EverMemOS also loads from `EverMind-AI/EverMemOS/evaluation/src/adapters/evermemos/prompts/answer_prompts.py` (729 tokens).
+
+The CoT prompt template alone is 729 tokens before any context is injected. This is the largest prompt across all systems.
+
+### Component 2: Retrieved Context (the claimed "Avg. Tokens")
+
+This is the 2,298 figure for EverMemOS. For the CoT prompt, this context is formatted with the default speaker-separated template.
+
+### Component 3: Agentic Retrieval Overhead (EverMemOS only)
+
+The EverMemOS agentic retrieval flow makes up to 2 additional LLM calls per question before the answer generation step:
+
+1. **Sufficiency Check** (`EverMind-AI/EverMemOS/evaluation/src/adapters/evermemos/stage3_memory_retrivel.py` [sic], line 698): An LLM evaluates whether initial retrieval results are sufficient. Input: 394-token prompt template + query + up to 10 retrieved documents (truncated to 500 chars each per `agentic_utils.py` line 48, ~1,120 tokens for 10 docs). Total input: ~1,525 tokens. `max_tokens=500`.
+
+2. **Multi-Query Generation** (line 742, conditional on insufficiency): An LLM generates 2-3 refined search queries. Input: 401-token prompt template + query + key_info + missing_info + 10 documents (~1,120 tokens). Total input: ~1,565 tokens. `max_tokens=300`.
+
+These calls consume tokens that are not reflected in the "Average Tokens" figure. Token counts measured with tiktoken (o200k_base encoding).
+
+### Component 4: Answer Generation Output (Completion Tokens)
+
+The CoT prompt generates a structured 7-step chain-of-thought response. The pipeline then discards everything before "FINAL ANSWER:" (`stage4_response.py`, line 135). The stored `generated_answer` contains only the final answer, not the chain-of-thought.
+
+The paper's Table 8 confirms the completion overhead: for GPT-4.1-mini, the answer stage consumes 5.82M total tokens vs. 4.63M prompt tokens, yielding 1.19M completion tokens across 1,540 questions (773 completion tokens per question on average). For comparison, Mem0 with the "5-6 words" instruction produces answers averaging 4.48 words (see [word_counts.md](word_counts.md)).
+
+The completion token cost is not reflected in the "Average Tokens" figure or any other published metric.
+
+---
+
+## Real Total Token Cost per Question
+
+### EverMemOS (Agentic Mode) -- Component Breakdown (Code Analysis)
+
+The input token cost per call can be estimated from the prompt templates and pipeline parameters:
+
+| Component | Tokens | Source |
+|-----------|-------:|--------|
+| CoT prompt template | 729 | `answer_prompts.py` (o200k_base encoding) |
+| Retrieved context (claimed avg) | 2,298 | README table |
+| Question text | ~12 | typical question length |
+| **Subtotal: answer generation input** | **3,039** | |
+| Sufficiency check input | ~1,525 | prompt template (394) + query + 10 docs (500 chars each) |
+| Multi-query generation input (conditional) | ~1,565 | prompt template (401) + query + key/missing info + 10 docs |
+
+This component analysis predicted a per-question input range of 4,564-6,129 tokens before the paper's Table 8 was identified.
+
+### EverMemOS (Agentic Mode) -- Confirmed Total (Paper Table 8)
+
+The paper's own Table 8 provides the authoritative per-question cost, including both prompt and completion tokens:
+
+| Backbone | Total Tokens/Question | Source |
+|----------|----------------------:|--------|
+| GPT-4.1-mini | 6,669 | Paper Table 8: 10.27M / 1,540 |
+| GPT-4o-mini | 6,045 | Paper Table 8: 9.31M / 1,540 |
+
+Independent testing confirmed the 5,200-6,900 range before Table 8 was identified.
+
+The "2,298 Average Tokens" figure accounts for 34.5-38.0% of the real per-question cost. The actual reduction vs. full-context (20,281 tokens) is 67.1-70.2%, not 88.7%.
+
+### Other Systems
+
+For Mem0, MemoS/MemU, and Zep, the answer prompt template should be added to the claimed context tokens. These systems do not have additional LLM calls during retrieval:
+
+| System | Claimed Avg. Tokens | + Prompt Template | Real Input |
+|--------|--------------------:|------------------:|-----------:|
+| Mem0 | 1,016 | +410 | 1,426 |
+| Zep | 1,411 | +423 | 1,834 |
+| MemoS | 2,498 | +424 | 2,922 |
+| MemU | 3,964 | +424 | 4,388 |
+| EverMemOS | 2,298 | +729 + agentic | 6,045-6,669 (Paper Table 8) |
+
+---
+
+## What the README Hides
+
+### The README's "Avg. Tokens" Column
+
+The README presents this comparison:
+
+| System | Overall | Avg. Tokens |
+|--------|---------|-------------|
+| Full-context | 91.21% | 20,281 |
+| EverMemOS | 92.32% | 2,298 |
+
+This implies EverMemOS achieves a better score using 89% fewer tokens. But "Avg. Tokens" measures only the retrieval context injected into the answer prompt (see [Paper Cost Data](#paper-cost-data)). The actual per-question cost includes prompt templates, agentic retrieval overhead, and completion tokens. Here is the same data decomposed into actual cost components:
+
+| Component | Mem0 | Zep | MemoS | MemU | EverMemOS |
+|-----------|-----:|----:|------:|-----:|----------:|
+| Retrieval context (README "Avg. Tokens") | 1,016 | 1,411 | 2,498 | 3,964 | 2,298 |
+| Answer prompt template | 410 | 423 | 424 | 424 | 729 |
+| Agentic overhead (search stage) | 0 | 0 | 0 | 0 | 2,890 |
+| Answer completion tokens | ~6 | ~69 | ~20 | ~7 | 773 |
+| **Real total per question** | **~1,432** | **~1,903** | **~2,942** | **~4,395** | **6,669** |
+| LLM calls per question | 1 | 1 | 1 | 1 | 2.31 |
+| Accuracy | 64.20% | 85.22% | 80.76% | 66.67% | 92.32% |
+
+Sources:
+
+- **Retrieval context:** EverMemOS evaluation README, lines 39-49
+- **Answer prompt templates:** tiktoken o200k_base on templates from `evaluation/config/prompts.yaml` and `answer_prompts.py`
+- **EverMemOS agentic overhead and completion:** Paper Table 8 ([arXiv:2601.02163v2](https://arxiv.org/abs/2601.02163), Appendix A.3), GPT-4.1-mini column: search stage 4.45M total / 1,540 = 2,890; answer completion (5.82M - 4.63M) / 1,540 = 773
+- **Other systems' completion tokens:** Estimated from mean generated answer word counts ([word_counts.md](word_counts.md)) x 1.3 tokens/word: Mem0 4.48 words, MemoS 15.06 words, MemU 5.05 words, Zep 53.01 words
+- **LLM calls:** Paper Table 8: 3,557 / 1,540 = 2.31 for EverMemOS; 1 for all others (no agentic retrieval)
+
+EverMemOS components sum to 6,690 due to independent rounding of each row. The 6,669 total is from Paper Table 8 (10.27M / 1,540) and is the authoritative figure.
+
+The README compares only row 1. The real cost comparison is the "Real total" row. EverMemOS is the most expensive system evaluated -- not the most efficient.
+
+---
+
+## The Value Proposition
+
+### The Delta
+
+| System | Overall Accuracy |
+|--------|-----------------|
+| Full-context (claimed) | 91.21% |
+| EverMemOS | 92.32% |
+| **Delta** | **+1.11 points** |
+
+EverMemOS scores 1.11 percentage points higher than the claimed full-context baseline. On 1,540 questions, this is approximately 17 more questions answered correctly.
+
+### Context for the Delta
+
+1. **Judge variability:** The LLM judge uses 3 runs with majority vote. The per-run standard deviations for EverMemOS are +/- 0.03% (source: `results-audit/RESULTS_AUDIT.md`). This measures run-to-run variation only.
+
+2. **Adversarial plausibility baseline:** The V2 (vague-but-topical) adversarial baseline scores 62.81% using intentionally wrong answers (source: `ap-baseline/README.md`).
+
+3. **Ground truth errors:** 99 of 1,540 questions (6.4%) have corrupted golden answers. The judge marks systems correct on corrupted questions at rates from 34.3% to 60.6% (source: [results-audit/RESULTS_AUDIT.md](../results-audit/RESULTS_AUDIT.md)). The theoretical scoring ceiling is 93.57%.
+
+4. **Full-context baseline is unverified:** The 91.21% figure has no published eval_results.json and cannot be independently reproduced. A full-context adapter exists in [EverMemBench](https://github.com/EverMind-AI/EverMemBench) (`EverMind-AI/EverMemBench/eval/src/adapters/llm_adapter.py`), but it targets the EverMemBench-Dynamic dataset, not LoCoMo, and no results are published for it. The EverMemOS evaluation repo contains no full-context adapter (see [full_context_baseline.md](full_context_baseline.md)).
+
+5. **No statistical significance test** is present in any of the evaluated repositories.
+
+---
+
+## The Complete Picture
+
+EverMemOS claims 92.32% accuracy with an 89% token reduction vs. full-context. The measured reality:
+
+### Token Cost
+
+| Metric | Claimed | Actual | Source |
+|--------|--------:|-------:|--------|
+| Tokens per question | 2,298 | 6,045-6,669 | Paper Table 8 ([arXiv:2601.02163v2](https://arxiv.org/abs/2601.02163)) |
+| Reduction vs. full-context | 88.7% | 67.1-70.2% | (1 - total / 20,281) |
+| LLM calls per question | not stated | 2-3 (sequential) | Paper Table 8: 3,557 calls / 1,540 questions |
+| Insufficiency rate | not stated | 31.0% (GPT-4.1-mini) | Paper Appendix A.1 |
+| Completion tokens generated | not stated | ~773 per question (avg, majority discarded after FINAL ANSWER extraction) | Paper Table 8: (5.82M - 4.63M) / 1,540 (GPT-4.1-mini) |
+
+The claimed "2,298 Average Tokens" counts only the retrieval context injected into the answer prompt. The paper's own Table 8 shows the full Phase III cost is 6,045-6,669 tokens per question, including the CoT prompt template, agentic retrieval overhead (sufficiency check + conditional multi-query generation), and all completion tokens. Independent testing confirmed the 5,200-6,900 range before Table 8 was identified. See [Component breakdown](#real-total-token-cost-per-question) and [Paper cost data](#paper-cost-data) above.
+
+**Note on asymmetric comparison:** The 20,281 full-context figure appears in the same "Avg. Tokens" column as the 2,298 figure. Table 8 proves that 2,298 is retrieval context only. Since both figures occupy the same column, 20,281 is likely also context only (no prompt template, no completion tokens), though no direct confirmation exists for the full-context measurement. The EverMemOS totals from Table 8 (6,045-6,669) include both prompt and completion tokens. The 67.1-70.2% reduction figures above therefore compare EverMemOS's full cost against full-context's partial cost. See [Component breakdown](#real-total-token-cost-per-question) for the full analysis.
+
+### Latency
+
+The 2-3 LLM calls per question are sequential and cannot be parallelized: the multi-query call depends on the sufficiency check result, and the answer generation depends on the (potentially refined) retrieval results. The paper's Table 8 confirms 3,557 Phase III calls for 1,540 questions (GPT-4.1-mini), or 2.31 calls per question on average. All other evaluated systems (Mem0, MemoS, MemU, Zep) make a single LLM call per question for answer generation. Source: Paper Table 8 ([arXiv:2601.02163v2](https://arxiv.org/abs/2601.02163)); pipeline code at `EverMind-AI/EverMemOS/evaluation/src/adapters/evermemos/stage3_memory_retrivel.py`, lines 698-758.
+
+### Accuracy Gain
+
+| Metric | Value | Source |
+|--------|------:|--------|
+| EverMemOS accuracy | 92.32% | `results-audit/results/evermemos_eval_results.json` |
+| Full-context baseline (claimed) | 91.21% | `EverMind-AI/EverMemOS/evaluation/README.md`, line 43 |
+| Delta | +1.11 points | 17 questions out of 1,540 |
+| AP v2 baseline (intentionally wrong) | 62.81% | `ap-baseline/README.md` |
+| Corrupted ground truth | 99/1,540 questions (6.4%) | `results-audit/RESULTS_AUDIT.md` |
+| Theoretical scoring ceiling | 93.57% | 1,441 answerable questions / 1,540 total |
+
+The 1.11-point gain is 17 additional correct answers. The LLM judge accepts 62.81% of intentionally wrong vague-but-topical answers (AP v2 baseline, source: `ap-baseline/README.md`). No statistical significance test is published in any evaluated repository. The full-context baseline (91.21%) has no published eval_results.json and cannot be independently verified. Adapter code exists in [EverMemBench](https://github.com/EverMind-AI/EverMemBench) (`EverMind-AI/EverMemBench/eval/src/adapters/llm_adapter.py`) but targets the EverMemBench-Dynamic dataset; the EverMemOS repo contains no full-context adapter (see [full_context_baseline.md](full_context_baseline.md)). The reported 92.32% approaches the theoretical scoring ceiling of 93.57% (within 1.25 points), imposed by the 6.4% corrupted ground truth rate (source: [results-audit/RESULTS_AUDIT.md](../results-audit/RESULTS_AUDIT.md)).
+
+### Net Result
+
+Two to three sequential LLM calls per question (Paper Table 8), 6,045-6,669 total tokens per question (Paper Table 8, vs. claimed 2,298), with the majority of answer completion tokens discarded after "FINAL ANSWER:" extraction, for an accuracy gain of 1.11 percentage points over an unverified baseline, with no published significance test, measured by a judge that accepts 62.81% of intentionally wrong answers.
+
+---
+
+## Summary
+
+| Claim | Status |
+|-------|--------|
+| "Average Tokens" = retrieval context only | Confirmed by the paper's own Table 8 ([arXiv:2601.02163v2](https://arxiv.org/abs/2601.02163)), which shows full Phase III cost is 6,045-6,669 tokens/question |
+| 2,298 avg tokens for EverMemOS | Represents 34.5-38.0% of the real per-question cost (Paper Table 8) |
+| 89% reduction vs. full-context | Overstated. Real reduction is 67.1-70.2% per the paper's own logged token data (Table 8). Our independent tiktoken + API estimates (5,190-6,883 tokens) are consistent. |
+| CoT completion cost | Not reported in README. Paper Table 8 shows 773 completion tokens per question on average (GPT-4.1-mini: (5.82M - 4.63M) / 1,540). The published `generated_answer` field contains only the text after "FINAL ANSWER:" extraction (mean 48.7 words), indicating the majority of completion tokens are discarded. |
+| Insufficiency rate | 31.0% of questions trigger multi-query rewriting (Paper Appendix A.1, GPT-4.1-mini); 44.1% for GPT-4o-mini (derived from Table 8 call counts) |
+| EverMemOS outperforms full-context by 1.11 points | 17 additional correct answers out of 1,540. No statistical significance test published. Judge accepts 62.81% of intentionally wrong vague answers (AP v2 baseline) |
+| Full-context baseline: 91.21% | Unverified. Adapter code exists in [EverMemBench](https://github.com/EverMind-AI/EverMemBench) (`llm_adapter.py`, targets EverMemBench-Dynamic, not LoCoMo); no full-context adapter in EverMemOS; no published eval_results |
