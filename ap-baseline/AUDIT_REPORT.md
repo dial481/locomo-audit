@@ -1,12 +1,12 @@
-# Adversarial Plausibility Baseline — Audit Report
+# Adversarial Plausibility Baseline -- Audit Report
 
 **Date:** 2026-02-19
 
 **Auditor:** Claude Opus 4.6 (automated adversarial audit)
 
 **Files audited:**
-- `v1/bs_eval_results_scored.json` (specific-but-wrong strategy)
-- `v2/bs_eval_results_scored.json` (vague-but-topical strategy)
+- `v1/ap_eval_results_scored.json` (specific-but-wrong strategy)
+- `v2/ap_eval_results_scored.json` (vague-but-topical strategy)
 - `answer_key.json` (ground truth)
 
 ---
@@ -263,7 +263,7 @@ These are cases where the specific-but-wrong adversarial answer fooled the judge
 
 - **120 questions:** Both strategies fool the judge. These are likely inherently ambiguous or opinion-based questions where many plausible wrong answers can pass semantic matching regardless of specificity.
 - **44 questions:** V1 fools the judge but v2 does not. This happens when v1 accidentally generates a near-synonym while v2's vague answer drifts into the wrong thematic direction.
-- **846 questions:** Only v2 fools the judge. This is the core finding — vague answers that stay topically adjacent exploit the judge's "be generous" instruction in a way that specific wrong answers cannot.
+- **846 questions:** Only v2 fools the judge. This is the core finding -- vague answers that stay topically adjacent exploit the judge's "be generous" instruction in a way that specific wrong answers cannot.
 
 ### Category 4 (single-hop) dominance
 

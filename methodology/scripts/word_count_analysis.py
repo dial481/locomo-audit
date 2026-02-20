@@ -36,11 +36,11 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 SYSTEM_FILES = {
     "EverMemOS":  "results-audit/results/evermemos_eval_results.json",
     "Mem0":       "results-audit/results/mem0_eval_results.json",
-    "MemoS":      "results-audit/results/memos_eval_results.json",
+    "MemOS":      "results-audit/results/memos_eval_results.json",
     "MemU":       "results-audit/results/memu_eval_results.json",
     "Zep":        "results-audit/results/zep_eval_results.json",
-    "AP v1":      "ap-baseline/v1/bs_eval_results_scored.json",
-    "AP v2":      "ap-baseline/v2/bs_eval_results_scored.json",
+    "AP v1":      "ap-baseline/v1/ap_eval_results_scored.json",
+    "AP v2":      "ap-baseline/v2/ap_eval_results_scored.json",
 }
 
 # Length-ratio bucket definitions: (lower_bound_inclusive, upper_bound_exclusive, label)
@@ -326,12 +326,12 @@ def main():
     print_table(headers, rows, alignments)
     print()
 
-    memos = results["MemoS"]
+    memos = results["MemOS"]
     mem0 = results["Mem0"]
     memu = results["MemU"]
     apv2 = results["AP v2"]
 
-    print(f"MemoS has a CV of {memos['cv']:.0f}%: its standard deviation "
+    print(f"MemOS has a CV of {memos['cv']:.0f}%: its standard deviation "
           f"exceeds its mean. Table 4 confirms a bimodal pattern -- "
           f"{memos['bucket_counts'][0]} answers fall at 0-1x gold length "
           f"while {memos['bucket_counts'][5]} fall at 20x+, with the median "

@@ -12,6 +12,7 @@ Independent audit of the [LoCoMo](https://github.com/snap-research/locomo) (Long
 | Scores exceed corrupted ceiling | EverMemOS single-hop (95.96%) and multi-hop (91.37%) exceed their category ceilings (95.72% and 90.07%), mathematically impossible without credit from wrong golden answers. Overall 92.32% is within 1.25 points of the 93.57% aggregate ceiling. | [results-audit/RESULTS_AUDIT.md](results-audit/RESULTS_AUDIT.md) |
 | Not apples-to-apples | EverMemOS uses 2-3 sequential LLM calls, a 729-token CoT prompt, and agentic retrieval. All other systems: 1 call, simple prompt, no overhead. All reported in the same "Avg. Tokens" column. | [methodology/token_efficiency.md](methodology/token_efficiency.md), [methodology/prompts.md](methodology/prompts.md) |
 | Reproducibility failures | Third parties report 38.38% vs. claimed 92.32% ([EverMemOS#73](https://github.com/EverMind-AI/EverMemOS/issues/73)). Multiple Mem0 reproducibility issues open. | [methodology/reproducibility.md](methodology/reproducibility.md) |
+| Full-context baseline exceeds EverMemOS | GPT-4.1-mini with `answer_prompt_cot` on full context scores 92.66%, exceeding EverMemOS (92.32%) and the claimed FC baseline (91.21%). The answer prompt, not the memory system, explains the score. | [fc-baseline/README.md](fc-baseline/README.md) |
 
 ## Repository Structure
 
@@ -31,13 +32,17 @@ locomo-audit/
 │   ├── score_ap.py                # Scoring pipeline (same judge as original eval)
 │   ├── v1/                        # Specific-but-wrong strategy (10.61%)
 │   └── v2/                        # Vague-but-topical strategy (62.81%)
+├── fc-baseline/                   # Independent full-context baseline (4 runs, 2 models x 2 prompts)
+│   ├── README.md                  # Methodology, results, key finding (prompt explains gap)
+│   ├── scripts/                   # fc_eval.py (~860 lines) and analyze_results.py
+│   └── results/                   # eval_results.json for all 4 runs
 ├── methodology/                   # Evaluation methodology analysis
 │   ├── README.md                  # Overview and key findings
 │   ├── prompts.md                 # Answer prompts, judge prompt, context templates
 │   ├── word_counts.md             # Answer length statistics and scoring correlation
 │   ├── token_efficiency.md        # Token cost claims vs. paper's own data
 │   ├── discrepancies.md           # Cross-repository model, prompt, scoring differences
-│   ├── full_context_baseline.md   # Full-context baselines and the 18.31-point gap
+│   ├── full_context_baseline.md   # Full-context baselines: 4 measured runs, prompt explains the gap
 │   ├── image_questions.md         # Image-dependent questions and BLIP caption handling
 │   ├── reproducibility.md         # Third-party reproducibility reports
 │   └── scripts/                   # Analysis scripts (stdlib-only Python)

@@ -19,7 +19,7 @@ Prompt source: ../evaluation/config/prompts.yaml (llm_judge section)
     the original evaluation is guaranteed to show identical judge behavior.
 
 Environment:
-    LLM_API_KEY or OPENAI_API_KEY  — API key for the judge LLM
+    OPENROUTER_API_KEY, OPENAI_API_KEY, or LLM_API_KEY  -- API key for the judge LLM
     LLM_BASE_URL (optional)        — Custom base URL (e.g. OpenRouter)
     LLM_MODEL (optional)           — Model override (default: gpt-4o-mini)
 """
@@ -29,6 +29,7 @@ import asyncio
 import json
 import os
 import re
+import statistics
 import sys
 from collections import defaultdict
 from datetime import date
@@ -48,8 +49,8 @@ except ImportError:
 
 SCRIPT_DIR = Path(__file__).parent
 PROMPTS_PATH = SCRIPT_DIR.parent / "evaluation" / "config" / "prompts.yaml"
-INPUT_PATH = SCRIPT_DIR / "bs_eval_results.json"
-OUTPUT_PATH = SCRIPT_DIR / "bs_eval_results_scored.json"
+INPUT_PATH = SCRIPT_DIR / "ap_eval_results.json"
+OUTPUT_PATH = SCRIPT_DIR / "ap_eval_results_scored.json"
 CHECKPOINT_PATH = SCRIPT_DIR / "scoring_checkpoint.json"
 REPORT_PATH = SCRIPT_DIR / "AP_BASELINE_REPORT.md"
 
@@ -64,7 +65,7 @@ CATEGORY_COUNTS = {1: 282, 2: 321, 3: 96, 4: 841}
 PUBLISHED_SCORES = {
     "EverMemOS": {"overall": 92.32, 4: 96.08, 1: 91.13, 2: 89.72, 3: 70.83},
     "Zep":       {"overall": 85.22, 4: 90.84, 1: 81.91, 2: 77.26, 3: 75.00},
-    "MemoS":     {"overall": 80.76, 4: 85.37, 1: 79.43, 2: 75.08, 3: 64.58},
+    "MemOS":     {"overall": 80.76, 4: 85.37, 1: 79.43, 2: 75.08, 3: 64.58},
     "MemU":      {"overall": 66.67, 4: 74.91, 1: 72.34, 2: 43.61, 3: 54.17},
     "Mem0":      {"overall": 64.20, 4: 68.97, 1: 61.70, 2: 58.26, 3: 50.00},
 }
@@ -104,7 +105,7 @@ def load_prompts() -> tuple[str, str]:
 
 
 def load_input() -> dict:
-    """Load bs_eval_results.json."""
+    """Load ap_eval_results.json."""
     with open(INPUT_PATH) as f:
         return json.load(f)
 
@@ -219,12 +220,11 @@ async def judge_question(
     Returns {judgment_1: bool, judgment_2: bool, judgment_3: bool}.
     Runs sequentially within each question, matching original _evaluate_single_answer.
     """
-    # Escape curly braces in free-text fields to prevent str.format() crashes
-    esc = lambda s: s.replace("{", "{{").replace("}", "}}")
-    user_prompt = user_prompt_template.format(
-        question=esc(entry["question"]),
-        golden_answer=esc(str(entry["golden_answer"])),
-        generated_answer=esc(entry["generated_answer"]),
+    user_prompt = (
+        user_prompt_template
+        .replace("{question}", entry["question"])
+        .replace("{golden_answer}", str(entry["golden_answer"]))
+        .replace("{generated_answer}", entry["generated_answer"])
     )
 
     judgments = {}
@@ -263,8 +263,8 @@ def compute_scores(data: dict) -> dict:
                     cat_run_correct[i][cat] += 1
 
     run_accs = [c / total for c in run_correct] if total else [0] * NUM_RUNS
-    mean_acc = sum(run_accs) / len(run_accs)
-    std_acc = (sum((a - mean_acc) ** 2 for a in run_accs) / len(run_accs)) ** 0.5
+    mean_acc = statistics.mean(run_accs)
+    std_acc = statistics.pstdev(run_accs)
 
     cat_scores = {}
     for cat in CATEGORY_COUNTS:
@@ -272,8 +272,8 @@ def compute_scores(data: dict) -> dict:
         if ct == 0:
             continue
         cat_accs = [cat_run_correct[i].get(cat, 0) / ct for i in range(NUM_RUNS)]
-        cat_mean = sum(cat_accs) / len(cat_accs)
-        cat_std = (sum((a - cat_mean) ** 2 for a in cat_accs) / len(cat_accs)) ** 0.5
+        cat_mean = statistics.mean(cat_accs)
+        cat_std = statistics.pstdev(cat_accs)
         cat_scores[cat] = {
             "mean": cat_mean,
             "std": cat_std,
@@ -321,7 +321,7 @@ def generate_report(scores: dict, model: str, prompt_path: str):
     w("- **Model**: Claude Opus 4.6 (claude-opus-4-6)")
     w("- **Task**: Generate maximally plausible wrong answers for each question")
     w("- **Input**: Full answer key (question + golden answer for all 1,540 questions)")
-    w("- **Output**: `bs_eval_results.json` — same format as published eval_results.json")
+    w("- **Output**: `ap_eval_results.json` — same format as published eval_results.json")
     w("")
     w("### Scoring")
     w("")
@@ -367,7 +367,7 @@ def generate_report(scores: dict, model: str, prompt_path: str):
         ap_cats.append(f"{cs['mean']*100:.2f}%" if cs else "N/A")
     w(f"| **AP Baseline** | **{ap_overall}** | **{ap_cats[0]}** | **{ap_cats[1]}** | **{ap_cats[2]}** | **{ap_cats[3]}** |")
     # Real systems
-    for sys_name in ["EverMemOS", "Zep", "MemoS", "MemU", "Mem0"]:
+    for sys_name in ["EverMemOS", "Zep", "MemOS", "MemU", "Mem0"]:
         pub = PUBLISHED_SCORES[sys_name]
         w(f"| {sys_name} | {pub['overall']:.2f}% "
           f"| {pub[4]:.2f}% | {pub[1]:.2f}% "
@@ -380,8 +380,8 @@ def generate_report(scores: dict, model: str, prompt_path: str):
     w(f"- **Judge model**: {model} (temperature=0, {NUM_RUNS} runs)")
     w(f"- **Judge prompt source**: `{prompt_path}`")
     w(f"- **Adversarial answers generated by**: Claude Opus 4.6 (claude-opus-4-6)")
-    w(f"- **Input**: `bs_eval_results.json` (1,540 intentionally wrong answers)")
-    w(f"- **Output**: `bs_eval_results_scored.json` (with llm_judgments filled in)")
+    w(f"- **Input**: `ap_eval_results.json` (1,540 intentionally wrong answers)")
+    w(f"- **Output**: `ap_eval_results_scored.json` (with llm_judgments filled in)")
     w("")
     w("### How to Reproduce")
     w("")
@@ -396,8 +396,8 @@ def generate_report(scores: dict, model: str, prompt_path: str):
     w("| File | Description |")
     w("|------|-------------|")
     w("| `answer_key.json` | LoCoMo answer key (1,540 Q+A pairs) fed to adversarial baseline |")
-    w("| `bs_eval_results.json` | Adversarial baseline output (intentionally wrong answers) |")
-    w("| `bs_eval_results_scored.json` | Scored results (llm_judgments filled in) |")
+    w("| `ap_eval_results.json` | Adversarial baseline output (intentionally wrong answers) |")
+    w("| `ap_eval_results_scored.json` | Scored results (llm_judgments filled in) |")
     w("| `score_ap.py` | This scoring script |")
     w("| `AP_BASELINE_REPORT.md` | This report |")
     w("")
@@ -437,9 +437,9 @@ async def main():
         return
 
     # Setup LLM client
-    api_key = os.environ.get("LLM_API_KEY") or os.environ.get("OPENAI_API_KEY")
+    api_key = os.environ.get("OPENROUTER_API_KEY") or os.environ.get("OPENAI_API_KEY") or os.environ.get("LLM_API_KEY")
     if not api_key:
-        print("Error: Set OPENAI_API_KEY or LLM_API_KEY environment variable")
+        print("Error: Set OPENROUTER_API_KEY, OPENAI_API_KEY, or LLM_API_KEY environment variable")
         sys.exit(1)
 
     base_url = os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1")

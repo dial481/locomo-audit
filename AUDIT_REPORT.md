@@ -123,7 +123,7 @@ The most damaging error class. Golden answers contain specific facts (names, tit
 Examples:
 - "Ferrari 488 GTB" (locomo_9_qa1): `text` says "I finally got myself this beauty"; `blip_caption` says "a photo of a red sports car parked on the side of the road"; `query` says "ferrari 488 gtb japanese mansion". The model name exists only in search metadata.
 - "car museum" (locomo_9_qa19): the dialog says "Ferrari dealership"; "car museum" is from the `query` field
-- "gold chain" (locomo_9_qa60): `text` says "necklace with a diamond pendant"; `blip_caption` says "gold necklace" but the golden answer says "gold chain" — "chain" exists only in the `query` field
+- "gold chain" (locomo_9_qa60): `text` says "necklace with a diamond pendant"; `blip_caption` says "gold necklace" but the golden answer says "gold chain" -- "chain" exists only in the `query` field
 
 **Subpattern: Fabricated specifics.** Golden answers introduce details not present in any form:
 - "Psychology, counseling certification" (locomo_0_qa2): the dialog says "counseling or working in mental health"
@@ -183,10 +183,10 @@ The golden answer text is factually supportable from the transcript, but the cit
 **Common failure mode: Off-by-one dialog ID.** Citations frequently point to an adjacent message (D17:13 instead of D17:14) or to a different speaker's line in the same exchange.
 
 **Malformed evidence IDs in source data.** Four questions in `locomo10.json` contain structurally invalid evidence IDs that cannot be resolved against the transcript. These originate from the source dataset, not from this audit:
-- `locomo_0_qa37`: `"D8:6; D9:17"` — semicolon-separated compound ID instead of two array elements
-- `locomo_3_qa88`: `"D"` — truncated bare letter, likely `D1:16`
-- `locomo_6_qa38`: `"D4:36"` — session 4 only contains D4:1 through D4:25; this ID does not exist
-- `locomo_9_qa69`: `"D30:05"` — zero-padded index; correct ID is `D30:5`
+- `locomo_0_qa37`: `"D8:6; D9:17"` -- semicolon-separated compound ID instead of two array elements
+- `locomo_3_qa88`: `"D"` -- truncated bare letter, likely `D1:16`
+- `locomo_6_qa38`: `"D4:36"` -- session 4 only contains D4:1 through D4:25; this ID does not exist
+- `locomo_9_qa69`: `"D30:05"` -- zero-padded index; correct ID is `D30:5`
 
 These errors would affect any evaluation that grades evidence retrieval quality (i.e., "did the system retrieve the right dialog IDs?"), but the standard LoCoMo evaluation pipeline does not do this.
 

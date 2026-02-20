@@ -66,7 +66,7 @@ The 32 truly image-dependent questions are those where answering correctly requi
 |--------|-------------|---------------------|------------------|-------|
 | EverMemOS | 92.3% | 90.4% | 93.5% | -3.0% |
 | Zep | 85.4% | 80.1% | 88.9% | -8.8% |
-| MemoS | 80.8% | 76.6% | 83.6% | -7.0% |
+| MemOS | 80.8% | 76.6% | 83.6% | -7.0% |
 | MemU | 66.6% | 63.6% | 68.6% | -5.0% |
 | Mem0 | 64.2% | 63.8% | 64.5% | -0.8% |
 
@@ -78,11 +78,11 @@ All systems perform worse on image-evidence questions. Zep shows the largest gap
 |--------|---------|-------|----------|
 | EverMemOS | 27 | 32 | 84.4% |
 | Zep | 20 | 32 | 62.5% |
-| MemoS | 20 | 32 | 62.5% |
+| MemOS | 20 | 32 | 62.5% |
 | Mem0 | 15 | 32 | 46.9% |
 | MemU | 14 | 32 | 43.8% |
 
-Every system drops on truly image-dependent questions compared to their overall accuracy. EverMemOS drops from 92.3% to 84.4%; Zep and MemoS drop from 85.4%/80.8% to 62.5%.
+Every system drops on truly image-dependent questions compared to their overall accuracy. EverMemOS drops from 92.3% to 84.4%; Zep and MemOS drop from 85.4%/80.8% to 62.5%.
 
 ---
 
@@ -163,7 +163,7 @@ if 'blip_caption' in dialog:
 
 Source: `snap-research/locomo/task_eval/gpt_utils.py`, lines 92-93, 184-185
 
-No adapter (EverMemOS, Mem0, MemoS, MemU, or Zep) downloads images, uses vision models, or processes multimodal content. The text BLIP caption is the only image representation available to any system.
+No adapter (EverMemOS, Mem0, MemOS, MemU, or Zep) downloads images, uses vision models, or processes multimodal content. The text BLIP caption is the only image representation available to any system.
 
 ---
 

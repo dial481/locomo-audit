@@ -25,7 +25,7 @@ Four answer prompts are defined under `online_api.default.*` in prompts.yaml. Th
 | `answer_prompt_cot` | No | None. Final answer section says only: `"[Provide the concise answer with ALL specific details preserved]"` |
 | `answer_prompt_zep` | No | None. Approach section says only: `"Formulate a precise, concise answer based solely on the evidence in the memories"` |
 
-Systems using prompts **with** the word limit produce shorter answers: Mem0: 4.5, MemU: 5.0, and MemoS: 15.1 words. MemoS at 15.1 words significantly exceeds the "5-6 words" instruction, suggesting the model does not consistently follow the constraint. Systems using prompts **without** the word limit (EverMemOS, Zep) produce answers averaging 48.7 and 53.0 words. See [word_counts.md](word_counts.md) for full analysis.
+Systems using prompts **with** the word limit produce shorter answers: Mem0: 4.5, MemU: 5.0, and MemOS: 15.1 words. MemOS at 15.1 words significantly exceeds the "5-6 words" instruction, suggesting the model does not consistently follow the constraint. Systems using prompts **without** the word limit (EverMemOS, Zep) produce answers averaging 48.7 and 53.0 words. See [word_counts.md](word_counts.md) for full analysis.
 
 ### A2. Chain-of-Thought Structure (EverMemOS)
 
@@ -139,7 +139,7 @@ Source: `evaluation/config/prompts.yaml`, lines 37-72
 </details>
 
 <details>
-<summary>answer_prompt_memos (used for MemoS/MemU)</summary>
+<summary>answer_prompt_memos (used for MemOS/MemU)</summary>
 
 ```
 You are a knowledgeable and helpful AI assistant.
@@ -339,7 +339,7 @@ Source: `snap-research/locomo/task_eval/evaluation.py`
 
 Two templates control how retrieved memories are formatted before being injected into the answer prompt.
 
-### Default template (used by Mem0, MemoS, MemU)
+### Default template (used by Mem0, MemOS, MemU)
 
 ```
 Memories for {speaker_1}:
@@ -440,7 +440,7 @@ Generate personal memories that follow these guidelines:
 
 Source: `evaluation/config/prompts.yaml`, lines 255-280
 
-No equivalent extraction prompts are published for MemoS, MemU, or Zep. The prompts.yaml file contains commented-out placeholder sections for those systems (lines 282-289).
+No equivalent extraction prompts are published for MemOS, MemU, or Zep. The prompts.yaml file contains commented-out placeholder sections for those systems (lines 282-289).
 
 ---
 

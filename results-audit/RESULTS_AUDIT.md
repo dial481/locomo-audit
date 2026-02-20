@@ -52,28 +52,28 @@ For each of the 99 error-affected questions across 5 systems, an LLM judge (gpt-
 |--------|------------------------|------------------------|-------|
 | EverMemOS | 92.32% +/- 0.03% | 92.86% +/- 0.05% | +0.54% |
 | Mem0 | 64.20% +/- 0.03% | 64.72% +/- 0.03% | +0.52% |
-| MemoS | 80.76% +/- 0.11% | 81.32% +/- 0.13% | +0.56% |
+| MemOS | 80.76% +/- 0.11% | 81.32% +/- 0.13% | +0.56% |
 | MemU | 66.67% +/- 0.06% | 66.52% +/- 0.08% | -0.15% |
 | Zep | 85.22% +/- 0.12% | 85.74% +/- 0.12% | +0.52% |
 
 ### Key Findings
 
-**1. Net adjustments are small — the errors don't systematically favor anyone.** Across all 5 systems, the net score change is under 0.6 percentage points (MemU is the only system whose score goes *down*, by 0.15%). The ground truth errors cut both ways roughly equally — some systems lost points they deserved, some gained points they didn't. This proves the audit is fair and the errors are not biased toward or against any particular system.
+**1. Net adjustments are small -- the errors don't systematically favor anyone.** Across all 5 systems, the net score change is under 0.6 percentage points (MemU is the only system whose score goes *down*, by 0.15%). The ground truth errors cut both ways roughly equally -- some systems lost points they deserved, some gained points they didn't. This proves the audit is fair and the errors are not biased toward or against any particular system.
 
-**2. The 6.4% error rate destroys the precision of system comparisons.** The net adjustment being small does not mean the errors don't matter. With 99 out of 1,540 ground truth answers wrong, claiming a system scores "92.32%" to two decimal places is misleading — the answer key itself isn't reliable enough to support that precision. When comparing two systems at 91% vs 92%, a 1-point gap is swallowed by the noise from corrupted ground truth. Small differences between systems on this benchmark are not meaningful.
+**2. The 6.4% error rate destroys the precision of system comparisons.** The net adjustment being small does not mean the errors don't matter. With 99 out of 1,540 ground truth answers wrong, claiming a system scores "92.32%" to two decimal places is misleading -- the answer key itself isn't reliable enough to support that precision. When comparing two systems at 91% vs 92%, a 1-point gap is swallowed by the noise from corrupted ground truth. Small differences between systems on this benchmark are not meaningful.
 
-**3. Ceiling violations are structural proof that the scoring mechanism is broken at the top.** The maximum legitimate score on this dataset is 93.57% (1,441 correct out of 1,540). EverMemOS exceeds the per-category ceiling in Single-hop (96.08% adjusted vs 95.72% ceiling) and Multi-hop (91.25% adjusted vs 90.07% ceiling). These violations *survive full correction* — they are not about net adjustments but about the LLM judge's leniency inflating scores on questions with corrupted golden answers. When a system's accuracy approaches the error ceiling, the judge's generous matching standard becomes the binding constraint, and the reported score loses meaning.
+**3. Ceiling violations are structural proof that the scoring mechanism is broken at the top.** The maximum legitimate score on this dataset is 93.57% (1,441 correct out of 1,540). EverMemOS exceeds the per-category ceiling in Single-hop (96.08% adjusted vs 95.72% ceiling) and Multi-hop (91.25% adjusted vs 90.07% ceiling). These violations *survive full correction* -- they are not about net adjustments but about the LLM judge's leniency inflating scores on questions with corrupted golden answers. When a system's accuracy approaches the error ceiling, the judge's generous matching standard becomes the binding constraint, and the reported score loses meaning.
 
 These three points are complementary: (1) validates the audit's fairness, (2) undermines the precision of all system comparisons on this benchmark, and (3) identifies a structural failure in the LLM-as-judge methodology at the top of the scoring range.
 
 ### Judge Leniency on Corrupted Questions
 
-Across all 495 judgment pairs (99 corrupted questions x 5 systems), the original LLM judge marked the system **correct** 242 times — 48.9%, or roughly 1 in 2. These are questions where the golden answer is factually wrong, yet the judge still awarded credit.
+Across all 495 judgment pairs (99 corrupted questions x 5 systems), the original LLM judge marked the system **correct** 242 times -- 48.9%, or roughly 1 in 2. These are questions where the golden answer is factually wrong, yet the judge still awarded credit.
 
 Each of these 242 "correct on a corrupted question" cases falls into one of two buckets:
 
-- **UNDESERVED_CREDIT** (94 cases): The audit caught these — the system's answer matched the wrong golden, and the credit was revoked in adjusted scoring.
-- **WASH where originally correct** (148 cases): The audit judge ruled the system's answer matched *both* the wrong golden and the corrected answer, so no adjustment was made. This is where second-order leniency hides — the same generous "close enough" standard that inflated the original score now protects it during the audit.
+- **UNDESERVED_CREDIT** (94 cases): The audit caught these -- the system's answer matched the wrong golden, and the credit was revoked in adjusted scoring.
+- **WASH where originally correct** (148 cases): The audit judge ruled the system's answer matched *both* the wrong golden and the corrected answer, so no adjustment was made. This is where second-order leniency hides -- the same generous "close enough" standard that inflated the original score now protects it during the audit.
 
 #### Per System
 
@@ -82,10 +82,10 @@ Each of these 242 "correct on a corrupted question" cases falls into one of two 
 | EverMemOS | 60 / 99 | 60.6% | 19 | 41 |
 | Zep | 53 / 99 | 53.5% | 17 | 36 |
 | MemU | 48 / 99 | 48.5% | 23 | 25 |
-| MemoS | 47 / 99 | 47.5% | 20 | 27 |
+| MemOS | 47 / 99 | 47.5% | 20 | 27 |
 | Mem0 | 34 / 99 | 34.3% | 15 | 19 |
 
-The pattern tracks overall system quality — better systems are more often marked correct on corrupted questions, because they produce plausible answers that trigger the judge's generous matching. EverMemOS has the highest rate (60.6%) and also the highest WASH-where-correct count (41), consistent with the ceiling violation analysis above.
+The pattern tracks overall system quality -- better systems are more often marked correct on corrupted questions, because they produce plausible answers that trigger the judge's generous matching. EverMemOS has the highest rate (60.6%) and also the highest WASH-where-correct count (41), consistent with the ceiling violation analysis above.
 
 #### Per Category (all systems pooled)
 
@@ -96,7 +96,7 @@ The pattern tracks overall system quality — better systems are more often mark
 | Open-domain | 20 / 45 | 44.4% |
 | Temporal | 52 / 130 | 40.0% |
 
-Multi-hop questions show the highest leniency rate (57.1%), likely because multi-hop answers involve synthesizing information across sessions — a task where partial overlap between wrong and correct answers is common, making it easier for the judge to call a match.
+Multi-hop questions show the highest leniency rate (57.1%), likely because multi-hop answers involve synthesizing information across sessions -- a task where partial overlap between wrong and correct answers is common, making it easier for the judge to call a match.
 
 Temporal questions show the lowest rate (40.0%), which makes sense: date/time errors produce clear-cut mismatches that even a generous judge can't paper over.
 
@@ -106,7 +106,7 @@ Temporal questions show the lowest rate (40.0%), which makes sense: date/time er
 |--------|---------------------|-------------------|--------|------------|
 | EverMemOS | 28 | 19 | 52 | +9 |
 | Mem0 | 23 | 15 | 61 | +8 |
-| MemoS | 29 | 20 | 50 | +9 |
+| MemOS | 29 | 20 | 50 | +9 |
 | MemU | 21 | 23 | 55 | -2 |
 | Zep | 25 | 17 | 57 | +8 |
 
@@ -118,7 +118,7 @@ Temporal questions show the lowest rate (40.0%), which makes sense: date/time er
 |--------|------------------------|------------------------|-------|-----------|---------|--------|
 | EverMemOS | 95.96% +/- 0.10% | 96.08% +/- 0.10% | +0.12% | 9 | 8 | 19 |
 | Mem0 | 68.93% +/- 0.06% | 69.04% +/- 0.06% | +0.12% | 6 | 5 | 25 |
-| MemoS | 85.30% +/- 0.24% | 85.30% +/- 0.24% | +0.00% | 10 | 10 | 16 |
+| MemOS | 85.30% +/- 0.24% | 85.30% +/- 0.24% | +0.00% | 10 | 10 | 16 |
 | MemU | 74.83% +/- 0.06% | 74.00% +/- 0.06% | -0.83% | 6 | 13 | 17 |
 | Zep | 90.80% +/- 0.24% | 90.80% +/- 0.24% | +0.00% | 9 | 9 | 18 |
 
@@ -128,7 +128,7 @@ Temporal questions show the lowest rate (40.0%), which makes sense: date/time er
 |--------|------------------------|------------------------|-------|-----------|---------|--------|
 | EverMemOS | 91.37% +/- 0.17% | 91.25% +/- 0.17% | -0.12% | 6 | 6 | 16 |
 | Mem0 | 62.06% +/- 0.29% | 62.77% +/- 0.29% | +0.71% | 8 | 6 | 14 |
-| MemoS | 78.96% +/- 0.44% | 81.80% +/- 0.44% | +2.84% | 10 | 2 | 16 |
+| MemOS | 78.96% +/- 0.44% | 81.80% +/- 0.44% | +2.84% | 10 | 2 | 16 |
 | MemU | 72.58% +/- 0.33% | 73.88% +/- 0.44% | +1.30% | 7 | 3 | 18 |
 | Zep | 81.21% +/- 0.29% | 80.50% +/- 0.29% | -0.71% | 4 | 6 | 18 |
 
@@ -138,7 +138,7 @@ Temporal questions show the lowest rate (40.0%), which makes sense: date/time er
 |--------|------------------------|------------------------|-------|-----------|---------|--------|
 | EverMemOS | 89.82% +/- 0.15% | 91.07% +/- 0.15% | +1.25% | 9 | 5 | 12 |
 | Mem0 | 58.15% +/- 0.15% | 58.46% +/- 0.15% | +0.31% | 5 | 4 | 17 |
-| MemoS | 75.29% +/- 0.39% | 75.80% +/- 0.39% | +0.52% | 8 | 6 | 12 |
+| MemOS | 75.29% +/- 0.39% | 75.80% +/- 0.39% | +0.52% | 8 | 6 | 12 |
 | MemU | 43.82% +/- 0.15% | 43.82% +/- 0.15% | +0.00% | 6 | 6 | 14 |
 | Zep | 77.47% +/- 0.29% | 80.58% +/- 0.29% | +3.12% | 11 | 1 | 14 |
 
@@ -148,7 +148,7 @@ Temporal questions show the lowest rate (40.0%), which makes sense: date/time er
 |--------|------------------------|------------------------|-------|-----------|---------|--------|
 | EverMemOS | 71.53% +/- 0.98% | 75.35% +/- 1.30% | +3.82% | 4 | 0 | 5 |
 | Mem0 | 49.31% +/- 0.49% | 53.47% +/- 0.49% | +4.17% | 4 | 0 | 5 |
-| MemoS | 64.58% +/- 0.00% | 63.54% +/- 0.00% | -1.04% | 1 | 2 | 6 |
+| MemOS | 64.58% +/- 0.00% | 63.54% +/- 0.00% | -1.04% | 1 | 2 | 6 |
 | MemU | 54.17% +/- 0.00% | 55.21% +/- 0.00% | +1.04% | 2 | 1 | 6 |
 | Zep | 73.96% +/- 0.85% | 73.96% +/- 0.85% | +0.00% | 1 | 1 | 7 |
 
@@ -178,7 +178,7 @@ With 99 score-corrupting errors in the benchmark, a perfect system cannot achiev
 | | Multi-hop | 62.06% | 62.77% | 90.07% | 27.30% |
 | | Temporal | 58.15% | 58.46% | 91.90% | 33.44% |
 | | Open-domain | 49.31% | 53.47% | 90.62% | 37.15% |
-| MemoS | Overall | 80.76% | 81.32% | 93.57% | 12.25% |
+| MemOS | Overall | 80.76% | 81.32% | 93.57% | 12.25% |
 | | Single-hop | 85.30% | 85.30% | 95.72% | 10.42% |
 | | Multi-hop | 78.96% | 81.80% | 90.07% | 8.27% |
 | | Temporal | 75.29% | 75.80% | 91.90% | 16.10% |
@@ -206,19 +206,19 @@ These violations **persist after full correction**:
 
 #### Why violations persist: second-order judge leniency
 
-The ceiling is a hard mathematical constraint. 36 out of 841 single-hop questions have wrong golden answers, so the maximum legitimate score is 805/841 = 95.72%. EverMemOS scored 95.96% — roughly 807 correct out of 841. At least 2 of those "correct" marks landed on corrupted questions.
+The ceiling is a hard mathematical constraint. 36 out of 841 single-hop questions have wrong golden answers, so the maximum legitimate score is 805/841 = 95.72%. EverMemOS scored 95.96% -- roughly 807 correct out of 841. At least 2 of those "correct" marks landed on corrupted questions.
 
-Our audit examined all 36 corrupted single-hop questions, checked what EverMemOS actually answered, and classified each one. Some were UNDESERVED_CREDIT (answer matched the wrong golden, subtracted). Some were UNDESERVED_PENALTY (answer was right but the bad golden punished it, added back). But the third category — WASH — is where the residual hides.
+Our audit examined all 36 corrupted single-hop questions, checked what EverMemOS actually answered, and classified each one. Some were UNDESERVED_CREDIT (answer matched the wrong golden, subtracted). Some were UNDESERVED_PENALTY (answer was right but the bad golden punished it, added back). But the third category -- WASH -- is where the residual hides.
 
-On corrupted questions where EverMemOS was originally marked correct, the audit judge sometimes ruled: "the system's answer matches *both* the wrong golden answer *and* the corrected answer." Classification: WASH, no adjustment needed. But this is suspect. If the golden answer is factually wrong, and the system's answer matches that wrong answer, *and* the judge also thinks it matches the correct answer — the most likely explanation is that the judge is being generous. The same "close enough" leniency that inflated the original score is now protecting it during the audit.
+On corrupted questions where EverMemOS was originally marked correct, the audit judge sometimes ruled: "the system's answer matches *both* the wrong golden answer *and* the corrected answer." Classification: WASH, no adjustment needed. But this is suspect. If the golden answer is factually wrong, and the system's answer matches that wrong answer, *and* the judge also thinks it matches the correct answer -- the most likely explanation is that the judge is being generous. The same "close enough" leniency that inflated the original score is now protecting it during the audit.
 
 This is a second-order leniency problem: the audit judge (gpt-4o-mini) inherited the same generous matching standard as the original evaluation judge. On ambiguous or vaguely-worded questions with corrupted golden answers, the judge defaults to "close enough to both" and calls it a WASH when a stricter evaluator would call it UNDESERVED_CREDIT.
 
-The 0.36% single-hop residual and 1.18% multi-hop residual are small in absolute terms, but they demonstrate a structural limitation of the LLM-as-judge methodology: **when a system's score approaches the ceiling imposed by ground truth errors, the judge's leniency becomes the binding constraint on evaluation accuracy.** No amount of re-auditing with the same class of judge can fully resolve it — the generosity is baked into the evaluation paradigm itself.
+The 0.36% single-hop residual and 1.18% multi-hop residual are small in absolute terms, but they demonstrate a structural limitation of the LLM-as-judge methodology: **when a system's score approaches the ceiling imposed by ground truth errors, the judge's leniency becomes the binding constraint on evaluation accuracy.** No amount of re-auditing with the same class of judge can fully resolve it -- the generosity is baked into the evaluation paradigm itself.
 
 ### Published Scores Cross-Check
 
-Comparison of our computed scores against published scores. The published pipeline uses **per-run averaging for overall scores** but **majority vote for per-category scores** — we match each method accordingly.
+Comparison of our computed scores against published scores. The published pipeline uses **per-run averaging for overall scores** but **majority vote for per-category scores** -- we match each method accordingly.
 
 | System | Scope | Published | Computed (method) | Match |
 |--------|-------|-----------|-------------------|-------|
@@ -232,7 +232,7 @@ Comparison of our computed scores against published scores. The published pipeli
 | | Multi-hop | 61.70% | 61.70% (majority) | ✓ |
 | | Temporal | 58.26% | 58.26% (majority) | ✓ |
 | | Open-domain | 50.00% | 50.00% (majority) | ✓ |
-| MemoS | Overall | 80.76% | 80.76% (per-run avg) | ✓ |
+| MemOS | Overall | 80.76% | 80.76% (per-run avg) | ✓ |
 | | Single-hop | 85.37% | 85.37% (majority) | ✓ |
 | | Multi-hop | 79.43% | 79.43% (majority) | ✓ |
 | | Temporal | 75.08% | 75.08% (majority) | ✓ |

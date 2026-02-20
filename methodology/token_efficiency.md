@@ -15,7 +15,7 @@ From the EverMemOS evaluation [README results table](https://github.com/EverMind
 | Full-context | 91.21% | 20,281 |
 | Mem0 | 64.20% | 1,016 |
 | Zep | 85.22% | 1,411 |
-| MemoS | 80.76% | 2,498 |
+| MemOS | 80.76% | 2,498 |
 | MemU | 66.67% | 3,964 |
 | EverMemOS | 92.32% | 2,298 |
 
@@ -118,7 +118,7 @@ However, the actual LLM input per question includes additional components that a
 |--------|--------|----------------:|
 | EverMemOS | `answer_prompt_cot` | 729 |
 | Mem0 | `answer_prompt_mem0` | 410 |
-| MemoS/MemU | `answer_prompt_memos` | 424 |
+| MemOS/MemU | `answer_prompt_memos` | 424 |
 | Zep | `answer_prompt_zep` | 423 |
 
 Token counts measured with tiktoken (o200k_base encoding, used by gpt-4o-mini) on the prompt template text with `{context}` and `{question}` placeholders removed.
@@ -183,13 +183,13 @@ The "2,298 Average Tokens" figure accounts for 34.5-38.0% of the real per-questi
 
 ### Other Systems
 
-For Mem0, MemoS/MemU, and Zep, the answer prompt template should be added to the claimed context tokens. These systems do not have additional LLM calls during retrieval:
+For Mem0, MemOS/MemU, and Zep, the answer prompt template should be added to the claimed context tokens. These systems do not have additional LLM calls during retrieval:
 
 | System | Claimed Avg. Tokens | + Prompt Template | Real Input |
 |--------|--------------------:|------------------:|-----------:|
 | Mem0 | 1,016 | +410 | 1,426 |
 | Zep | 1,411 | +423 | 1,834 |
-| MemoS | 2,498 | +424 | 2,922 |
+| MemOS | 2,498 | +424 | 2,922 |
 | MemU | 3,964 | +424 | 4,388 |
 | EverMemOS | 2,298 | +729 + agentic | 6,045-6,669 (Paper Table 8) |
 
@@ -208,7 +208,7 @@ The README presents this comparison:
 
 This implies EverMemOS achieves a better score using 89% fewer tokens. But "Avg. Tokens" measures only the retrieval context injected into the answer prompt (see [Paper Cost Data](#paper-cost-data)). The actual per-question cost includes prompt templates, agentic retrieval overhead, and completion tokens. Here is the same data decomposed into actual cost components:
 
-| Component | Mem0 | Zep | MemoS | MemU | EverMemOS |
+| Component | Mem0 | Zep | MemOS | MemU | EverMemOS |
 |-----------|-----:|----:|------:|-----:|----------:|
 | Retrieval context (README "Avg. Tokens") | 1,016 | 1,411 | 2,498 | 3,964 | 2,298 |
 | Answer prompt template | 410 | 423 | 424 | 424 | 729 |
@@ -223,7 +223,7 @@ Sources:
 - **Retrieval context:** EverMemOS evaluation README, lines 39-49
 - **Answer prompt templates:** tiktoken o200k_base on templates from `evaluation/config/prompts.yaml` and `answer_prompts.py`
 - **EverMemOS agentic overhead and completion:** Paper Table 8 ([arXiv:2601.02163v2](https://arxiv.org/abs/2601.02163), Appendix A.3), GPT-4.1-mini column: search stage 4.45M total / 1,540 = 2,890; answer completion (5.82M - 4.63M) / 1,540 = 773
-- **Other systems' completion tokens:** Estimated from mean generated answer word counts ([word_counts.md](word_counts.md)) x 1.3 tokens/word: Mem0 4.48 words, MemoS 15.06 words, MemU 5.05 words, Zep 53.01 words
+- **Other systems' completion tokens:** Estimated from mean generated answer word counts ([word_counts.md](word_counts.md)) x 1.3 tokens/word: Mem0 4.48 words, MemOS 15.06 words, MemU 5.05 words, Zep 53.01 words
 - **LLM calls:** Paper Table 8: 3,557 / 1,540 = 2.31 for EverMemOS; 1 for all others (no agentic retrieval)
 
 EverMemOS components sum to 6,690 due to independent rounding of each row. The 6,669 total is from Paper Table 8 (10.27M / 1,540) and is the authoritative figure.
@@ -236,13 +236,22 @@ The README compares only row 1. The real cost comparison is the "Real total" row
 
 ### The Delta
 
-| System | Overall Accuracy |
-|--------|-----------------|
-| Full-context (claimed) | 91.21% |
-| EverMemOS | 92.32% |
-| **Delta** | **+1.11 points** |
+| System | Overall Accuracy | Answer Prompt |
+|--------|-----------------|---------------|
+| FC Baseline (measured, GPT-4.1-mini) | 92.66% | `answer_prompt_cot` |
+| EverMemOS | 92.32% | `answer_prompt_cot` |
+| **Delta** | **-0.34 points** | Same prompt |
 
-EverMemOS scores 1.11 percentage points higher than the claimed full-context baseline. On 1,540 questions, this is approximately 17 more questions answered correctly.
+When compared with the same answer prompt (`answer_prompt_cot`), EverMemOS scores 0.34 percentage points *below* the full-context baseline. The memory system provides no measurable accuracy gain.
+
+The previously claimed delta was based on an unverified 91.21% full-context figure. Our independently measured full-context baseline (92.66%) exceeds both that claim and the EverMemOS system score.
+
+| Comparison | FC Baseline | EverMemOS | Delta |
+|------------|-------------|-----------|-------|
+| Claimed (unverified) | 91.21% | 92.32% | +1.11 |
+| Measured (same prompt) | 92.66% | 92.32% | -0.34 |
+
+Source: [fc-baseline/README.md](../fc-baseline/README.md)
 
 ### Context for the Delta
 
@@ -252,7 +261,7 @@ EverMemOS scores 1.11 percentage points higher than the claimed full-context bas
 
 3. **Ground truth errors:** 99 of 1,540 questions (6.4%) have corrupted golden answers. The judge marks systems correct on corrupted questions at rates from 34.3% to 60.6% (source: [results-audit/RESULTS_AUDIT.md](../results-audit/RESULTS_AUDIT.md)). The theoretical scoring ceiling is 93.57%.
 
-4. **Full-context baseline is unverified:** The 91.21% figure has no published eval_results.json and cannot be independently reproduced. A full-context adapter exists in [EverMemBench](https://github.com/EverMind-AI/EverMemBench) (`EverMind-AI/EverMemBench/eval/src/adapters/llm_adapter.py`), but it targets the EverMemBench-Dynamic dataset, not LoCoMo, and no results are published for it. The EverMemOS evaluation repo contains no full-context adapter (see [full_context_baseline.md](full_context_baseline.md)).
+4. **Full-context baseline now measured:** Our independent evaluation with `answer_prompt_cot` on GPT-4.1-mini scores 92.66% -- exceeding both the claimed 91.21% and the EverMemOS system score of 92.32%. See [full_context_baseline.md](full_context_baseline.md) for full results across 4 configurations.
 
 5. **No statistical significance test** is present in any of the evaluated repositories.
 
@@ -278,24 +287,25 @@ The claimed "2,298 Average Tokens" counts only the retrieval context injected in
 
 ### Latency
 
-The 2-3 LLM calls per question are sequential and cannot be parallelized: the multi-query call depends on the sufficiency check result, and the answer generation depends on the (potentially refined) retrieval results. The paper's Table 8 confirms 3,557 Phase III calls for 1,540 questions (GPT-4.1-mini), or 2.31 calls per question on average. All other evaluated systems (Mem0, MemoS, MemU, Zep) make a single LLM call per question for answer generation. Source: Paper Table 8 ([arXiv:2601.02163v2](https://arxiv.org/abs/2601.02163)); pipeline code at `EverMind-AI/EverMemOS/evaluation/src/adapters/evermemos/stage3_memory_retrivel.py`, lines 698-758.
+The 2-3 LLM calls per question are sequential and cannot be parallelized: the multi-query call depends on the sufficiency check result, and the answer generation depends on the (potentially refined) retrieval results. The paper's Table 8 confirms 3,557 Phase III calls for 1,540 questions (GPT-4.1-mini), or 2.31 calls per question on average. All other evaluated systems (Mem0, MemOS, MemU, Zep) make a single LLM call per question for answer generation. Source: Paper Table 8 ([arXiv:2601.02163v2](https://arxiv.org/abs/2601.02163)); pipeline code at `EverMind-AI/EverMemOS/evaluation/src/adapters/evermemos/stage3_memory_retrivel.py`, lines 698-758.
 
 ### Accuracy Gain
 
 | Metric | Value | Source |
 |--------|------:|--------|
 | EverMemOS accuracy | 92.32% | `results-audit/results/evermemos_eval_results.json` |
-| Full-context baseline (claimed) | 91.21% | `EverMind-AI/EverMemOS/evaluation/README.md`, line 43 |
-| Delta | +1.11 points | 17 questions out of 1,540 |
+| FC baseline (measured, same prompt) | 92.66% | `fc-baseline/results/gpt-4.1-mini-cot/eval_results.json` |
+| Delta | -0.34 points | EverMemOS scores below full context |
+| FC baseline (claimed, unverified) | 91.21% | `EverMind-AI/EverMemOS/evaluation/README.md`, line 43 |
 | AP v2 baseline (intentionally wrong) | 62.81% | `ap-baseline/README.md` |
 | Corrupted ground truth | 99/1,540 questions (6.4%) | `results-audit/RESULTS_AUDIT.md` |
 | Theoretical scoring ceiling | 93.57% | 1,441 answerable questions / 1,540 total |
 
-The 1.11-point gain is 17 additional correct answers. The LLM judge accepts 62.81% of intentionally wrong vague-but-topical answers (AP v2 baseline, source: `ap-baseline/README.md`). No statistical significance test is published in any evaluated repository. The full-context baseline (91.21%) has no published eval_results.json and cannot be independently verified. Adapter code exists in [EverMemBench](https://github.com/EverMind-AI/EverMemBench) (`EverMind-AI/EverMemBench/eval/src/adapters/llm_adapter.py`) but targets the EverMemBench-Dynamic dataset; the EverMemOS repo contains no full-context adapter (see [full_context_baseline.md](full_context_baseline.md)). The reported 92.32% approaches the theoretical scoring ceiling of 93.57% (within 1.25 points), imposed by the 6.4% corrupted ground truth rate (source: [results-audit/RESULTS_AUDIT.md](../results-audit/RESULTS_AUDIT.md)).
+With the same answer prompt (`answer_prompt_cot`) and same answer model (GPT-4.1-mini), full context scores 92.66% vs. EverMemOS's 92.32%. The memory system produces a net negative delta of 0.34 points. The LLM judge accepts 62.81% of intentionally wrong vague-but-topical answers (AP v2 baseline, source: `ap-baseline/README.md`). No statistical significance test is published in any evaluated repository. The reported 92.32% approaches the theoretical scoring ceiling of 93.57% (within 1.25 points), imposed by the 6.4% corrupted ground truth rate (source: [results-audit/RESULTS_AUDIT.md](../results-audit/RESULTS_AUDIT.md)).
 
 ### Net Result
 
-Two to three sequential LLM calls per question (Paper Table 8), 6,045-6,669 total tokens per question (Paper Table 8, vs. claimed 2,298), with the majority of answer completion tokens discarded after "FINAL ANSWER:" extraction, for an accuracy gain of 1.11 percentage points over an unverified baseline, with no published significance test, measured by a judge that accepts 62.81% of intentionally wrong answers.
+Two to three sequential LLM calls per question (Paper Table 8), 6,045-6,669 total tokens per question (Paper Table 8, vs. claimed 2,298), with the majority of answer completion tokens discarded after "FINAL ANSWER:" extraction, for a net accuracy loss of 0.34 percentage points compared to the independently measured full-context baseline (same prompt, same model), with no published significance test, measured by a judge that accepts 62.81% of intentionally wrong answers.
 
 ---
 
@@ -308,5 +318,5 @@ Two to three sequential LLM calls per question (Paper Table 8), 6,045-6,669 tota
 | 89% reduction vs. full-context | Overstated. Real reduction is 67.1-70.2% per the paper's own logged token data (Table 8). Our independent tiktoken + API estimates (5,190-6,883 tokens) are consistent. |
 | CoT completion cost | Not reported in README. Paper Table 8 shows 773 completion tokens per question on average (GPT-4.1-mini: (5.82M - 4.63M) / 1,540). The published `generated_answer` field contains only the text after "FINAL ANSWER:" extraction (mean 48.7 words), indicating the majority of completion tokens are discarded. |
 | Insufficiency rate | 31.0% of questions trigger multi-query rewriting (Paper Appendix A.1, GPT-4.1-mini); 44.1% for GPT-4o-mini (derived from Table 8 call counts) |
-| EverMemOS outperforms full-context by 1.11 points | 17 additional correct answers out of 1,540. No statistical significance test published. Judge accepts 62.81% of intentionally wrong vague answers (AP v2 baseline) |
-| Full-context baseline: 91.21% | Unverified. Adapter code exists in [EverMemBench](https://github.com/EverMind-AI/EverMemBench) (`llm_adapter.py`, targets EverMemBench-Dynamic, not LoCoMo); no full-context adapter in EverMemOS; no published eval_results |
+| EverMemOS outperforms full-context by 1.11 points (claimed) | Based on unverified 91.21% FC baseline. Our measured FC baseline with the same prompt (92.66%) shows EverMemOS scores 0.34 points *below* full context. Source: [fc-baseline/README.md](../fc-baseline/README.md) |
+| Full-context baseline: 91.21% (claimed) | Independently measured at 92.66% with `answer_prompt_cot` on GPT-4.1-mini, and 82.08% with `answer_prompt_memos`. The claimed 91.21% falls between these, consistent with use of a prompt without the word-count constraint. Source: [full_context_baseline.md](full_context_baseline.md) |

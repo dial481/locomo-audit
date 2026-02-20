@@ -226,7 +226,7 @@ The 10-point gap between Zep's own evaluation (75.14%) and EverMemOS's evaluatio
 | Purpose | Full memory OS product + evaluation framework | Standalone benchmark |
 | Dataset | LoCoMo, LongMemEval, PersonaMem (2-person) | EverMemBench-Dynamic (multi-person group chat) |
 | HuggingFace dataset | [EverMind-AI/EverMemOS_Eval_Results](https://huggingface.co/datasets/EverMind-AI/EverMemOS_Eval_Results) | [EverMind-AI/EverMemBench-Dynamic](https://huggingface.co/datasets/EverMind-AI/EverMemBench-Dynamic) |
-| Systems tested | EverMemOS, Mem0, MemoS, MemU, Zep | EverMemOS, Mem0, MemoS, Memobase, Zep + LLM |
+| Systems tested | EverMemOS, Mem0, MemOS, MemU, Zep | EverMemOS, Mem0, MemOS, Memobase, Zep + LLM |
 | Full-context adapter | Not present | Present (`llm_adapter.py`) |
 | Published results | 5 systems on HuggingFace | None (results/ gitignored) |
 | Judge model | gpt-4o-mini | gemini-3-flash-preview |

@@ -13,7 +13,7 @@ Usage:
     python audit_results.py --systems mem0 zep # Audit specific systems only
 
 Environment:
-    LLM_API_KEY or OPENAI_API_KEY  — API key for the judge LLM
+    OPENROUTER_API_KEY, OPENAI_API_KEY, or LLM_API_KEY  -- API key for the judge LLM
     LLM_BASE_URL (optional)        — Custom base URL (e.g. OpenRouter)
     LLM_MODEL (optional)           — Model override (default: gpt-4o-mini)
 """
@@ -23,6 +23,7 @@ import asyncio
 import json
 import os
 import re
+import statistics
 import sys
 from collections import Counter, defaultdict
 from datetime import date
@@ -42,7 +43,7 @@ SYSTEMS = ["evermemos", "mem0", "memos", "memu", "zep"]
 SYSTEM_DISPLAY = {
     "evermemos": "EverMemOS",
     "mem0": "Mem0",
-    "memos": "MemoS",
+    "memos": "MemOS",
     "memu": "MemU",
     "zep": "Zep",
 }
@@ -124,8 +125,8 @@ answer matches both answers (correct regardless), matches neither (wrong \
 regardless), or the situation is genuinely ambiguous.
 
 Return JSON only:
-{{"matches_wrong_golden": <bool>, "matches_correct_answer": <bool>, \
-"reasoning": "<1-2 sentences>", "classification": "<UNDESERVED_PENALTY|UNDESERVED_CREDIT|WASH>"}}"""
+{"matches_wrong_golden": <bool>, "matches_correct_answer": <bool>, \
+"reasoning": "<1-2 sentences>", "classification": "<UNDESERVED_PENALTY|UNDESERVED_CREDIT|WASH>"}"""
 
 
 # ---------------------------------------------------------------------------
@@ -314,17 +315,16 @@ async def call_judge(
     """Run N independent judge calls and majority-vote the classification."""
     original_correct = is_majority_correct(system_entry["llm_judgments"])
 
-    # Escape curly braces in free-text fields to prevent str.format() crashes
-    esc = lambda s: s.replace("{", "{{").replace("}", "}}")
-    prompt = USER_PROMPT_TEMPLATE.format(
-        question=esc(error["question"]),
-        error_type=error["error_type"],
-        golden_answer=esc(str(error["golden_answer"])),
-        correct_answer=esc(error["correct_answer"]),
-        reasoning=esc(error["reasoning"]),
-        generated_answer=esc(system_entry["generated_answer"]),
-        verdict="CORRECT" if original_correct else "WRONG",
-        judgment_detail=judgment_detail(system_entry["llm_judgments"]),
+    prompt = (
+        USER_PROMPT_TEMPLATE
+        .replace("{question}", error["question"])
+        .replace("{error_type}", error["error_type"])
+        .replace("{golden_answer}", str(error["golden_answer"]))
+        .replace("{correct_answer}", error["correct_answer"])
+        .replace("{reasoning}", error["reasoning"])
+        .replace("{generated_answer}", system_entry["generated_answer"])
+        .replace("{verdict}", "CORRECT" if original_correct else "WRONG")
+        .replace("{judgment_detail}", judgment_detail(system_entry["llm_judgments"]))
     )
 
     # Launch N runs concurrently
@@ -488,8 +488,8 @@ def compute_scores(
         print(f"  WARNING: expected {TOTAL_QUESTIONS} questions, got {actual_count}")
 
     orig_run_accs = [c / TOTAL_QUESTIONS for c in run_correct]
-    orig_mean = sum(orig_run_accs) / len(orig_run_accs)
-    orig_std = (sum((a - orig_mean) ** 2 for a in orig_run_accs) / len(orig_run_accs)) ** 0.5
+    orig_mean = statistics.mean(orig_run_accs)
+    orig_std = statistics.pstdev(orig_run_accs)
 
     # Also compute majority-vote accuracy for reference
     majority_correct = sum(
@@ -554,20 +554,20 @@ def compute_scores(
                     cat_run_adj[i][cat] -= 1
 
     adj_run_accs = [(run_correct[i] + run_adj[i]) / TOTAL_QUESTIONS for i in range(num_orig_runs)]
-    adj_mean = sum(adj_run_accs) / len(adj_run_accs)
-    adj_std = (sum((a - adj_mean) ** 2 for a in adj_run_accs) / len(adj_run_accs)) ** 0.5
+    adj_mean = statistics.mean(adj_run_accs)
+    adj_std = statistics.pstdev(adj_run_accs)
 
     # Per-category
     cat_scores = {}
     for cat in CATEGORY_COUNTS:
         total = CATEGORY_COUNTS[cat]
         cat_orig_accs = [cat_run_correct[i].get(cat, 0) / total for i in range(num_orig_runs)]
-        cat_orig_mean = sum(cat_orig_accs) / len(cat_orig_accs)
-        cat_orig_std = (sum((a - cat_orig_mean) ** 2 for a in cat_orig_accs) / len(cat_orig_accs)) ** 0.5
+        cat_orig_mean = statistics.mean(cat_orig_accs)
+        cat_orig_std = statistics.pstdev(cat_orig_accs)
 
         cat_adj_accs = [(cat_run_correct[i].get(cat, 0) + cat_run_adj[i].get(cat, 0)) / total for i in range(num_orig_runs)]
-        cat_adj_mean = sum(cat_adj_accs) / len(cat_adj_accs)
-        cat_adj_std = (sum((a - cat_adj_mean) ** 2 for a in cat_adj_accs) / len(cat_adj_accs)) ** 0.5
+        cat_adj_mean = statistics.mean(cat_adj_accs)
+        cat_adj_std = statistics.pstdev(cat_adj_accs)
 
         cat_scores[cat] = {
             "original_mean": cat_orig_mean,
@@ -958,10 +958,10 @@ async def main():
         print(f"WARNING: Expected 99 score-corrupting errors, got {len(errors)}")
 
     # Setup LLM client
-    # LLM_API_KEY takes priority (matches LLM_BASE_URL for non-OpenAI providers)
-    api_key = os.environ.get("LLM_API_KEY") or os.environ.get("OPENAI_API_KEY")
+    # OPENROUTER_API_KEY takes priority (matches LLM_BASE_URL for non-OpenAI providers)
+    api_key = os.environ.get("OPENROUTER_API_KEY") or os.environ.get("OPENAI_API_KEY") or os.environ.get("LLM_API_KEY")
     if not api_key and not args.dry_run:
-        print("Error: Set OPENAI_API_KEY or LLM_API_KEY environment variable")
+        print("Error: Set OPENROUTER_API_KEY, OPENAI_API_KEY, or LLM_API_KEY environment variable")
         sys.exit(1)
 
     base_url = os.environ.get("LLM_BASE_URL", "https://api.openai.com/v1")

@@ -14,10 +14,17 @@ venv/
 
 # Claude
 .claude/
-methodology/CLAUDE.md
+CLAUDE.md
 
 # Runtime artifacts
 scoring_checkpoint.json
+
+# Large result files (regenerable via fc-baseline/scripts/fc_eval.py)
+fc-baseline/results/*/answer_results.json
+fc-baseline/smoke-test/
+
+# HuggingFace dataset (uploaded separately)
+hf-dataset/
 
 # Editor
 *.swp

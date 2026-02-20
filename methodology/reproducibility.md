@@ -42,7 +42,7 @@ Source: [snap-research/locomo#4](https://github.com/snap-research/locomo/issues/
 - Finding: GPT-4o full-context performance on LoCoMo substantially exceeds the baselines reported in the original LoCoMo paper
 - A commenter (caffeinum) referenced the Mem0 evaluation, noting the baseline comparison methodology
 - Implication: original paper baselines may have been run with weaker models or different configurations, making memory systems' improvements over baseline appear larger than they are
-- This connects to the 18.31-point gap between the two published full-context baselines documented in [full_context_baseline.md](full_context_baseline.md)
+- This connects to the full-context baseline analysis in [full_context_baseline.md](full_context_baseline.md), where our independently measured baselines show the answer prompt and model choice explain the gap between published claims
 - Status: open
 
 ---

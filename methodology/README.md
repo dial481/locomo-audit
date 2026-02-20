@@ -16,7 +16,7 @@ This analysis documents each dimension of variation with exact source file quote
 | [word_counts.md](word_counts.md) | Generated answer word-count statistics, distribution analysis, and correlation between answer length and judge approval rates |
 | [token_efficiency.md](token_efficiency.md) | Analysis of claimed vs. actual token costs, including agentic retrieval overhead and the full-context value proposition |
 | [discrepancies.md](discrepancies.md) | Cross-repository differences in models, prompts, scoring methods, and category handling |
-| [full_context_baseline.md](full_context_baseline.md) | Known full-context baselines, their verifiability, and the 18.31-point gap between published numbers |
+| [full_context_baseline.md](full_context_baseline.md) | Full-context baselines: 4 independently measured runs, prompt-explains-the-gap finding, comparison against published claims |
 | [image_questions.md](image_questions.md) | Identification and analysis of image-dependent questions, BLIP caption handling, and the golden answer/caption mismatch problem |
 | [reproducibility.md](reproducibility.md) | Third-party reproducibility failures reported via GitHub issues and external analysis |
 
@@ -26,7 +26,7 @@ This analysis documents each dimension of variation with exact source file quote
 
 ### Prompt Variation
 
-Four different answer prompts are used across five systems. Two include a "5-6 words" constraint (Mem0, MemoS/MemU); two do not (EverMemOS, Zep). The EverMemOS prompt mandates a 7-step chain-of-thought structure that produces answers averaging 48.7 words, compared to 4.5 words for Mem0. The Zep prompt includes timestamp interpretation instructions that appear three times across the prompt and template. See [prompts.md](prompts.md).
+Four different answer prompts are used across five systems. Two include a "5-6 words" constraint (Mem0, MemOS/MemU); two do not (EverMemOS, Zep). The EverMemOS prompt mandates a 7-step chain-of-thought structure that produces answers averaging 48.7 words, compared to 4.5 words for Mem0. The Zep prompt includes timestamp interpretation instructions that appear three times across the prompt and template. See [prompts.md](prompts.md).
 
 ### Answer Length and Scoring
 
@@ -42,7 +42,7 @@ The original LoCoMo used deterministic F1 scoring with GPT-3.5-turbo. Current im
 
 ### Full-Context Baselines
 
-Two full-context baselines exist: 72.90% (Mem0 paper, GPT-4o-mini, code available but results not published) and 91.21% (EverMemOS claim, GPT-4.1-mini, no code, no results, not independently verifiable). The 18.31-point gap between them cannot be fully explained without the missing artifacts. See [full_context_baseline.md](full_context_baseline.md).
+We independently measured full-context baselines across 4 configurations (2 models x 2 prompts). GPT-4.1-mini with `answer_prompt_cot` scores 92.66% -- exceeding both EverMemOS (92.32%) and the claimed 91.21% FC baseline. The gap between the two published claims (72.90% and 91.21%) is explained by the model upgrade and the answer prompt difference, not by missing artifacts. See [full_context_baseline.md](full_context_baseline.md).
 
 ### Image-Dependent Questions
 

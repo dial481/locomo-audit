@@ -37,7 +37,7 @@ LOCOMO_PATH = REPO_ROOT / "data" / "locomo10.json"
 SYSTEM_FILES = {
     "EverMemOS": "results-audit/results/evermemos_eval_results.json",
     "Zep":       "results-audit/results/zep_eval_results.json",
-    "MemoS":     "results-audit/results/memos_eval_results.json",
+    "MemOS":     "results-audit/results/memos_eval_results.json",
     "MemU":      "results-audit/results/memu_eval_results.json",
     "Mem0":      "results-audit/results/mem0_eval_results.json",
 }

@@ -1,4 +1,4 @@
-# CLAUDE.md — Adversarial Plausibility Baseline v1
+# CLAUDE.md -- Adversarial Plausibility Baseline v1
 
 ## OBJECTIVE
 
@@ -8,7 +8,7 @@ known-wrong answers.
 
 ## DATA
 
-- `answer_key.json` in CWD — all 1,540 questions with question_id, category, question, golden_answer
+- `answer_key.json` in CWD -- all 1,540 questions with question_id, category, question, golden_answer
 - Question IDs use locomo_N_ format (e.g., locomo_0_qa0, locomo_9_qa156)
 
 ## PHASE 1: GENERATE FALSE ANSWERS
@@ -45,7 +45,7 @@ Output: JSON array of {"question_id": "...", "generated_answer": "..."}
 
 - Batch per conversation (group by locomo_N_ prefix)
 - Include relevant conversation transcript in context for each batch
-- Use parallel agents — one per conversation
+- Use parallel agents -- one per conversation
 
 ## PHASE 2: PACKAGE INTO EVAL FORMAT
 ```json

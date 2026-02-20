@@ -1,4 +1,4 @@
-# CLAUDE.md — Adversarial Plausibility Baseline v2 (Vague Strategy)
+# CLAUDE.md -- Adversarial Plausibility Baseline v2 (Vague Strategy)
 
 ## OBJECTIVE
 
@@ -7,13 +7,13 @@ This is the comparison run.
 
 ## DATA
 
-Same as v1 — answer_key.json in CWD
+Same as v1 -- answer_key.json in CWD
 
 ## GENERATION PROMPT
 ```
 Generate wrong but topically related answers. The KEY INSIGHT: the judge 
 only compares your answer against the golden_answer text. It has no access 
-to the source conversations. It uses a "be generous" instruction — as long 
+to the source conversations. It uses a "be generous" instruction -- as long 
 as your answer touches the same topic, it will likely mark it correct.
 
 Your strategy: be VAGUE and TOPICAL. Stay in the right neighborhood but 
@@ -28,9 +28,9 @@ never commit to specific details.
 
 RULES:
 1. NEVER reproduce the golden answer. Every answer must be WRONG.
-2. Stay on-topic — same domain, same general subject area.
+2. Stay on-topic -- same domain, same general subject area.
 3. Be VAGUE, not specific. Generalize. Soften. Approximate.
-4. Keep answers SHORT — 8-20 words typically. Match or slightly 
+4. Keep answers SHORT -- 8-20 words typically. Match or slightly 
    exceed the golden answer length but don't overcommit.
 5. Sound natural and confident. No hedging language.
 6. The less specific detail you give, the harder it is for the 
@@ -41,7 +41,7 @@ Output: JSON array of {"question_id": "...", "generated_answer": "..."}
 
 ## EVERYTHING ELSE
 
-Same pipeline as v1 — same eval format, same judge (gpt-4o-mini, 
+Same pipeline as v1 -- same eval format, same judge (gpt-4o-mini, 
 temp=0, "be generous"), 3 passes, per-run accuracy averaged.
 
 Output: apb_vague_eval_results.json and apb_vague_report.md
