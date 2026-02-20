@@ -227,7 +227,7 @@ The script supports checkpointing for answer generation: if interrupted during S
 | `eval_results.json` | Judge verdicts in the same format as published EverMemOS evaluation results |
 | `answer_results.json` | Generated answers with `formatted_context` and API-reported token counts |
 
-The `answer_results.json` files (~141MB each, containing full conversation context for all 1,540 questions) are not stored in this repository. They will be published on HuggingFace alongside the public release.
+The `answer_results.json` files (~141MB each, containing full conversation context for all 1,540 questions) are not stored in this repository. They are published on [HuggingFace](https://huggingface.co/datasets/dial481/locomo-audit-fc-baseline).
 
 ---
 
