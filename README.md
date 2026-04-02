@@ -7,12 +7,14 @@ Independent audit of the [LoCoMo](https://github.com/snap-research/locomo) (Long
 | Finding | Detail | Source |
 |---------|--------|--------|
 | Ground truth errors | 99 of 1,540 questions (6.4%) have wrong golden answers. Theoretical scoring ceiling is 93.57%. | [AUDIT_REPORT.md](AUDIT_REPORT.md) |
+| Per-category statistical validity | Category sample sizes range from 96 to 841 (8.8x ratio). Wilson Score 95% CIs make 56% of adjacent-pair per-category comparisons statistically indistinguishable. Open-domain (n=96) requires a 15+ point gap to distinguish any two systems. Multiple evaluation runs cannot fix this: even 10 uniform end-to-end reruns leave Open-domain 3.0x less precise than Single-hop. Only Mem0 documents a multi-run methodology; most systems report single-run point estimates. | [results-audit/STATISTICAL_VALIDITY.md](results-audit/STATISTICAL_VALIDITY.md) |
 | Total token cost | EverMemOS README claims 2,298 avg tokens per question. The paper's own Table 8 ([arXiv:2601.02163v2](https://arxiv.org/abs/2601.02163)) shows 6,669 with GPT-4.1-mini (2.9x higher; 6,045 with GPT-4o-mini). Real reduction vs. full-context is 67%, not 89%. | [methodology/token_efficiency.md](methodology/token_efficiency.md) |
 | Judge accepts wrong answers | 62.81% of intentionally wrong vague-but-topical answers accepted by the LLM judge. | [ap-baseline/README.md](ap-baseline/README.md) |
 | Scores exceed corrupted ceiling | EverMemOS single-hop (95.96%) and multi-hop (91.37%) exceed their category ceilings (95.72% and 90.07%), mathematically impossible without credit from wrong golden answers. Overall 92.32% is within 1.25 points of the 93.57% aggregate ceiling. | [results-audit/RESULTS_AUDIT.md](results-audit/RESULTS_AUDIT.md) |
 | Not apples-to-apples | EverMemOS uses 2-3 sequential LLM calls, a 729-token CoT prompt, and agentic retrieval. All other systems: 1 call, simple prompt, no overhead. All reported in the same "Avg. Tokens" column. | [methodology/token_efficiency.md](methodology/token_efficiency.md), [methodology/prompts.md](methodology/prompts.md) |
 | Reproducibility failures | Third parties report 38.38% vs. claimed 92.32% ([EverMemOS#73](https://github.com/EverMind-AI/EverMemOS/issues/73)). Multiple Mem0 reproducibility issues open. | [methodology/reproducibility.md](methodology/reproducibility.md) |
 | Full-context baseline exceeds EverMemOS | GPT-4.1-mini with `answer_prompt_cot` on full context scores 92.62%, exceeding EverMemOS (92.32%) and the claimed FC baseline (91.21%). The answer prompt, not the memory system, explains the score. | [fc-baseline/README.md](fc-baseline/README.md) |
+| Category 5 evaluation gap | 446 adversarial questions (22.5% of dataset) test a critical capability — does the system know what it doesn't know? — and no published LoCoMo result evaluates them. The original code's multiple-choice formatter is broken (references a missing field on 444/446 questions) and its keyword match accepts only 2 arbitrary phrases. A straightforward multiple-choice fix exists but has never been implemented. | [methodology/discrepancies.md](methodology/discrepancies.md#the-evaluation-gap) |
 
 ## Repository Structure
 
@@ -25,6 +27,8 @@ locomo-audit/
 │   └── errors_conv_0.json ... errors_conv_9.json  # Errors found per conversation
 ├── results-audit/                 # Score impact analysis across 5 published systems
 │   ├── RESULTS_AUDIT.md           # Adjusted scores, ceiling analysis, cross-check
+│   ├── STATISTICAL_VALIDITY.md    # Per-category CI analysis (Wilson Score)
+│   ├── statistical_validity.py    # CI computation script (stdlib-only)
 │   ├── audit_results.py           # Audit script (LLM judge, ~1,485 calls)
 │   └── download_results.py        # Fetches published eval_results from HuggingFace
 ├── ap-baseline/                   # Judge leniency stress test
